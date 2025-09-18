@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{a3b8ab91-3d09-4a81-944c-7ac84ee07073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\c_container">
+      <UniqueIdentifier>{074a07f1-33f2-42c1-9705-4903a8095900}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_bucket.c">
+      <Filter>src\c_container</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_code_template.c">
+      <Filter>src\c_container</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_item.c">
+      <Filter>src\c_container</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="c_container\cc_bucket.h">
+      <Filter>src\c_container</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_code_template.h">
+      <Filter>src\c_container</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_item.h">
+      <Filter>src\c_container</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc.h">
+      <Filter>src\c_container</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

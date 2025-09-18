@@ -29,6 +29,7 @@
     <ClInclude Include="c_container\cc_bucket.h" />
     <ClInclude Include="c_container\cc_code_template.h" />
     <ClInclude Include="c_container\cc_item.h" />
+    <ClInclude Include="c_container\cc_module.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

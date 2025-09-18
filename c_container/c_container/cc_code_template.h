@@ -3,13 +3,13 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc-code-template.h
+// # File: cc_code_template.h
 // 
 // # Created by: code1009
 // # Created on: 2025-09-18
 // 
 // # Description:
-//   # code template
+//   @ code template
 // 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
@@ -38,11 +38,11 @@ extern "C" {
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-typedef struct _cc_code_template_struct_t
+typedef struct _cc_code_template_t
 {
-	size_t code_template_field;
+	size_t field;
 }
-cc_code_template_struct_t;
+cc_code_template_t;
 
 
 
@@ -50,7 +50,7 @@ cc_code_template_struct_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-CC_API void cc_code_template_function(cc_code_template_struct_t* ctx);
+CC_API void cc_code_template_function(cc_code_template_t* ctx);
 
 
 

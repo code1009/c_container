@@ -35,5 +35,8 @@
     <ClInclude Include="c_container\cc.h">
       <Filter>src\c_container</Filter>
     </ClInclude>
+    <ClInclude Include="c_container\cc_module.h">
+      <Filter>src\c_container</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

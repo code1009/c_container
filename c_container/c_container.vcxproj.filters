@@ -50,5 +50,8 @@
     <ClInclude Include="c_container\cc_compare.h">
       <Filter>src\c_container</Filter>
     </ClInclude>
+    <ClInclude Include="c_container\cc_pair.h">
+      <Filter>src\c_container</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

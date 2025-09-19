@@ -33,6 +33,7 @@
     <ClInclude Include="c_container\cc_export.h" />
     <ClInclude Include="c_container\cc_import.h" />
     <ClInclude Include="c_container\cc_item.h" />
+    <ClInclude Include="c_container\cc_pair.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

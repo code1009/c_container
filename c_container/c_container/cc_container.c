@@ -79,8 +79,10 @@ bool CC_API cc_container_insert(cc_container_t* ctx, size_t index, void* ptr)
 		}
 		ctx->data[index].ptr = ptr;
 		ctx->count++;
+
 		return true;
 	}
+
 	return false;
 }
 

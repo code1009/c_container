@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="c_container\cc_compare.c" />
-    <ClCompile Include="c_container\cc_element.c" />
+    <ClCompile Include="c_container\cc_container.c" />
     <ClCompile Include="c_container\cc_code_template.c" />
     <ClCompile Include="c_container\cc_item.c" />
     <ClCompile Include="main.cpp" />
@@ -28,7 +28,7 @@
   <ItemGroup>
     <ClInclude Include="c_container\cc.h" />
     <ClInclude Include="c_container\cc_compare.h" />
-    <ClInclude Include="c_container\cc_element.h" />
+    <ClInclude Include="c_container\cc_container.h" />
     <ClInclude Include="c_container\cc_code_template.h" />
     <ClInclude Include="c_container\cc_export.h" />
     <ClInclude Include="c_container\cc_import.h" />

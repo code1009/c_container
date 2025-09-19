@@ -27,14 +27,14 @@ typedef struct _cc_element_t
 cc_element_t;
 
 //===========================================================================
-typedef struct _cc_elements_t
+typedef struct _cc_container_t
 {
 	cc_element_t* data;
 	size_t capacity;
 	size_t chunk;
 	size_t count;
 }
-cc_elements_t;
+cc_container_t;
 
 
 
@@ -42,16 +42,17 @@ cc_elements_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-void cc_elements_initialize(cc_elements_t* ctx, cc_element_t* data, size_t capacity, size_t chunk);
-void cc_elements_clear(cc_elements_t* ctx);
+void cc_container_initialize(cc_container_t* ctx, cc_element_t* data, size_t capacity, size_t chunk);
+void cc_container_clear(cc_container_t* ctx);
 
-bool cc_elements_erase(cc_elements_t* ctx, size_t index);
-bool cc_elements_add(cc_elements_t* ctx, void* ptr);
-bool cc_elements_insert(cc_elements_t* ctx, size_t index, void* ptr);
+bool cc_container_erase(cc_container_t* ctx, size_t index);
+bool cc_container_add(cc_container_t* ctx, void* ptr);
+bool cc_container_insert(cc_container_t* ctx, size_t index, void* ptr);
 
-void* cc_elements_at(cc_elements_t* ctx, size_t index);
+void* cc_container_at(cc_container_t* ctx, size_t index);
 
-size_t cc_elements_count(cc_elements_t* ctx);
+size_t cc_container_count(cc_container_t* ctx);
+bool cc_container_is_empty(cc_container_t* ctx);
 
 
 

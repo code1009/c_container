@@ -15,7 +15,7 @@
     <ClCompile Include="main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="c_container\cc_element.c">
+    <ClCompile Include="c_container\cc_container.c">
       <Filter>src\c_container</Filter>
     </ClCompile>
     <ClCompile Include="c_container\cc_item.c">
@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="c_container\cc_element.h">
+    <ClInclude Include="c_container\cc_container.h">
       <Filter>src\c_container</Filter>
     </ClInclude>
     <ClInclude Include="c_container\cc_item.h">

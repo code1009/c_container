@@ -26,7 +26,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-void cc_elements_initialize(cc_elements_t* ctx, cc_element_t* data, size_t capacity, size_t chunk)
+void CC_API cc_container_initialize(cc_container_t* ctx, cc_element_t* data, size_t capacity, size_t chunk)
 {
 	ctx->data = data;
 	ctx->capacity = capacity;
@@ -36,12 +36,12 @@ void cc_elements_initialize(cc_elements_t* ctx, cc_element_t* data, size_t capac
 	memset(ctx->data, 0, sizeof(cc_element_t) * ctx->capacity);
 }
 
-void cc_elements_clear(cc_elements_t* ctx)
+void CC_API cc_container_clear(cc_container_t* ctx)
 {
 	ctx->count = 0;
 }
 
-bool cc_elements_add(cc_elements_t* ctx, void* ptr)
+bool CC_API cc_container_add(cc_container_t* ctx, void* ptr)
 {
 	if (ctx->count < ctx->capacity)
 	{
@@ -53,7 +53,7 @@ bool cc_elements_add(cc_elements_t* ctx, void* ptr)
 	return false;
 }
 
-bool cc_elements_erase(cc_elements_t* ctx, size_t index)
+bool CC_API cc_container_erase(cc_container_t* ctx, size_t index)
 {
 	if (index < ctx->count)
 	{
@@ -69,7 +69,7 @@ bool cc_elements_erase(cc_elements_t* ctx, size_t index)
 	return false;
 }
 
-bool cc_elements_insert(cc_elements_t* ctx, size_t index, void* ptr)
+bool CC_API cc_container_insert(cc_container_t* ctx, size_t index, void* ptr)
 {
 	if (index <= ctx->count && ctx->count < ctx->capacity)
 	{
@@ -84,7 +84,7 @@ bool cc_elements_insert(cc_elements_t* ctx, size_t index, void* ptr)
 	return false;
 }
 
-void* cc_elements_at(cc_elements_t* ctx, size_t index)
+CC_API void* cc_container_at(cc_container_t* ctx, size_t index)
 {
 	if (index < ctx->count)
 	{
@@ -93,7 +93,12 @@ void* cc_elements_at(cc_elements_t* ctx, size_t index)
 	return NULL;
 }
 
-size_t cc_elements_count(cc_elements_t* ctx)
+size_t CC_API cc_container_count(cc_container_t* ctx)
 {
 	return ctx->count;
+}
+
+bool CC_API cc_container_is_empty(cc_container_t* ctx)
+{
+	return (ctx->count == 0);
 }

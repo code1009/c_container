@@ -20,37 +20,37 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-typedef bool (*cc_equal_t)(void* left, void* right);
-typedef bool (*cc_less_t )(void* left, void* right);
+typedef bool (*cc_equal_t)(cc_element_t* left, cc_element_t* right);
+typedef bool (*cc_less_t )(cc_element_t* left, cc_element_t* right);
 
 
 //===========================================================================
-CC_API bool cc_equal_int32_t (void* left, void* right);
-CC_API bool cc_equal_int16_t (void* left, void* right);
-CC_API bool cc_equal_int8_t  (void* left, void* right);
+CC_API bool cc_equal_int32_t (cc_element_t* left, cc_element_t* right);
+CC_API bool cc_equal_int16_t (cc_element_t* left, cc_element_t* right);
+CC_API bool cc_equal_int8_t  (cc_element_t* left, cc_element_t* right);
 
-CC_API bool cc_equal_uint32_t(void* left, void* right);
-CC_API bool cc_equal_uint16_t(void* left, void* right);
-CC_API bool cc_equal_uint8_t (void* left, void* right);
+CC_API bool cc_equal_uint32_t(cc_element_t* left, cc_element_t* right);
+CC_API bool cc_equal_uint16_t(cc_element_t* left, cc_element_t* right);
+CC_API bool cc_equal_uint8_t (cc_element_t* left, cc_element_t* right);
 
-CC_API bool cc_equal_size_t  (void* left, void* right);
+CC_API bool cc_equal_size_t  (cc_element_t* left, cc_element_t* right);
 
-CC_API bool cc_equal_char    (void* left, void* right);
-CC_API bool cc_equal_c_str   (void* left, void* right);
+CC_API bool cc_equal_char    (cc_element_t* left, cc_element_t* right);
+CC_API bool cc_equal_c_str   (cc_element_t* left, cc_element_t* right);
 
 //===========================================================================
-CC_API bool cc_less_int32_t  (void* left, void* right);
-CC_API bool cc_less_int16_t  (void* left, void* right);
-CC_API bool cc_less_int8_t   (void* left, void* right);
+CC_API bool cc_less_int32_t  (cc_element_t* left, cc_element_t* right);
+CC_API bool cc_less_int16_t  (cc_element_t* left, cc_element_t* right);
+CC_API bool cc_less_int8_t   (cc_element_t* left, cc_element_t* right);
 
-CC_API bool cc_less_uint32_t (void* left, void* right);
-CC_API bool cc_less_uint16_t (void* left, void* right);
-CC_API bool cc_less_uint8_t  (void* left, void* right);
+CC_API bool cc_less_uint32_t (cc_element_t* left, cc_element_t* right);
+CC_API bool cc_less_uint16_t (cc_element_t* left, cc_element_t* right);
+CC_API bool cc_less_uint8_t  (cc_element_t* left, cc_element_t* right);
 
-CC_API bool cc_less_size_t   (void* left, void* right);
+CC_API bool cc_less_size_t   (cc_element_t* left, cc_element_t* right);
 
-CC_API bool cc_less_char     (void* left, void* right);
-CC_API bool cc_less_c_str    (void* left, void* right);
+CC_API bool cc_less_char     (cc_element_t* left, cc_element_t* right);
+CC_API bool cc_less_c_str    (cc_element_t* left, cc_element_t* right);
 
 
 

@@ -36,7 +36,6 @@ CC_API bool cc_equal_uint8_t (void* left, void* right);
 CC_API bool cc_equal_size_t  (void* left, void* right);
 
 CC_API bool cc_equal_char    (void* left, void* right);
-
 CC_API bool cc_equal_c_str   (void* left, void* right);
 
 //===========================================================================
@@ -50,8 +49,7 @@ CC_API bool cc_less_uint8_t  (void* left, void* right);
 
 CC_API bool cc_less_size_t   (void* left, void* right);
 
-CC_API bool cc_less_char_t   (void* left, void* right);
-
+CC_API bool cc_less_char     (void* left, void* right);
 CC_API bool cc_less_c_str    (void* left, void* right);
 
 

@@ -1,9 +1,9 @@
-﻿#ifndef cc_element_h
-#define cc_element_h
+﻿#ifndef cc_container_h
+#define cc_container_h
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc_element.h
+// # File: cc_container.h
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2005.

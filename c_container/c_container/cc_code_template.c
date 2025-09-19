@@ -3,7 +3,7 @@
 // # File: cc_code_template.c
 // 
 // # Created by: code1009
-// # Created on: 2025-09-18
+// # Created on: 09-18, 2025.
 // 
 // # Description:
 //   @ code template
@@ -17,7 +17,10 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#include "cc_module.h"
+#include <stdio.h>
+
+//===========================================================================
+#include "cc_export.h"
 #include "cc_code_template.h"
 
 
@@ -28,5 +31,5 @@
 //===========================================================================
 void cc_code_template_function(cc_code_template_t* ctx)
 {
-
+	printf("cc_code_template_function called %zu\n", ctx->field);
 }

@@ -1,9 +1,9 @@
-﻿#ifndef cc_code_template_h
-#define cc_code_template_h
+﻿#ifndef cc_element_h
+#define cc_element_h
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc_code_template.h
+// # File: cc_element.h
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2005.
@@ -20,19 +20,21 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#define cc_code_template_macro 100
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////
-//===========================================================================
-typedef struct _cc_code_template_t
+typedef struct _cc_element_t
 {
-	size_t field;
+	void* ptr;
 }
-cc_code_template_t;
+cc_element_t;
+
+//===========================================================================
+typedef struct _cc_elements_t
+{
+	cc_element_t* data;
+	size_t capacity;
+	size_t chunk;
+	size_t count;
+}
+cc_elements_t;
 
 
 
@@ -40,7 +42,16 @@ cc_code_template_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-CC_API void cc_code_template_function(cc_code_template_t* ctx);
+void cc_elements_initialize(cc_elements_t* ctx, cc_element_t* data, size_t capacity, size_t chunk);
+void cc_elements_clear(cc_elements_t* ctx);
+
+void cc_elements_erase(cc_elements_t* ctx, size_t index);
+void cc_elements_add(cc_elements_t* ctx, void* ptr);
+bool cc_elements_insert(cc_elements_t* ctx, size_t index, void* ptr);
+
+void* cc_elements_at(cc_elements_t* ctx, size_t index);
+
+size_t cc_elements_count(cc_elements_t* ctx);
 
 
 
@@ -48,5 +59,5 @@ CC_API void cc_code_template_function(cc_code_template_t* ctx);
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#endif // cc_code_template_h
+#endif // cc_element_h
 

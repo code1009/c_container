@@ -41,16 +41,19 @@ void cc_elements_clear(cc_elements_t* ctx)
 	ctx->count = 0;
 }
 
-void cc_elements_add(cc_elements_t* ctx, void* ptr)
+bool cc_elements_add(cc_elements_t* ctx, void* ptr)
 {
 	if (ctx->count < ctx->capacity)
 	{
 		ctx->data[ctx->count].ptr = ptr;
 		ctx->count++;
+		return true;
 	}
+
+	return false;
 }
 
-void cc_elements_erase(cc_elements_t* ctx, size_t index)
+bool cc_elements_erase(cc_elements_t* ctx, size_t index)
 {
 	if (index < ctx->count)
 	{
@@ -59,7 +62,11 @@ void cc_elements_erase(cc_elements_t* ctx, size_t index)
 			ctx->data[i] = ctx->data[i + 1];
 		}
 		ctx->count--;
+
+		return true;
 	}
+
+	return false;
 }
 
 bool cc_elements_insert(cc_elements_t* ctx, size_t index, void* ptr)

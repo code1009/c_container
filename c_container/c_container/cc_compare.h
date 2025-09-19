@@ -20,10 +20,22 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef bool (*cc_equal_t)(cc_element_t* left, cc_element_t* right);
 typedef bool (*cc_less_t )(cc_element_t* left, cc_element_t* right);
 
+#ifdef __cplusplus
+}
+#endif
 
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 CC_API bool cc_equal_int32_t (cc_element_t* left, cc_element_t* right);
 CC_API bool cc_equal_int16_t (cc_element_t* left, cc_element_t* right);

@@ -45,8 +45,8 @@ cc_elements_t;
 void cc_elements_initialize(cc_elements_t* ctx, cc_element_t* data, size_t capacity, size_t chunk);
 void cc_elements_clear(cc_elements_t* ctx);
 
-void cc_elements_erase(cc_elements_t* ctx, size_t index);
-void cc_elements_add(cc_elements_t* ctx, void* ptr);
+bool cc_elements_erase(cc_elements_t* ctx, size_t index);
+bool cc_elements_add(cc_elements_t* ctx, void* ptr);
 bool cc_elements_insert(cc_elements_t* ctx, size_t index, void* ptr);
 
 void* cc_elements_at(cc_elements_t* ctx, size_t index);

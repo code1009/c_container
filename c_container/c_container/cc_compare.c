@@ -34,8 +34,8 @@
 	T  bv;                  \
 	                        \
 	                        \
-	ap = (T*)a->ptr;        \
-	bp = (T*)b->ptr;        \
+	ap = (T*)a->pointer;    \
+	bp = (T*)b->pointer;    \
 	av = *ap;               \
 	bv = *bp;               \
 	                        \
@@ -55,8 +55,8 @@
 	T  bv;                  \
 	                        \
 	                        \
-	ap = (T*)a->ptr;        \
-	bp = (T*)b->ptr;        \
+	ap = (T*)a->pointer;    \
+	bp = (T*)b->pointer;    \
 	av = *ap;               \
 	bv = *bp;               \
 	                        \
@@ -92,8 +92,8 @@ CC_API bool cc_equal_c_str(cc_element_t* left, cc_element_t* right)
 	char* bp;
 
 
-	ap = (char*)left->ptr;
-	bp = (char*)right->ptr;
+	ap = (char*)left->pointer;
+	bp = (char*)right->pointer;
 
 	if (0==strcmp(ap, bp))
 	{
@@ -126,8 +126,8 @@ CC_API bool cc_less_c_str(cc_element_t* left, cc_element_t* right)
 	char* bp;
 
 
-	ap = (char*)left->ptr;
-	bp = (char*)right->ptr;
+	ap = (char*)left->pointer;
+	bp = (char*)right->pointer;
 
 	if (0 > strcmp(ap, bp))
 	{

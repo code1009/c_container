@@ -22,7 +22,7 @@
 //===========================================================================
 typedef struct _cc_element_t
 {
-	void* ptr;
+	void* pointer;
 }
 cc_element_t;
 

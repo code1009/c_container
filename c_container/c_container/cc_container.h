@@ -22,9 +22,9 @@
 //===========================================================================
 typedef struct _cc_container_t
 {
-	cc_element_t* data;
-	size_t capacity;
-	size_t chunk;
+	cc_element_t* elements;
+	size_t max_count;
+	size_t data_size;
 	size_t count;
 }
 cc_container_t;
@@ -35,7 +35,7 @@ cc_container_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-CC_API void cc_container_initialize(cc_container_t* ctx, cc_element_t* data, size_t capacity, size_t chunk);
+CC_API void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size);
 CC_API void cc_container_clear(cc_container_t* ctx);
 
 CC_API bool cc_container_erase(cc_container_t* ctx, size_t index);

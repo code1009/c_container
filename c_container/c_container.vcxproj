@@ -25,6 +25,7 @@
     <ClCompile Include="c_container\cc_element.c" />
     <ClCompile Include="c_container\cc_item.c" />
     <ClCompile Include="c_container\cc_pair.c" />
+    <ClCompile Include="c_container\cc_simple_segregated_storage.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +38,7 @@
     <ClInclude Include="c_container\cc_import.h" />
     <ClInclude Include="c_container\cc_item.h" />
     <ClInclude Include="c_container\cc_pair.h" />
+    <ClInclude Include="c_container\cc_simple_segregated_storage.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

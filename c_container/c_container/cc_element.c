@@ -28,5 +28,5 @@
 //===========================================================================
 void CC_API cc_element_initialize(cc_element_t* ctx)
 {
-	ctx->ptr = NULL;
+	ctx->pointer = NULL;
 }

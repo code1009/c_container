@@ -18,6 +18,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 #include "cc_export.h"
+#include "cc_element.h"
 #include "cc_container.h"
 
 
@@ -26,22 +27,25 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-void CC_API cc_container_initialize(cc_container_t* ctx, cc_element_t* data, size_t capacity, size_t chunk)
+CC_API void cc_container_initialize(cc_container_t* ctx, cc_element_t* data, size_t capacity, size_t chunk)
 {
 	ctx->data = data;
 	ctx->capacity = capacity;
 	ctx->chunk = chunk;
 	ctx->count = 0;
 
-	memset(ctx->data, 0, sizeof(cc_element_t) * ctx->capacity);
+	for (size_t i = 0; i < ctx->capacity; i++)
+	{
+		cc_element_initialize(&ctx->data[i]);
+	}
 }
 
-void CC_API cc_container_clear(cc_container_t* ctx)
+CC_API void cc_container_clear(cc_container_t* ctx)
 {
 	ctx->count = 0;
 }
 
-bool CC_API cc_container_add(cc_container_t* ctx, void* ptr)
+CC_API bool cc_container_add(cc_container_t* ctx, void* ptr)
 {
 	if (ctx->count < ctx->capacity)
 	{
@@ -53,7 +57,7 @@ bool CC_API cc_container_add(cc_container_t* ctx, void* ptr)
 	return false;
 }
 
-bool CC_API cc_container_erase(cc_container_t* ctx, size_t index)
+CC_API bool cc_container_erase(cc_container_t* ctx, size_t index)
 {
 	if (index < ctx->count)
 	{
@@ -69,7 +73,7 @@ bool CC_API cc_container_erase(cc_container_t* ctx, size_t index)
 	return false;
 }
 
-bool CC_API cc_container_insert(cc_container_t* ctx, size_t index, void* ptr)
+CC_API bool cc_container_insert(cc_container_t* ctx, size_t index, void* ptr)
 {
 	if (index <= ctx->count && ctx->count < ctx->capacity)
 	{
@@ -95,12 +99,12 @@ CC_API void* cc_container_at(cc_container_t* ctx, size_t index)
 	return NULL;
 }
 
-size_t CC_API cc_container_count(cc_container_t* ctx)
+CC_API size_t cc_container_count(cc_container_t* ctx)
 {
 	return ctx->count;
 }
 
-bool CC_API cc_container_is_empty(cc_container_t* ctx)
+CC_API bool cc_container_is_empty(cc_container_t* ctx)
 {
 	return (ctx->count == 0);
 }

@@ -6,7 +6,7 @@
 // # File: cc_pair.h
 // 
 // # Created by: code1009
-// # Created on: 09-18, 2005.
+// # Created on: 09-18, 2025.
 // 
 // # Description:
 //   @ 
@@ -26,6 +26,15 @@ typedef struct _cc_pair_t
 	cc_element_t second;
 }
 cc_pair_t;
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+CC_API void cc_pair_initialize(cc_pair_t* ctx);
+
 
 
 

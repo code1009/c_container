@@ -21,6 +21,10 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+#if defined(_WIN64) || defined(_WIN32)
+#include <crtdbg.h>
+#endif
+
 //===========================================================================
 #include "cc_export.h"
 #include "cc_assert.h"
@@ -31,6 +35,8 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
+#if defined(_WIN64) || defined(_WIN32)
+
 cc_api void cc_assert_printf(const char* format, ...)
 {
     va_list args;
@@ -45,6 +51,10 @@ cc_api void cc_assert_printf(const char* format, ...)
 
     fflush(stderr);
 
+    _CrtDbgBreak();
+
     /* assertion 실패 시 즉시 종료 */
     abort();
 }
+
+#endif

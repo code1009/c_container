@@ -1,15 +1,12 @@
-﻿#ifndef cc_h
-#define cc_h
-
-/////////////////////////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc.h
+// # File: cc_allocator.c
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2025.
 // 
 // # Description:
-//   @ c container
+//   @ 
 // 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
@@ -20,18 +17,9 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#include "cc_import.h"
-
-#include "cc_code_template.h"
-
-#include "cc_allocator.h"
-#include "cc_simple_segregated_storage.h"
-
+#include "cc_export.h"
 #include "cc_element.h"
-#include "cc_container.h"
-
-#include "cc_compare.h"
-#include "cc_pair.h"
+#include "cc_allocator.h"
 
 
 
@@ -39,5 +27,9 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#endif // cc_h
-
+cc_api void cc_allocator_initialize(cc_allocator_t* ctx, void* handle, cc_alloc_t alloc, cc_free_t free)
+{
+	ctx->handle = handle;
+	ctx->alloc = alloc;
+	ctx->free = free;
+}

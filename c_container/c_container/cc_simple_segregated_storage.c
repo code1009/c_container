@@ -177,7 +177,7 @@ cc_api void* cc_simple_segregated_storage_allocate(cc_simple_segregated_storage_
 	return pointer;
 }
 
-cc_api bool cc_simple_segregated_storage_release(cc_simple_segregated_storage_t* ctx, void* pointer)
+cc_api bool cc_simple_segregated_storage_free(cc_simple_segregated_storage_t* ctx, void* pointer)
 {
 	//-----------------------------------------------------------------------
 	if (false == cc_simple_segregated_storage_validate_pointer(ctx, pointer))

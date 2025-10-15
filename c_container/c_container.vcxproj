@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="c_container\cc_allocator.c" />
     <ClCompile Include="c_container\cc_assert.c" />
     <ClCompile Include="c_container\cc_compare.c" />
     <ClCompile Include="c_container\cc_container.c" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c_container\cc.h" />
+    <ClInclude Include="c_container\cc_allocator.h" />
     <ClInclude Include="c_container\cc_assert.h" />
     <ClInclude Include="c_container\cc_compare.h" />
     <ClInclude Include="c_container\cc_config.h" />

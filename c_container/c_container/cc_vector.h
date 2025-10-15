@@ -1,9 +1,9 @@
-﻿#ifndef cc_allocator_h
-#define cc_allocator_h
+﻿#ifndef cc_vector_h
+#define cc_vector_h
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc_allocator.h
+// # File: cc_vector.h
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2025.
@@ -20,21 +20,11 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-typedef void* (*cc_alloc_t)(void* handle);
-typedef void  (*cc_free_t) (void* handle, void* pointer);
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////
-//===========================================================================
-typedef struct _cc_allocator_t
+typedef struct _cc_vector_t
 {
-	void* handle;
-	cc_alloc_t alloc;
-	cc_free_t free;
+	cc_container_t container;
 }
-cc_allocator_t;
+cc_vector_t;
 
 
 
@@ -42,7 +32,17 @@ cc_allocator_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_allocator_initialize(cc_allocator_t* ctx, void* handle, cc_alloc_t alloc, cc_free_t free);
+cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size);
+cc_api void cc_vector_clear(cc_vector_t* ctx);
+
+cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index);
+cc_api bool cc_vector_add(cc_vector_t* ctx, void* pointer);
+cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer);
+
+cc_api void* cc_vector_at(cc_vector_t* ctx, size_t index);
+
+cc_api size_t cc_vector_count(cc_vector_t* ctx);
+cc_api bool cc_vector_is_empty(cc_vector_t* ctx);
 
 
 
@@ -50,5 +50,5 @@ cc_api void cc_allocator_initialize(cc_allocator_t* ctx, void* handle, cc_alloc_
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#endif // cc_allocator_h
+#endif // cc_vector_h
 

@@ -45,6 +45,9 @@
     <ClCompile Include="c_container\cc_allocator.c">
       <Filter>src\c_container\memory</Filter>
     </ClCompile>
+    <ClCompile Include="c_container\cc_vector.c">
+      <Filter>src\c_container</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c_container\cc_container.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="c_container\cc_allocator.h">
       <Filter>src\c_container\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_vector.h">
+      <Filter>src\c_container</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

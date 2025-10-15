@@ -39,8 +39,8 @@ cc_api void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements,
 cc_api void cc_container_clear(cc_container_t* ctx);
 
 cc_api bool cc_container_erase(cc_container_t* ctx, size_t index);
-cc_api bool cc_container_add(cc_container_t* ctx, void* ptr);
-cc_api bool cc_container_insert(cc_container_t* ctx, size_t index, void* ptr);
+cc_api bool cc_container_add(cc_container_t* ctx, void* pointer);
+cc_api bool cc_container_insert(cc_container_t* ctx, size_t index, void* pointer);
 
 cc_api void* cc_container_at(cc_container_t* ctx, size_t index);
 

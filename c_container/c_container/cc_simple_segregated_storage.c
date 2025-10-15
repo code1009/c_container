@@ -82,7 +82,7 @@ cc_api bool cc_simple_segregated_storage_validate_pointer(cc_simple_segregated_s
 	{
 		return false;
 	}
-	if (0!=(current % ctx->chunk_size))
+	if (0 != (current % ctx->chunk_size))
 	{
 		return false;
 	}
@@ -110,7 +110,7 @@ cc_api bool cc_simple_segregated_storage_initialize(cc_simple_segregated_storage
 	//-----------------------------------------------------------------------
 	ctx->chunk_size = cc_simple_segregated_storage_calc_chunk_size(data_size);
 	ctx->free_chunk_head = NULL;
-	ctx->count = 0L;
+	ctx->count = 0;
 
 
 	//-----------------------------------------------------------------------

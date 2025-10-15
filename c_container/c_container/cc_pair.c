@@ -27,7 +27,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-void CC_API cc_pair_initialize(cc_pair_t* ctx)
+cc_api void cc_pair_initialize(cc_pair_t* ctx)
 {
 	cc_element_initialize(&ctx->first);
 	cc_element_initialize(&ctx->second);

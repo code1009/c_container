@@ -29,7 +29,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-CC_API void cc_code_template_function(cc_code_template_t* ctx)
+cc_api void cc_code_template_function(cc_code_template_t* ctx)
 {
 	printf("cc_code_template_function called %zu\n", ctx->field);
 }

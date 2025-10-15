@@ -27,7 +27,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-CC_API void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size)
+cc_api void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size)
 {
 	ctx->elements = elements;
 	ctx->max_count = max_count;
@@ -40,12 +40,12 @@ CC_API void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements,
 	}
 }
 
-CC_API void cc_container_clear(cc_container_t* ctx)
+cc_api void cc_container_clear(cc_container_t* ctx)
 {
 	ctx->count = 0;
 }
 
-CC_API bool cc_container_add(cc_container_t* ctx, void* pointer)
+cc_api bool cc_container_add(cc_container_t* ctx, void* pointer)
 {
 	size_t index = ctx->count;
 	if (index < ctx->max_count)
@@ -58,7 +58,7 @@ CC_API bool cc_container_add(cc_container_t* ctx, void* pointer)
 	return false;
 }
 
-CC_API bool cc_container_erase(cc_container_t* ctx, size_t index)
+cc_api bool cc_container_erase(cc_container_t* ctx, size_t index)
 {
 	if (index < ctx->count)
 	{
@@ -74,7 +74,7 @@ CC_API bool cc_container_erase(cc_container_t* ctx, size_t index)
 	return false;
 }
 
-CC_API bool cc_container_insert(cc_container_t* ctx, size_t index, void* pointer)
+cc_api bool cc_container_insert(cc_container_t* ctx, size_t index, void* pointer)
 {
 	if (index <= ctx->count && ctx->count < ctx->max_count)
 	{
@@ -91,7 +91,7 @@ CC_API bool cc_container_insert(cc_container_t* ctx, size_t index, void* pointer
 	return false;
 }
 
-CC_API void* cc_container_at(cc_container_t* ctx, size_t index)
+cc_api void* cc_container_at(cc_container_t* ctx, size_t index)
 {
 	if (index < ctx->count)
 	{
@@ -100,12 +100,12 @@ CC_API void* cc_container_at(cc_container_t* ctx, size_t index)
 	return NULL;
 }
 
-CC_API size_t cc_container_count(cc_container_t* ctx)
+cc_api size_t cc_container_count(cc_container_t* ctx)
 {
 	return ctx->count;
 }
 
-CC_API bool cc_container_is_empty(cc_container_t* ctx)
+cc_api bool cc_container_is_empty(cc_container_t* ctx)
 {
 	return (ctx->count == 0) ? true : false;
 }

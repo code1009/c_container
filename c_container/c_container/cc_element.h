@@ -32,7 +32,7 @@ cc_element_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-CC_API void cc_element_initialize(cc_element_t* ctx);
+cc_api void cc_element_initialize(cc_element_t* ctx);
 
 
 

@@ -1,9 +1,9 @@
-﻿#ifndef cc_pair_h
-#define cc_pair_h
+﻿#ifndef cc_assert_h
+#define cc_assert_h
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc_pair.h
+// # File: cc_assert.h
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2025.
@@ -20,12 +20,15 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-typedef struct _cc_pair_t
-{
-	cc_element_t first;
-	cc_element_t second;
-}
-cc_pair_t;
+#define cc_assert(x) \
+	do                                                                                         \
+	{                                                                                          \
+		if (!(x))                                                                              \
+		{                                                                                      \
+			cc_assert_printf("assertion failed: %s (%s:%d)\n", #x, __FILE__, __LINE__);        \
+		}                                                                                      \
+	}                                                                                          \
+	while(0)
 
 
 
@@ -33,7 +36,7 @@ cc_pair_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_pair_initialize(cc_pair_t* ctx);
+void cc_assert_printf(const char* format, ...);
 
 
 
@@ -41,5 +44,5 @@ cc_api void cc_pair_initialize(cc_pair_t* ctx);
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#endif // cc_pair_h
+#endif // cc_assert_h
 

@@ -35,17 +35,17 @@ cc_container_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-CC_API void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size);
-CC_API void cc_container_clear(cc_container_t* ctx);
+cc_api void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size);
+cc_api void cc_container_clear(cc_container_t* ctx);
 
-CC_API bool cc_container_erase(cc_container_t* ctx, size_t index);
-CC_API bool cc_container_add(cc_container_t* ctx, void* ptr);
-CC_API bool cc_container_insert(cc_container_t* ctx, size_t index, void* ptr);
+cc_api bool cc_container_erase(cc_container_t* ctx, size_t index);
+cc_api bool cc_container_add(cc_container_t* ctx, void* ptr);
+cc_api bool cc_container_insert(cc_container_t* ctx, size_t index, void* ptr);
 
-CC_API void* cc_container_at(cc_container_t* ctx, size_t index);
+cc_api void* cc_container_at(cc_container_t* ctx, size_t index);
 
-CC_API size_t cc_container_count(cc_container_t* ctx);
-CC_API bool cc_container_is_empty(cc_container_t* ctx);
+cc_api size_t cc_container_count(cc_container_t* ctx);
+cc_api bool cc_container_is_empty(cc_container_t* ctx);
 
 
 

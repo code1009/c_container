@@ -288,7 +288,7 @@ void test_cc_map1()
 
 
 	cc_simple_segregated_storage_t key_storage;
-	int key_memory[max_count*2];
+	uintptr_t key_memory[max_count];
 
 	cc_allocator_t key_allocator;
 

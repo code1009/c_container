@@ -21,6 +21,8 @@
 
 //===========================================================================
 #include "cc_export.h"
+
+//===========================================================================
 #include "cc_code_template.h"
 
 
@@ -29,7 +31,20 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
+#if (1==cc_config_os_windows)
+
 cc_api void cc_code_template_function(cc_code_template_t* ctx)
 {
 	printf("cc_code_template_function called %zu\n", ctx->field);
 }
+
+#endif
+
+//===========================================================================
+#if (1==cc_config_os_unknown)
+
+cc_api void cc_code_template_function(cc_code_template_t* ctx)
+{
+}
+
+#endif

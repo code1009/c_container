@@ -18,10 +18,14 @@
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 #include "cc_export.h"
+
+//===========================================================================
 #include "cc_element.h"
 #include "cc_compare.h"
 #include "cc_pair.h"
-#include "cc_pair_container.h"
+#include "cc_pair_collection.h"
+
+//===========================================================================
 #include "cc_map.h"
 
 
@@ -50,7 +54,7 @@ cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* pointer)
 		// (x+y)/2 => x&y + (x^y)/2
 		mid = (low & high) + ((low ^ high) / 2u);
 
-		first_element_pointer = cc_pair_container_first(&ctx->container, mid);
+		first_element_pointer = cc_pair_collection_first(&ctx->collection, mid);
 		if (true == ctx->less(first_element_pointer, pointer))
 		{
 			low = mid + 1u;
@@ -81,7 +85,7 @@ cc_api void cc_map_initialize(cc_map_t* ctx, cc_equal_t equal, cc_less_t less, c
 
 	ctx->equal = equal;
 	ctx->less = less;
-	cc_pair_container_initialize(&ctx->container, elements, max_count, param);
+	cc_pair_collection_initialize(&ctx->collection, elements, max_count, param);
 }
 
 cc_api uintptr_t cc_map_param(cc_map_t* ctx)
@@ -89,7 +93,7 @@ cc_api uintptr_t cc_map_param(cc_map_t* ctx)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_pair_container_param(&ctx->container);
+	return cc_pair_collection_param(&ctx->collection);
 }
 
 //===========================================================================
@@ -98,7 +102,7 @@ cc_api void cc_map_clear(cc_map_t* ctx)
 	cc_debug_assert(ctx != NULL);
 
 
-	cc_pair_container_clear(&ctx->container);
+	cc_pair_collection_clear(&ctx->collection);
 }
 
 cc_api bool cc_map_erase(cc_map_t* ctx, size_t index)
@@ -106,7 +110,7 @@ cc_api bool cc_map_erase(cc_map_t* ctx, size_t index)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_pair_container_erase(&ctx->container, index);
+	return cc_pair_collection_erase(&ctx->collection, index);
 }
 
 cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second)
@@ -121,7 +125,7 @@ cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second)
 	// if key already exists, do not insert
 	if (index < cc_map_count(ctx))
 	{
-		void* first_element_pointer = cc_pair_container_first(&ctx->container, index);
+		void* first_element_pointer = cc_pair_collection_first(&ctx->collection, index);
 		if (true == ctx->equal(first_element_pointer, first))
 		{
 			return false;
@@ -129,7 +133,7 @@ cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second)
 	}
 
 	// insert at found position (shifts elements)
-	return cc_pair_container_insert(&ctx->container, index, first, second);
+	return cc_pair_collection_insert(&ctx->collection, index, first, second);
 }
 
 //===========================================================================
@@ -138,7 +142,7 @@ cc_api cc_pair_t* cc_map_at(cc_map_t* ctx, size_t index)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_pair_container_at(&ctx->container, index);
+	return cc_pair_collection_at(&ctx->collection, index);
 }
 
 cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
@@ -149,7 +153,7 @@ cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
 	size_t index = cc_map_lower_bound(ctx, first);
 	if (index < cc_map_count(ctx))
 	{
-		void* first_element_pointer = cc_pair_container_first(&ctx->container, index);
+		void* first_element_pointer = cc_pair_collection_first(&ctx->collection, index);
 		if (true == ctx->equal(first_element_pointer, first))
 		{
 			return index;
@@ -167,7 +171,7 @@ cc_api void* cc_map_get(cc_map_t* ctx, void* first)
 	size_t index = cc_map_find(ctx, first);
 	if (index != cc_invalid_index)
 	{
-		return cc_pair_container_second(&ctx->container, index);
+		return cc_pair_collection_second(&ctx->collection, index);
 	}
 
 	return NULL;
@@ -179,7 +183,7 @@ cc_api size_t cc_map_count(cc_map_t* ctx)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_pair_container_count(&ctx->container);
+	return cc_pair_collection_count(&ctx->collection);
 }
 
 cc_api bool cc_map_empty(cc_map_t* ctx)
@@ -187,5 +191,5 @@ cc_api bool cc_map_empty(cc_map_t* ctx)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_pair_container_empty(&ctx->container);
+	return cc_pair_collection_empty(&ctx->collection);
 }

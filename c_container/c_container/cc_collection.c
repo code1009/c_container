@@ -1,6 +1,6 @@
 ﻿/////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc_pair_container.c
+// # File: cc_collection.c
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2025.
@@ -18,9 +18,12 @@
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 #include "cc_export.h"
+
+//===========================================================================
 #include "cc_element.h"
-#include "cc_pair.h"
-#include "cc_pair_container.h"
+
+//===========================================================================
+#include "cc_collection.h"
 
 
 
@@ -28,7 +31,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_pair_container_initialize(cc_pair_container_t* ctx, cc_pair_t* elements, size_t max_count, uintptr_t param)
+cc_api void cc_collection_initialize(cc_collection_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param)
 {
 	cc_debug_assert(ctx != NULL);
 	cc_debug_assert(elements != NULL);
@@ -43,11 +46,11 @@ cc_api void cc_pair_container_initialize(cc_pair_container_t* ctx, cc_pair_t* el
 
 	for (size_t i = 0; i < ctx->max_count; i++)
 	{
-		cc_pair_initialize(&ctx->elements[i]);
+		cc_element_initialize(&ctx->elements[i]);
 	}
 }
 
-cc_api uintptr_t cc_pair_container_param(cc_pair_container_t* ctx)
+cc_api uintptr_t cc_collection_param(cc_collection_t* ctx)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -56,7 +59,7 @@ cc_api uintptr_t cc_pair_container_param(cc_pair_container_t* ctx)
 }
 
 //===========================================================================
-cc_api void cc_pair_container_clear(cc_pair_container_t* ctx)
+cc_api void cc_collection_clear(cc_collection_t* ctx)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -64,7 +67,7 @@ cc_api void cc_pair_container_clear(cc_pair_container_t* ctx)
 	ctx->count = 0;
 }
 
-cc_api bool cc_pair_container_erase(cc_pair_container_t* ctx, size_t index)
+cc_api bool cc_collection_erase(cc_collection_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -73,7 +76,7 @@ cc_api bool cc_pair_container_erase(cc_pair_container_t* ctx, size_t index)
 	{
 		for (size_t i = index; i < ctx->count - 1; i++)
 		{
-			cc_pair_copy(&ctx->elements[i], &ctx->elements[i + 1]);
+			cc_element_copy(&ctx->elements[i], &ctx->elements[i + 1]);
 		}
 		ctx->count--;
 
@@ -83,7 +86,7 @@ cc_api bool cc_pair_container_erase(cc_pair_container_t* ctx, size_t index)
 	return false;
 }
 
-cc_api bool cc_pair_container_add(cc_pair_container_t* ctx, void* first, void* second)
+cc_api bool cc_collection_add(cc_collection_t* ctx, void* pointer)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -91,7 +94,7 @@ cc_api bool cc_pair_container_add(cc_pair_container_t* ctx, void* first, void* s
 	size_t index = ctx->count;
 	if (index < ctx->max_count)
 	{
-		cc_pair_set(&ctx->elements[index], first, second);
+		cc_element_set(&ctx->elements[index], pointer);
 		ctx->count++;
 		return true;
 	}
@@ -99,7 +102,7 @@ cc_api bool cc_pair_container_add(cc_pair_container_t* ctx, void* first, void* s
 	return false;
 }
 
-cc_api bool cc_pair_container_insert(cc_pair_container_t* ctx, size_t index, void* first, void* second)
+cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* pointer)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -108,9 +111,9 @@ cc_api bool cc_pair_container_insert(cc_pair_container_t* ctx, size_t index, voi
 	{
 		for (size_t i = ctx->count; i > index; i--)
 		{
-			cc_pair_copy(&ctx->elements[i], &ctx->elements[i - 1]);
+			cc_element_copy(&ctx->elements[i], &ctx->elements[i - 1]);
 		}
-		cc_pair_set(&ctx->elements[index], first, second);
+		cc_element_set(&ctx->elements[index], pointer);
 		ctx->count++;
 
 		return true;
@@ -120,44 +123,20 @@ cc_api bool cc_pair_container_insert(cc_pair_container_t* ctx, size_t index, voi
 }
 
 //===========================================================================
-cc_api cc_pair_t* cc_pair_container_at(cc_pair_container_t* ctx, size_t index)
+cc_api void* cc_collection_at(cc_collection_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
 
 	if (index < ctx->count)
 	{
-		return &ctx->elements[index];
-	}
-	return NULL;
-}
-
-cc_api void* cc_pair_container_first(cc_pair_container_t* ctx, size_t index)
-{
-	cc_debug_assert(ctx != NULL);
-
-
-	if (index < ctx->count)
-	{
-		return cc_pair_first(&ctx->elements[index]);
-	}
-	return NULL;
-}
-
-cc_api void* cc_pair_container_second(cc_pair_container_t* ctx, size_t index)
-{
-	cc_debug_assert(ctx != NULL);
-
-
-	if (index < ctx->count)
-	{
-		return cc_pair_second(&ctx->elements[index]);
+		return cc_element_get(&ctx->elements[index]);
 	}
 	return NULL;
 }
 
 //===========================================================================
-cc_api size_t cc_pair_container_count(cc_pair_container_t* ctx)
+cc_api size_t cc_collection_count(cc_collection_t* ctx)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -165,7 +144,7 @@ cc_api size_t cc_pair_container_count(cc_pair_container_t* ctx)
 	return ctx->count;
 }
 
-cc_api bool cc_pair_container_empty(cc_pair_container_t* ctx)
+cc_api bool cc_collection_empty(cc_collection_t* ctx)
 {
 	cc_debug_assert(ctx != NULL);
 

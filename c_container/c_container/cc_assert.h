@@ -31,7 +31,7 @@
 	while(0)
 
 //===========================================================================
-#if cc_config_debug
+#if (1==cc_config_debug)
 
 #define cc_debug_assert(x) \
 	do                                                                                         \

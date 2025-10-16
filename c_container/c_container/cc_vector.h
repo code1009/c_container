@@ -22,7 +22,7 @@
 //===========================================================================
 typedef struct _cc_vector_t
 {
-	cc_container_t container;
+	cc_collection_t collection;
 }
 cc_vector_t;
 

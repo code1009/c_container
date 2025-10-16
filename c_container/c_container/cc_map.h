@@ -24,7 +24,7 @@ typedef struct _cc_map_t
 {
 	cc_equal_t equal;
 	cc_less_t less;
-	cc_pair_container_t container;
+	cc_pair_collection_t collection;
 }
 cc_map_t;
 

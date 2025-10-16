@@ -20,12 +20,12 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#if defined(_WIN64) || defined(_WIN32)
-#ifdef _WIN64
+#if (1==cc_config_platform_x64)
 	typedef __int64 cc_ssize_t;
-#else
-	typedef int cc_ssize_t;
 #endif
+
+#if (1==cc_config_platform_x32)
+	typedef int cc_ssize_t;
 #endif
 
 

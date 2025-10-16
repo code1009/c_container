@@ -29,11 +29,11 @@
 #include "cc_allocator_helper.h"
 
 #include "cc_element.h"
-#include "cc_container.h"
+#include "cc_collection.h"
 
 #include "cc_compare.h"
 #include "cc_pair.h"
-#include "cc_pair_container.h"
+#include "cc_pair_collection.h"
 
 #include "cc_vector.h"
 #include "cc_map.h"

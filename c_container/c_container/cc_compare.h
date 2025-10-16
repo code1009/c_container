@@ -70,6 +70,36 @@ cc_api bool cc_less_c_str           (void* left, void* right);
 
 
 
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+cc_api bool cc_equal_int32_t(void* left, void* right);
+cc_api bool cc_equal_int16_t(void* left, void* right);
+cc_api bool cc_equal_int8_t(void* left, void* right);
+
+cc_api bool cc_equal_uint32_t(void* left, void* right);
+cc_api bool cc_equal_uint16_t(void* left, void* right);
+cc_api bool cc_equal_uint8_t(void* left, void* right);
+
+cc_api bool cc_equal_size_t(void* left, void* right);
+
+cc_api bool cc_equal_char(void* left, void* right);
+
+//===========================================================================
+cc_api bool cc_less_int32_t(void* left, void* right);
+cc_api bool cc_less_int16_t(void* left, void* right);
+cc_api bool cc_less_int8_t(void* left, void* right);
+
+cc_api bool cc_less_uint32_t(void* left, void* right);
+cc_api bool cc_less_uint16_t(void* left, void* right);
+cc_api bool cc_less_uint8_t(void* left, void* right);
+
+cc_api bool cc_less_size_t(void* left, void* right);
+
+cc_api bool cc_less_char(void* left, void* right);
+
+
+
+
 #endif
 
 

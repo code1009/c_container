@@ -23,13 +23,13 @@
     <ClCompile Include="c_container\cc_allocator_helper.c" />
     <ClCompile Include="c_container\cc_assert.c" />
     <ClCompile Include="c_container\cc_compare.c" />
-    <ClCompile Include="c_container\cc_container.c" />
+    <ClCompile Include="c_container\cc_collection.c" />
     <ClCompile Include="c_container\cc_code_template.c" />
     <ClCompile Include="c_container\cc_element.c" />
     <ClCompile Include="c_container\cc_item.c" />
     <ClCompile Include="c_container\cc_map.c" />
     <ClCompile Include="c_container\cc_pair.c" />
-    <ClCompile Include="c_container\cc_pair_container.c" />
+    <ClCompile Include="c_container\cc_pair_collection.c" />
     <ClCompile Include="c_container\cc_simple_segregated_storage.c" />
     <ClCompile Include="c_container\cc_vector.c" />
     <ClCompile Include="main.cpp" />
@@ -41,7 +41,7 @@
     <ClInclude Include="c_container\cc_assert.h" />
     <ClInclude Include="c_container\cc_compare.h" />
     <ClInclude Include="c_container\cc_config.h" />
-    <ClInclude Include="c_container\cc_container.h" />
+    <ClInclude Include="c_container\cc_collection.h" />
     <ClInclude Include="c_container\cc_code_template.h" />
     <ClInclude Include="c_container\cc_define.h" />
     <ClInclude Include="c_container\cc_element.h" />
@@ -50,7 +50,7 @@
     <ClInclude Include="c_container\cc_item.h" />
     <ClInclude Include="c_container\cc_map.h" />
     <ClInclude Include="c_container\cc_pair.h" />
-    <ClInclude Include="c_container\cc_pair_container.h" />
+    <ClInclude Include="c_container\cc_pair_collection.h" />
     <ClInclude Include="c_container\cc_simple_segregated_storage.h" />
     <ClInclude Include="c_container\cc_type.h" />
     <ClInclude Include="c_container\cc_vector.h" />

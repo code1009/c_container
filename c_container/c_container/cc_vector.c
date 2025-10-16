@@ -18,8 +18,12 @@
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 #include "cc_export.h"
+
+//===========================================================================
 #include "cc_element.h"
-#include "cc_container.h"
+#include "cc_collection.h"
+
+//===========================================================================
 #include "cc_vector.h"
 
 
@@ -35,7 +39,7 @@ cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_
 	cc_debug_assert(max_count != 0);
 
 
-	cc_container_initialize(&ctx->container, elements, max_count, param);
+	cc_collection_initialize(&ctx->collection, elements, max_count, param);
 }
 
 cc_api uintptr_t cc_vector_param(cc_vector_t* ctx)
@@ -43,7 +47,7 @@ cc_api uintptr_t cc_vector_param(cc_vector_t* ctx)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_container_param(&ctx->container);
+	return cc_collection_param(&ctx->collection);
 }
 
 //===========================================================================
@@ -52,7 +56,7 @@ cc_api void cc_vector_clear(cc_vector_t* ctx)
 	cc_debug_assert(ctx != NULL);
 
 
-	cc_container_clear(&ctx->container);
+	cc_collection_clear(&ctx->collection);
 }
 
 cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index)
@@ -60,7 +64,7 @@ cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_container_erase(&ctx->container, index);
+	return cc_collection_erase(&ctx->collection, index);
 }
 
 cc_api bool cc_vector_add(cc_vector_t* ctx, void* pointer)
@@ -68,7 +72,7 @@ cc_api bool cc_vector_add(cc_vector_t* ctx, void* pointer)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_container_add(&ctx->container, pointer);
+	return cc_collection_add(&ctx->collection, pointer);
 }
 
 cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer)
@@ -76,7 +80,7 @@ cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_container_insert(&ctx->container, index, pointer);
+	return cc_collection_insert(&ctx->collection, index, pointer);
 }
 
 //===========================================================================
@@ -85,7 +89,7 @@ cc_api void* cc_vector_at(cc_vector_t* ctx, size_t index)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_container_at(&ctx->container, index);
+	return cc_collection_at(&ctx->collection, index);
 }
 
 //===========================================================================
@@ -94,7 +98,7 @@ cc_api size_t cc_vector_count(cc_vector_t* ctx)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_container_count(&ctx->container);
+	return cc_collection_count(&ctx->collection);
 }
 
 cc_api bool cc_vector_empty(cc_vector_t* ctx)
@@ -102,5 +106,5 @@ cc_api bool cc_vector_empty(cc_vector_t* ctx)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_container_empty(&ctx->container);
+	return cc_collection_empty(&ctx->collection);
 }

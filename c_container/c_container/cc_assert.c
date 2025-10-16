@@ -21,12 +21,15 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-#if defined(_WIN64) || defined(_WIN32)
+//===========================================================================
+#include "cc_export.h"
+
+//===========================================================================
+#if (1==cc_config_os_windows)
 #include <crtdbg.h>
 #endif
 
 //===========================================================================
-#include "cc_export.h"
 #include "cc_assert.h"
 
 
@@ -35,7 +38,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#if defined(_WIN64) || defined(_WIN32)
+#if (1==cc_config_os_windows)
 
 cc_api void cc_assert_printf(const char* format, ...)
 {
@@ -58,8 +61,10 @@ cc_api void cc_assert_printf(const char* format, ...)
 
     while (1);
 }
+#endif
 
-#else
+//===========================================================================
+#if (1==cc_config_os_unknown)
 
 cc_api void cc_assert_printf(const char* format, ...)
 {

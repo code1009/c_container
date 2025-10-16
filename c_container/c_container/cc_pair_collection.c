@@ -94,6 +94,7 @@ cc_api bool cc_pair_collection_add(cc_pair_collection_t* ctx, void* first, void*
 	{
 		cc_pair_set(&ctx->elements[index], first, second);
 		ctx->count++;
+
 		return true;
 	}
 
@@ -130,10 +131,11 @@ cc_api cc_pair_t* cc_pair_collection_at(cc_pair_collection_t* ctx, size_t index)
 	{
 		return &ctx->elements[index];
 	}
+
 	return NULL;
 }
 
-cc_api void* cc_pair_collection_first(cc_pair_collection_t* ctx, size_t index)
+cc_api void* cc_pair_collection_element_first(cc_pair_collection_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -142,10 +144,11 @@ cc_api void* cc_pair_collection_first(cc_pair_collection_t* ctx, size_t index)
 	{
 		return cc_pair_first(&ctx->elements[index]);
 	}
+
 	return NULL;
 }
 
-cc_api void* cc_pair_collection_second(cc_pair_collection_t* ctx, size_t index)
+cc_api void* cc_pair_collection_element_second(cc_pair_collection_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -154,6 +157,7 @@ cc_api void* cc_pair_collection_second(cc_pair_collection_t* ctx, size_t index)
 	{
 		return cc_pair_second(&ctx->elements[index]);
 	}
+
 	return NULL;
 }
 

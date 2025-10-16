@@ -51,7 +51,7 @@ cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* first)
 		// (x+y)/2 => x&y + (x^y)/2
 		mid = (low & high) + ((low ^ high) / 2);
 
-		first_element_pointer = cc_pair_collection_first(&ctx->collection, mid);
+		first_element_pointer = cc_pair_collection_element_first(&ctx->collection, mid);
 		if (true == ctx->less(first_element_pointer, first))
 		{
 			low = mid + 1u;
@@ -122,8 +122,8 @@ cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second)
 	// if key already exists, do not insert
 	if (index < cc_map_count(ctx))
 	{
-		void* first_element_pointer = cc_pair_collection_first(&ctx->collection, index);
-		if (true == ctx->equal(first_element_pointer, first))
+		void* existing_element_first = cc_pair_collection_element_first(&ctx->collection, index);
+		if (true == ctx->equal(existing_element_first, first))
 		{
 			return false;
 		}
@@ -147,7 +147,7 @@ cc_api void* cc_map_element_first(cc_map_t* ctx, size_t index)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_pair_collection_first(&ctx->collection, index);
+	return cc_pair_collection_element_first(&ctx->collection, index);
 }
 
 cc_api void* cc_map_element_second(cc_map_t* ctx, size_t index)
@@ -155,7 +155,7 @@ cc_api void* cc_map_element_second(cc_map_t* ctx, size_t index)
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_pair_collection_second(&ctx->collection, index);
+	return cc_pair_collection_element_second(&ctx->collection, index);
 }
 
 cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
@@ -166,8 +166,8 @@ cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
 	size_t index = cc_map_lower_bound(ctx, first);
 	if (index < cc_map_count(ctx))
 	{
-		void* first_element_pointer = cc_pair_collection_first(&ctx->collection, index);
-		if (true == ctx->equal(first_element_pointer, first))
+		void* existing_element_first = cc_pair_collection_element_first(&ctx->collection, index);
+		if (true == ctx->equal(existing_element_first, first))
 		{
 			return index;
 		}
@@ -182,7 +182,7 @@ cc_api void* cc_map_element_second_by_first(cc_map_t* ctx, void* first)
 
 
 	size_t index = cc_map_find(ctx, first);
-	return cc_pair_collection_second(&ctx->collection, index);
+	return cc_pair_collection_element_second(&ctx->collection, index);
 }
 
 //===========================================================================

@@ -39,6 +39,46 @@ cc_api void cc_hash_entry_initialize(cc_hash_entry_t* ctx)
 	ctx->status = cc_hash_entry_status_empty;
 }
 
+cc_api void cc_hash_entry_set_element(cc_hash_entry_t* dst, void* pointer)
+{
+	cc_debug_assert(dst != NULL);
+
+
+	dst->element.pointer = pointer;
+}
+
+cc_api void* cc_hash_entry_get_element(cc_hash_entry_t* dst)
+{
+	cc_debug_assert(dst != NULL);
+
+
+	return dst->element.pointer;
+}
+
+cc_api void cc_hash_entry_fill(cc_hash_entry_t* dst, void* pointer)
+{
+	cc_debug_assert(dst != NULL);
+
+
+	dst->element.pointer = pointer;
+}
+
+cc_api void* cc_hash_entry_remove(cc_hash_entry_t* dst)
+{
+	cc_debug_assert(dst != NULL);
+
+
+	return dst->element.pointer;
+}
+
+cc_api void* cc_hash_entry_clear(cc_hash_entry_t* dst)
+{
+	cc_debug_assert(dst != NULL);
+
+
+	return dst->element.pointer;
+}
+
 
 
 
@@ -61,17 +101,16 @@ cc_api hash_key_t cc_hash_key_djb2(void* data, size_t length)
 	return hash;
 }
 
-cc_api size_t cc_hash_linear_probe(size_t index, size_t attempt, size_t size)
-{
-	return (index + attempt) % size;
-}
-
 
 
 
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
+static inline size_t cc_hash_linear_probe(size_t index, size_t attempt, size_t size)
+{
+	return (index + attempt) % size;
+}
 
 
 
@@ -132,6 +171,20 @@ cc_api bool cc_hash_table_erase(cc_hash_table_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
+
+	if (index < ctx->max_count)
+	{
+		if (ctx->table[index].status == cc_hash_entry_status_filled)
+		{
+			ctx->table[index].status = cc_hash_entry_status_removed;
+			ctx->count--;
+
+			return true;
+		}
+
+		return false;
+	}
+
 	return false;
 }
 
@@ -154,21 +207,29 @@ cc_api bool cc_hash_table_add(cc_hash_table_t* ctx, void* element)
 	for(attempt = 0; attempt < ctx->max_count; attempt++)
 	{
 		size_t probe_index = cc_hash_linear_probe(index, attempt, ctx->max_count);
-		if ( (ctx->table[probe_index].status == cc_hash_entry_status_empty) || (ctx->table[probe_index].status == cc_hash_entry_status_deleted) )
+		if ( (ctx->table[probe_index].status == cc_hash_entry_status_empty) ||
+			 (ctx->table[probe_index].status == cc_hash_entry_status_removed) )
 		{
 			cc_element_set(&ctx->table[probe_index].element, element);
 			ctx->table[probe_index].status = cc_hash_entry_status_filled;
 			ctx->count++;
+
 			return true;
 		}
 		else if(ctx->table[probe_index].status == cc_hash_entry_status_filled)
 		{
-			void* existing_element_pointer = cc_element_get(&ctx->table[probe_index].element);
-			if(ctx->equal(existing_element_pointer, element))
+			void* existing_element = cc_element_get(&ctx->table[probe_index].element);
+			if(ctx->equal(existing_element, element))
 			{
 				// already exists, do not add
 				return false;
 			}
+
+			continue;
+		}
+		else
+		{
+			return false;
 		}
 	}
 
@@ -181,6 +242,11 @@ cc_api cc_hash_entry_t* cc_hash_table_at(cc_hash_table_t* ctx, size_t index)
 	cc_debug_assert(ctx != NULL);
 
 
+	if (index < ctx->max_count)
+	{
+		return &ctx->table[index];
+	}
+
 	return NULL;
 }
 
@@ -188,6 +254,11 @@ cc_api void* cc_hash_table_element(cc_hash_table_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
+
+	if (index < ctx->max_count)
+	{
+		return &ctx->table[index].element.pointer;
+	}
 
 	return NULL;
 }
@@ -207,12 +278,22 @@ cc_api size_t cc_hash_table_find(cc_hash_table_t* ctx, void* key_element)
 		size_t probe_index = cc_hash_linear_probe(index, attempt, ctx->max_count);
 		if (ctx->table[probe_index].status == cc_hash_entry_status_filled)
 		{
-			void* existing_element_pointer = cc_element_get(&ctx->table[probe_index].element);
-			if (ctx->equal(existing_element_pointer, key_element))
+			void* existing_element = cc_element_get(&ctx->table[probe_index].element);
+			if (ctx->equal(existing_element, key_element))
 			{
 				return probe_index;
 			}
 		}
+		else if (ctx->table[probe_index].status == cc_hash_entry_status_removed)
+		{
+			continue;
+		}
+		/*
+		else if (ctx->table[probe_index].status == cc_hash_entry_status_empty)
+		{
+			return cc_invalid_index;
+		}
+		*/
 		else
 		{
 			return cc_invalid_index;
@@ -223,7 +304,7 @@ cc_api size_t cc_hash_table_find(cc_hash_table_t* ctx, void* key_element)
 	return cc_invalid_index;
 }
 
-cc_api void* cc_hash_table_element_by_key(cc_hash_table_t* ctx, void* key_element)
+cc_api void* cc_hash_table_element_by_key(cc_hash_table_t* ctx, void* element)
 {
 	cc_debug_assert(ctx != NULL);
 

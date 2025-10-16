@@ -34,8 +34,8 @@ cc_api uintptr_t cc_vector_param(cc_vector_t* ctx);
 
 cc_api void cc_vector_clear(cc_vector_t* ctx);
 cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index);
-cc_api bool cc_vector_add(cc_vector_t* ctx, void* pointer);
-cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer);
+cc_api bool cc_vector_add(cc_vector_t* ctx, void* element);
+cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* element);
 
 cc_api cc_element_t* cc_vector_at(cc_vector_t* ctx, size_t index);
 cc_api void* cc_vector_element(cc_vector_t* ctx, size_t index);

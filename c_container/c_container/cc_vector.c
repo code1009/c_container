@@ -64,20 +64,20 @@ cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index)
 	return cc_collection_erase(&ctx->collection, index);
 }
 
-cc_api bool cc_vector_add(cc_vector_t* ctx, void* pointer)
+cc_api bool cc_vector_add(cc_vector_t* ctx, void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_collection_add(&ctx->collection, pointer);
+	return cc_collection_add(&ctx->collection, element);
 }
 
-cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer)
+cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
 
-	return cc_collection_insert(&ctx->collection, index, pointer);
+	return cc_collection_insert(&ctx->collection, index, element);
 }
 
 //===========================================================================

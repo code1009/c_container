@@ -31,8 +31,6 @@
     <ClCompile Include="c_container\cc_pair.c" />
     <ClCompile Include="c_container\cc_pair_collection.c" />
     <ClCompile Include="c_container\cc_simple_segregated_storage.c" />
-    <ClCompile Include="c_container\cc_snode.c" />
-    <ClCompile Include="c_container\cc_snode_collection.c" />
     <ClCompile Include="c_container\cc_vector.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
@@ -61,8 +59,6 @@
     <ClInclude Include="c_container\cc_pair.h" />
     <ClInclude Include="c_container\cc_pair_collection.h" />
     <ClInclude Include="c_container\cc_simple_segregated_storage.h" />
-    <ClInclude Include="c_container\cc_snode.h" />
-    <ClInclude Include="c_container\cc_snode_collection.h" />
     <ClInclude Include="c_container\cc_type.h" />
     <ClInclude Include="c_container\cc_vector.h" />
     <ClInclude Include="test.hpp" />

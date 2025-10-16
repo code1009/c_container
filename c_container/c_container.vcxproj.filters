@@ -84,12 +84,6 @@
     <ClCompile Include="test_cc_map_3.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
-    <ClCompile Include="c_container\cc_snode.c">
-      <Filter>src\c_container\core</Filter>
-    </ClCompile>
-    <ClCompile Include="c_container\cc_snode_collection.c">
-      <Filter>src\c_container\core</Filter>
-    </ClCompile>
     <ClCompile Include="c_container\cc_hash_table.c">
       <Filter>src\c_container\container</Filter>
     </ClCompile>
@@ -151,12 +145,6 @@
     </ClInclude>
     <ClInclude Include="test.hpp">
       <Filter>src\test</Filter>
-    </ClInclude>
-    <ClInclude Include="c_container\cc_snode.h">
-      <Filter>src\c_container\core</Filter>
-    </ClInclude>
-    <ClInclude Include="c_container\cc_snode_collection.h">
-      <Filter>src\c_container\core</Filter>
     </ClInclude>
     <ClInclude Include="c_container\cc_hash_table.h">
       <Filter>src\c_container\container</Filter>

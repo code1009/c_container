@@ -56,6 +56,7 @@ cc_api void cc_assert_printf(const char* format, ...)
     /* assertion 실패 시 즉시 종료 */
     abort();
 
+
     while (1);
 }
 #endif

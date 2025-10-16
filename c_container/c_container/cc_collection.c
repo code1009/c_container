@@ -83,7 +83,7 @@ cc_api bool cc_collection_erase(cc_collection_t* ctx, size_t index)
 	return false;
 }
 
-cc_api bool cc_collection_add(cc_collection_t* ctx, void* pointer)
+cc_api bool cc_collection_add(cc_collection_t* ctx, void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -91,15 +91,16 @@ cc_api bool cc_collection_add(cc_collection_t* ctx, void* pointer)
 	size_t index = ctx->count;
 	if (index < ctx->max_count)
 	{
-		cc_element_set(&ctx->elements[index], pointer);
+		cc_element_set(&ctx->elements[index], element);
 		ctx->count++;
+
 		return true;
 	}
 
 	return false;
 }
 
-cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* pointer)
+cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -110,7 +111,7 @@ cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* point
 		{
 			cc_element_copy(&ctx->elements[i], &ctx->elements[i - 1]);
 		}
-		cc_element_set(&ctx->elements[index], pointer);
+		cc_element_set(&ctx->elements[index], element);
 		ctx->count++;
 
 		return true;

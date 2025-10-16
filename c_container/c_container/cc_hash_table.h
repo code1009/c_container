@@ -27,8 +27,8 @@ typedef hash_key_t (*cc_hash_key_generate_t)(void* data);
 typedef enum _cc_hash_entry_status_t
 {
 	cc_hash_entry_status_empty = 0,
-	cc_hash_entry_status_filled,
-	cc_hash_entry_status_deleted,
+	cc_hash_entry_status_removed,
+	cc_hash_entry_status_filled
 }
 cc_hash_entry_status_t;
 
@@ -89,8 +89,8 @@ cc_api bool cc_hash_table_add(cc_hash_table_t* ctx, void* element);
 cc_api cc_hash_entry_t* cc_hash_table_at(cc_hash_table_t* ctx, size_t index);
 cc_api void* cc_hash_table_element(cc_hash_table_t* ctx, size_t index);
 
-cc_api size_t cc_hash_table_find(cc_hash_table_t* ctx, void* key_element);
-cc_api void* cc_hash_table_element_by_key(cc_hash_table_t* ctx, void* key_element);
+cc_api size_t cc_hash_table_find(cc_hash_table_t* ctx, void* element);
+cc_api void* cc_hash_table_element_by_key(cc_hash_table_t* ctx, void* element);
 
 cc_api size_t cc_hash_table_count(cc_hash_table_t* ctx);
 cc_api bool cc_hash_table_empty(cc_hash_table_t* ctx);

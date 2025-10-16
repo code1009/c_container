@@ -41,7 +41,8 @@ cc_api bool cc_collection_erase(cc_collection_t* ctx, size_t index);
 cc_api bool cc_collection_add(cc_collection_t* ctx, void* pointer);
 cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* pointer);
 
-cc_api void* cc_collection_at(cc_collection_t* ctx, size_t index);
+cc_api cc_element_t* cc_collection_at(cc_collection_t* ctx, size_t index);
+cc_api void* cc_collection_element(cc_collection_t* ctx, size_t index);
 
 cc_api size_t cc_collection_count(cc_collection_t* ctx);
 cc_api bool cc_collection_empty(cc_collection_t* ctx);

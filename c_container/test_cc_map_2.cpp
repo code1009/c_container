@@ -44,7 +44,7 @@ void test_cc_map_2()
 	cc_pair_t elements[max_count];
 	cc_map_t container;
 	cc_map_initialize(&container, cc_equal_int32_t, cc_less_int32_t, elements, max_count, sizeof(data_t));
-	cc_pair_t* pair_pointer;
+	cc_pair_t* element_pointer;
 
 
 	count = 20;
@@ -82,8 +82,8 @@ void test_cc_map_2()
 	size_t index = cc_map_find(&container, (void*)5);
 	if(index != cc_invalid_index)
 	{
-		pair_pointer = (cc_pair_t*)cc_map_at(&container, index);
-		data_pointer = (data_t*)pair_pointer->second.pointer;
+		element_pointer = (cc_pair_t*)cc_map_at(&container, index);
+		data_pointer = (data_t*)element_pointer->second.pointer;
 		std::cout << "find:" << index_string(index) << data_pointer->first << ", " << data_pointer->second << std::endl;
 		
 
@@ -121,15 +121,22 @@ void test_cc_map_2()
 	count = cc_map_count(&container);
 	for (i = 0; i < count; i++)
 	{
-		pair_pointer = (cc_pair_t*)cc_map_at(&container, i);
-		data_pointer = (data_t*)pair_pointer->second.pointer;
+		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
+		cc_debug_assert(element_pointer != NULL);
+
+		data_pointer = (data_t*)element_pointer->second.pointer;
+		cc_debug_assert(data_pointer != NULL);
 
 		std::cout << index_string(i) << data_pointer->first << ", " << data_pointer->second << std::endl;
 	}
 	for (i = 0; i < count; i++)
 	{
-		pair_pointer = (cc_pair_t*)cc_map_at(&container, i);
-		data_pointer = (data_t*)pair_pointer->second.pointer;
+		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
+		cc_debug_assert(element_pointer != NULL);
+
+		data_pointer = (data_t*)element_pointer->second.pointer;
+		cc_debug_assert(data_pointer != NULL);
+
 		data_allocator.free(&data_storage, data_pointer);
 	}
 

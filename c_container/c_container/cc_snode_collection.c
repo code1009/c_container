@@ -1,6 +1,6 @@
 ﻿/////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc_collection.c
+// # File: cc_snode_collection.c
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2025.
@@ -18,9 +18,10 @@
 
 //===========================================================================
 #include "cc_element.h"
+#include "cc_snode.h"
 
 //===========================================================================
-#include "cc_collection.h"
+#include "cc_snode_collection.h"
 
 
 
@@ -28,7 +29,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_collection_initialize(cc_collection_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param)
+cc_api void cc_snode_collection_initialize(cc_snode_collection_t* ctx, cc_snode_t* elements, size_t max_count, uintptr_t param)
 {
 	cc_debug_assert(ctx != NULL);
 	cc_debug_assert(elements != NULL);
@@ -43,11 +44,11 @@ cc_api void cc_collection_initialize(cc_collection_t* ctx, cc_element_t* element
 
 	for (size_t i = 0; i < ctx->max_count; i++)
 	{
-		cc_element_initialize(&ctx->elements[i]);
+		cc_snode_initialize(&ctx->elements[i]);
 	}
 }
 
-cc_api uintptr_t cc_collection_param(cc_collection_t* ctx)
+cc_api uintptr_t cc_snode_collection_param(cc_snode_collection_t* ctx)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -56,7 +57,7 @@ cc_api uintptr_t cc_collection_param(cc_collection_t* ctx)
 }
 
 //===========================================================================
-cc_api void cc_collection_clear(cc_collection_t* ctx)
+cc_api void cc_snode_collection_clear(cc_snode_collection_t* ctx)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -64,7 +65,7 @@ cc_api void cc_collection_clear(cc_collection_t* ctx)
 	ctx->count = 0;
 }
 
-cc_api bool cc_collection_erase(cc_collection_t* ctx, size_t index)
+cc_api bool cc_snode_collection_erase(cc_snode_collection_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -73,7 +74,7 @@ cc_api bool cc_collection_erase(cc_collection_t* ctx, size_t index)
 	{
 		for (size_t i = index; i < ctx->count - 1; i++)
 		{
-			cc_element_copy(&ctx->elements[i], &ctx->elements[i + 1]);
+			cc_snode_copy(&ctx->elements[i], &ctx->elements[i + 1]);
 		}
 		ctx->count--;
 
@@ -83,7 +84,7 @@ cc_api bool cc_collection_erase(cc_collection_t* ctx, size_t index)
 	return false;
 }
 
-cc_api bool cc_collection_add(cc_collection_t* ctx, void* pointer)
+cc_api bool cc_snode_collection_add(cc_snode_collection_t* ctx, cc_snode_t* next, void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -91,7 +92,7 @@ cc_api bool cc_collection_add(cc_collection_t* ctx, void* pointer)
 	size_t index = ctx->count;
 	if (index < ctx->max_count)
 	{
-		cc_element_set(&ctx->elements[index], pointer);
+		cc_snode_set(&ctx->elements[index], next, element);
 		ctx->count++;
 		return true;
 	}
@@ -99,7 +100,7 @@ cc_api bool cc_collection_add(cc_collection_t* ctx, void* pointer)
 	return false;
 }
 
-cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* pointer)
+cc_api bool cc_snode_collection_insert(cc_snode_collection_t* ctx, size_t index, cc_snode_t* next, void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -108,9 +109,9 @@ cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* point
 	{
 		for (size_t i = ctx->count; i > index; i--)
 		{
-			cc_element_copy(&ctx->elements[i], &ctx->elements[i - 1]);
+			cc_snode_copy(&ctx->elements[i], &ctx->elements[i - 1]);
 		}
-		cc_element_set(&ctx->elements[index], pointer);
+		cc_snode_set(&ctx->elements[index], next, element);
 		ctx->count++;
 
 		return true;
@@ -120,7 +121,7 @@ cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* point
 }
 
 //===========================================================================
-cc_api cc_element_t* cc_collection_at(cc_collection_t* ctx, size_t index)
+cc_api cc_snode_t* cc_snode_collection_at(cc_snode_collection_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -132,20 +133,32 @@ cc_api cc_element_t* cc_collection_at(cc_collection_t* ctx, size_t index)
 	return NULL;
 }
 
-cc_api void* cc_collection_element(cc_collection_t* ctx, size_t index)
+cc_api void* cc_snode_collection_next(cc_snode_collection_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
 
 	if (index < ctx->count)
 	{
-		return cc_element_get(&ctx->elements[index]);
+		return cc_snode_next(&ctx->elements[index]);
+	}
+	return NULL;
+}
+
+cc_api void* cc_snode_collection_element(cc_snode_collection_t* ctx, size_t index)
+{
+	cc_debug_assert(ctx != NULL);
+
+
+	if (index < ctx->count)
+	{
+		return cc_snode_element(&ctx->elements[index]);
 	}
 	return NULL;
 }
 
 //===========================================================================
-cc_api size_t cc_collection_count(cc_collection_t* ctx)
+cc_api size_t cc_snode_collection_count(cc_snode_collection_t* ctx)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -153,7 +166,7 @@ cc_api size_t cc_collection_count(cc_collection_t* ctx)
 	return ctx->count;
 }
 
-cc_api bool cc_collection_empty(cc_collection_t* ctx)
+cc_api bool cc_snode_collection_empty(cc_snode_collection_t* ctx)
 {
 	cc_debug_assert(ctx != NULL);
 

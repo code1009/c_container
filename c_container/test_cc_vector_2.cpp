@@ -61,6 +61,7 @@ void test_cc_vector_2()
 	cc_element_t elements[max_count];
 	cc_vector_t container;
 	cc_vector_initialize(&container, elements, max_count, sizeof(data_t));
+	cc_element_t* element_pointer;
 
 
 	count = 20;
@@ -91,7 +92,10 @@ void test_cc_vector_2()
 
 
 	i = 9;
-	data_pointer = (data_t*)cc_vector_at(&container, i);
+	element_pointer = cc_vector_at(&container, i);
+	cc_debug_assert(element_pointer != NULL);
+	data_pointer = (data_t*)element_pointer->pointer;
+	cc_debug_assert(data_pointer != NULL);
 	rv = cc_vector_erase(&container, i);
 	if (false == rv)
 	{
@@ -117,12 +121,22 @@ void test_cc_vector_2()
 	count = cc_vector_count(&container);
 	for (i = 0; i < count; i++)
 	{
-		data_pointer = (data_t*)cc_vector_at(&container, i);
+		element_pointer = cc_vector_at(&container, i);
+		cc_debug_assert(element_pointer != NULL);
+
+		data_pointer = (data_t*)element_pointer->pointer;
+		cc_debug_assert(data_pointer != NULL);
+
 		std::cout << index_string(i) << data_pointer->first << std::endl;
 	}
 	for (i = 0; i < count; i++)
 	{
-		data_pointer = (data_t*)cc_vector_at(&container, i);
+		element_pointer = cc_vector_at(&container, i);
+		cc_debug_assert(element_pointer != NULL);
+
+		data_pointer = (data_t*)element_pointer->pointer;
+		cc_debug_assert(data_pointer != NULL);
+
 		data_allocator.free(&data_storage, data_pointer);
 	}
 

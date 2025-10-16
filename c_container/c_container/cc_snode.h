@@ -1,9 +1,9 @@
-﻿#ifndef cc_vector_h
-#define cc_vector_h
+﻿#ifndef cc_snode_h
+#define cc_snode_h
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc_vector.h
+// # File: cc_snode.h
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2025.
@@ -17,11 +17,12 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-typedef struct _cc_vector_t
+typedef struct _cc_snode_t
 {
-	cc_collection_t collection;
+	struct _cc_snode_t* next;
+	cc_element_t element;
 }
-cc_vector_t;
+cc_snode_t;
 
 
 
@@ -29,19 +30,11 @@ cc_vector_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param);
-cc_api uintptr_t cc_vector_param(cc_vector_t* ctx);
-
-cc_api void cc_vector_clear(cc_vector_t* ctx);
-cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index);
-cc_api bool cc_vector_add(cc_vector_t* ctx, void* pointer);
-cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer);
-
-cc_api cc_element_t* cc_vector_at(cc_vector_t* ctx, size_t index);
-
-cc_api size_t cc_vector_count(cc_vector_t* ctx);
-cc_api bool cc_vector_empty(cc_vector_t* ctx);
-
+cc_api void cc_snode_initialize(cc_snode_t* ctx);
+cc_api void cc_snode_copy(cc_snode_t* dst, cc_snode_t* src);
+cc_api void cc_snode_set(cc_snode_t* dst, cc_snode_t* next, void* pointer);
+cc_api cc_snode_t* cc_snode_next(cc_snode_t* dst);
+cc_api void* cc_snode_element(cc_snode_t* dst);
 
 
 
@@ -49,5 +42,5 @@ cc_api bool cc_vector_empty(cc_vector_t* ctx);
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#endif // cc_vector_h
+#endif // cc_snode_h
 

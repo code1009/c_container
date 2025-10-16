@@ -81,7 +81,7 @@ cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer)
 }
 
 //===========================================================================
-cc_api void* cc_vector_at(cc_vector_t* ctx, size_t index)
+cc_api cc_element_t* cc_vector_at(cc_vector_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 

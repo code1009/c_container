@@ -62,7 +62,7 @@ void test_cc_map_1()
 	cc_map_t container;
 	cc_map_initialize(&container, cc_equal_pvalue_int32_t, cc_less_pvalue_int32_t, elements, max_count, sizeof(data_t));
 	int* key_pointer;
-	cc_pair_t* pair_pointer;
+	cc_pair_t* element_pointer;
 
 
 	count = 20;
@@ -109,17 +109,25 @@ void test_cc_map_1()
 	count = cc_map_count(&container);
 	for (i = 0; i < count; i++)
 	{
-		pair_pointer = (cc_pair_t*)cc_map_at(&container, i);
-		data_pointer = (data_t*)pair_pointer->second.pointer;
+		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
+		cc_debug_assert(element_pointer != NULL);
+
+		data_pointer = (data_t*)element_pointer->second.pointer;
+		cc_debug_assert(data_pointer != NULL);
 
 		std::cout << index_string(i) << data_pointer->first << ", " << data_pointer->second << std::endl;
 	}
 	for (i = 0; i < count; i++)
 	{
-		pair_pointer = (cc_pair_t*)cc_map_at(&container, i);
+		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
+		cc_debug_assert(element_pointer != NULL);
 
-		key_pointer = (int*)pair_pointer->first.pointer;
-		data_pointer = (data_t*)pair_pointer->second.pointer;
+		key_pointer = (int*)element_pointer->first.pointer;
+		cc_debug_assert(key_pointer != NULL);
+
+		data_pointer = (data_t*)element_pointer->second.pointer;
+		cc_debug_assert(data_pointer != NULL);
+
 		key_allocator.free(&key_storage, key_pointer);
 		data_allocator.free(&data_storage, data_pointer);
 	}

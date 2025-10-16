@@ -65,6 +65,9 @@ cc_api size_t cc_simple_segregated_storage_calc_memory_size(size_t data_size, cc
 
 cc_api bool cc_simple_segregated_storage_validate_pointer(cc_simple_segregated_storage_t* ctx, void* pointer)
 {
+	cc_debug_assert(ctx != NULL);
+
+
 	uintptr_t first;
 	uintptr_t last;
 	uintptr_t current;
@@ -94,9 +97,18 @@ cc_api bool cc_simple_segregated_storage_validate_pointer(cc_simple_segregated_s
 
 
 
+/////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 cc_api bool cc_simple_segregated_storage_initialize(cc_simple_segregated_storage_t* ctx, void* memory_pointer, size_t memory_size, size_t data_size, cc_ssize_t max_count)
 {
+	//-----------------------------------------------------------------------
+	cc_debug_assert(ctx != NULL);
+	cc_debug_assert(memory_pointer != NULL);
+	cc_debug_assert(memory_size != 0);
+	cc_debug_assert(data_size != 0);
+	cc_debug_assert(max_count != 0);
+
+
 	//-----------------------------------------------------------------------
 	ctx->memory_pointer = (uint8_t*)memory_pointer;
 	ctx->memory_size = memory_size;
@@ -151,13 +163,13 @@ cc_api bool cc_simple_segregated_storage_initialize(cc_simple_segregated_storage
 	return true;
 }
 
-
-
-
-
 //===========================================================================
 cc_api void* cc_simple_segregated_storage_allocate(cc_simple_segregated_storage_t* ctx)
 {
+	//-----------------------------------------------------------------------
+	cc_debug_assert(ctx != NULL);
+
+
 	//-----------------------------------------------------------------------
 	if (NULL == ctx->free_chunk_head)
 	{
@@ -180,6 +192,11 @@ cc_api void* cc_simple_segregated_storage_allocate(cc_simple_segregated_storage_
 cc_api bool cc_simple_segregated_storage_free(cc_simple_segregated_storage_t* ctx, void* pointer)
 {
 	//-----------------------------------------------------------------------
+	cc_debug_assert(ctx != NULL);
+	cc_debug_assert(pointer != NULL);
+
+
+	//-----------------------------------------------------------------------
 	if (false == cc_simple_segregated_storage_validate_pointer(ctx, pointer))
 	{
 		return false;
@@ -201,5 +218,10 @@ cc_api bool cc_simple_segregated_storage_free(cc_simple_segregated_storage_t* ct
 
 cc_api cc_ssize_t cc_simple_segregated_storage_count(cc_simple_segregated_storage_t* ctx)
 {
+	//-----------------------------------------------------------------------
+	cc_debug_assert(ctx != NULL);
+
+
+	//-----------------------------------------------------------------------
 	return ctx->count;
 }

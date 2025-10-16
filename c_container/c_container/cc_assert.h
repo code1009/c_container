@@ -30,6 +30,26 @@
 	}                                                                                          \
 	while(0)
 
+//===========================================================================
+#if cc_config_debug
+
+#define cc_debug_assert(x) \
+	do                                                                                         \
+	{                                                                                          \
+		if (!(x))                                                                              \
+		{                                                                                      \
+			cc_assert_printf("debug assertion failed: %s (%s:%d)\n", #x, __FILE__, __LINE__);  \
+		}                                                                                      \
+	}                                                                                          \
+	while(0)
+
+#else
+
+//#define cc_debug_assert(x) do { (void)(x); } while(0)
+#define cc_debug_assert(x) 
+
+#endif
+
 
 
 

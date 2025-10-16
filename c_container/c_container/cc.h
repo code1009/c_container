@@ -33,8 +33,10 @@
 
 #include "cc_compare.h"
 #include "cc_pair.h"
+#include "cc_pair_container.h"
 
 #include "cc_vector.h"
+#include "cc_map.h"
 
 
 

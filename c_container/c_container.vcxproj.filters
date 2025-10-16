@@ -51,6 +51,12 @@
     <ClCompile Include="c_container\cc_allocator_helper.c">
       <Filter>src\c_container\memory</Filter>
     </ClCompile>
+    <ClCompile Include="c_container\cc_map.c">
+      <Filter>src\c_container</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_pair_container.c">
+      <Filter>src\c_container</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c_container\cc_container.h">
@@ -103,6 +109,12 @@
     </ClInclude>
     <ClInclude Include="c_container\cc_allocator_helper.h">
       <Filter>src\c_container\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_map.h">
+      <Filter>src\c_container</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_pair_container.h">
+      <Filter>src\c_container</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

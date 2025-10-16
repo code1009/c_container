@@ -33,6 +33,9 @@ cc_element_t;
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 cc_api void cc_element_initialize(cc_element_t* ctx);
+cc_api void cc_element_copy(cc_element_t* dst, cc_element_t* src);
+cc_api void cc_element_set(cc_element_t* dst, void* pointer);
+cc_api void* cc_element_get(cc_element_t* dst);
 
 
 

@@ -34,6 +34,14 @@ cc_api bool cc_simple_segregated_storage_allocator_initialize(
 	cc_simple_segregated_storage_t* simple_segregated_storage, void* memory_pointer, size_t memory_size, size_t data_size, cc_ssize_t max_count
 )
 {
+	cc_debug_assert(allocator != NULL);
+	cc_debug_assert(simple_segregated_storage != NULL);
+	cc_debug_assert(memory_pointer != NULL);
+	cc_debug_assert(memory_size != 0);
+	cc_debug_assert(data_size != 0);
+	cc_debug_assert(max_count != 0);
+
+
 	bool rv;
 	rv = cc_simple_segregated_storage_initialize(simple_segregated_storage, memory_pointer, memory_size, data_size, max_count);
 	if (rv == false)

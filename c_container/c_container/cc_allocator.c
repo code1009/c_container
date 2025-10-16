@@ -29,6 +29,12 @@
 //===========================================================================
 cc_api void cc_allocator_initialize(cc_allocator_t* ctx, void* handle, cc_alloc_t alloc, cc_free_t free)
 {
+	cc_debug_assert(ctx != NULL);
+	cc_debug_assert(handle != NULL); 
+	cc_debug_assert(alloc != NULL);
+	cc_debug_assert(free != NULL);
+
+
 	ctx->handle = handle;
 	ctx->alloc = alloc;
 	ctx->free = free;

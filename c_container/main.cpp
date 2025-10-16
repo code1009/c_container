@@ -31,9 +31,14 @@ void test_cc_code_template()
 	cc_code_template_function(&code_template);
 }
 
-void test_cc_assert()
+void test_cc_assert1()
 {
 	cc_assert(0 != 0);
+}
+
+void test_cc_assert2()
+{
+	cc_debug_assert(0 != 0);
 }
 
 void test_cc_vector1()
@@ -260,10 +265,15 @@ void test()
 	test_t tests[] =
 	{
 		{ "begin", test_begin },
+		
 		{ "cc_code_template", test_cc_code_template },
-//		{ "cc_assert", test_cc_assert },
+		
+		{ "cc_assert1", test_cc_assert1 },
+		{ "cc_assert2", test_cc_assert2 },
+
 		{ "cc_vector1", test_cc_vector1 },
 		{ "cc_vector2", test_cc_vector2 },
+
 		{ "end", test_end }
 	};
 

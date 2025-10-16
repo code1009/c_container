@@ -1,9 +1,9 @@
-﻿#ifndef cc_vector_h
-#define cc_vector_h
+﻿#ifndef cc_map_h
+#define cc_map_h
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc_vector.h
+// # File: cc_map.h
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2025.
@@ -20,11 +20,13 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-typedef struct _cc_vector_t
+typedef struct _cc_map_t
 {
-	cc_container_t container;
+	cc_equal_t equal;
+	cc_less_t less;
+	cc_pair_container_t container;
 }
-cc_vector_t;
+cc_map_t;
 
 
 
@@ -32,19 +34,19 @@ cc_vector_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param);
-cc_api uintptr_t cc_vector_param(cc_vector_t* ctx);
+cc_api void cc_map_initialize(cc_map_t* ctx, cc_equal_t equal, cc_less_t less, cc_pair_t* elements, size_t max_count, uintptr_t param);
+cc_api uintptr_t cc_map_param(cc_map_t* ctx);
 
-cc_api void cc_vector_clear(cc_vector_t* ctx);
-cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index);
-cc_api bool cc_vector_add(cc_vector_t* ctx, void* pointer);
-cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer);
+cc_api void cc_map_clear(cc_map_t* ctx);
+cc_api bool cc_map_erase(cc_map_t* ctx, size_t index);
+cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second);
 
-cc_api void* cc_vector_at(cc_vector_t* ctx, size_t index);
+cc_api cc_pair_t* cc_map_at(cc_map_t* ctx, size_t index);
+cc_api size_t cc_map_find(cc_map_t* ctx, void* first);
+cc_api void* cc_map_get(cc_map_t* ctx, void* first);
 
-cc_api size_t cc_vector_count(cc_vector_t* ctx);
-cc_api bool cc_vector_empty(cc_vector_t* ctx);
-
+cc_api size_t cc_map_count(cc_map_t* ctx);
+cc_api bool cc_map_empty(cc_map_t* ctx);
 
 
 
@@ -52,5 +54,5 @@ cc_api bool cc_vector_empty(cc_vector_t* ctx);
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#endif // cc_vector_h
+#endif // cc_map_h
 

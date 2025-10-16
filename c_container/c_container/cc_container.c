@@ -27,11 +27,12 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size)
+cc_api void cc_container_initialize(cc_container_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param)
 {
 	ctx->elements = elements;
 	ctx->max_count = max_count;
-	ctx->data_size = data_size;
+	ctx->param = param;
+
 	ctx->count = 0;
 
 	for (size_t i = 0; i < ctx->max_count; i++)
@@ -105,7 +106,12 @@ cc_api size_t cc_container_count(cc_container_t* ctx)
 	return ctx->count;
 }
 
-cc_api bool cc_container_is_empty(cc_container_t* ctx)
+cc_api bool cc_container_empty(cc_container_t* ctx)
 {
 	return (ctx->count == 0) ? true : false;
+}
+
+cc_api uintptr_t cc_container_param(cc_container_t* ctx)
+{
+	return ctx->param;
 }

@@ -11,6 +11,19 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
+std::string index_string(size_t index)
+{
+	char buffer[32];
+	sprintf_s(buffer, " [%zu] ", index);
+	return std::string(buffer);
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
 void test_cc_code_template()
 {
 	cc_code_template_t code_template;
@@ -53,7 +66,7 @@ void test_cc_vector1()
 		rv = cc_vector_add(&container, pointer);
 		if (false == rv)
 		{
-			std::cout << "full:" << " [" << i << "] " << std::endl;
+			std::cout << "full:" << index_string(i) << std::endl;
 			delete pointer;
 			break;
 		}
@@ -65,11 +78,11 @@ void test_cc_vector1()
 	rv = cc_vector_erase(&container, i);
 	if (false == rv)
 	{
-		std::cout << "erase failed:" << " [" << i << "] " << std::endl;
+		std::cout << "erase failed:" << index_string(i) << std::endl;
 	}
 	else
 	{
-		std::cout << "erase success:" << " [" << i << "] " << pointer->value << std::endl;
+		std::cout << "erase success:" << index_string(i) << pointer->value << std::endl;
 		delete pointer;
 	}
 
@@ -87,7 +100,7 @@ void test_cc_vector1()
 	for (i = 0; i < count; i++)
 	{
 		pointer = (data_t*)cc_vector_at(&container, i);
-		std::cout <<" [" << i << "] " << pointer->value << std::endl;
+		std::cout << index_string(i) << pointer->value << std::endl;
 	}
 	for (i = 0; i < count; i++)
 	{
@@ -115,8 +128,7 @@ void test_cc_vector2()
 	data_t* pointer;
 
 
-
-
+#if 0
 	cc_simple_segregated_storage_t data_storage;
 	data_t data_memory[max_count];
 
@@ -130,6 +142,22 @@ void test_cc_vector2()
 
 	cc_allocator_t allocator;
 	cc_allocator_initialize(&allocator, &data_storage, (cc_alloc_t)cc_simple_segregated_storage_allocate, (cc_free_t)cc_simple_segregated_storage_free);
+#else
+	cc_simple_segregated_storage_t data_storage;
+	data_t data_memory[max_count];
+
+	cc_allocator_t allocator;
+
+	rv = cc_simple_segregated_storage_allocator_initialize(
+		&allocator,
+		&data_storage, &data_memory[0], sizeof(data_memory), sizeof(data_t), max_count
+	);
+	if (rv == false)
+	{
+		std::cout << "storage allocator initialize failed" << std::endl;
+		return;
+	}
+#endif
 
 
 	cc_element_t elements[max_count];
@@ -148,14 +176,14 @@ void test_cc_vector2()
 		}
 		else
 		{
-			std::cout << "storage allocate failed:" << " [" << i << "] " << std::endl;
+			std::cout << "storage allocate failed:" << index_string(i) << std::endl;
 			break;
 		}
 
 		rv = cc_vector_add(&container, pointer);
 		if (false == rv)
 		{
-			std::cout << "full:" << " [" << i << "] " << std::endl;
+			std::cout << "full:" << index_string(i) << std::endl;
 			allocator.free(&data_storage, pointer);
 			break;
 		}
@@ -167,11 +195,11 @@ void test_cc_vector2()
 	rv = cc_vector_erase(&container, i);
 	if (false == rv)
 	{
-		std::cout << "erase failed:" << " [" << i << "] " << std::endl;
+		std::cout << "erase failed:" << index_string(i) << std::endl;
 	}
 	else
 	{
-		std::cout << "erase success:" << " [" << i << "] " << pointer->first << std::endl;
+		std::cout << "erase success:" << index_string(i) << pointer->first << std::endl;
 		allocator.free(&data_storage, pointer);
 	}
 
@@ -189,7 +217,7 @@ void test_cc_vector2()
 	for (i = 0; i < count; i++)
 	{
 		pointer = (data_t*)cc_vector_at(&container, i);
-		std::cout << "[" << i << "] " << pointer->first << std::endl;
+		std::cout << index_string(i) << pointer->first << std::endl;
 	}
 	for (i = 0; i < count; i++)
 	{
@@ -206,14 +234,65 @@ void test_cc_vector2()
 
 
 
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+typedef struct _test_t
+{
+	const char* name;
+	void (*function)(void);
+} test_t;
+
+//===========================================================================
+void test_begin()
+{
+	std::cout << "begin of test" << std::endl;
+}
+
+void test_end()
+{
+	std::cout << "end of test" << std::endl;
+}
+
+void test()
+{
+	test_t tests[] =
+	{
+		{ "begin", test_begin },
+		{ "cc_code_template", test_cc_code_template },
+//		{ "cc_assert", test_cc_assert },
+		{ "cc_vector1", test_cc_vector1 },
+		{ "cc_vector2", test_cc_vector2 },
+		{ "end", test_end }
+	};
+
+
+
+	size_t i = 0;
+	size_t count = sizeof(tests) / sizeof(test_t);
+
+	for (i = 0; i < count; i++)
+	{
+		std::cout << "==========================================================================" << std::endl;
+		std::cout << "test: " << tests[i].name << std::endl;
+		std::cout << "==========================================================================" << std::endl;
+		
+		tests[i].function();
+		
+		std::cout << std::endl;
+	}
+}
+
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 int main()
 {
-	test_cc_code_template();
-	//test_cc_assert();
-	test_cc_vector1();
-	test_cc_vector2();
+	test();
 
 	return 0;
 }

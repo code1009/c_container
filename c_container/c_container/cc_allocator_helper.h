@@ -1,15 +1,15 @@
-﻿#ifndef cc_h
-#define cc_h
+﻿#ifndef cc_allocator_helper_h
+#define cc_allocator_helper_h
 
 /////////////////////////////////////////////////////////////////////////////
 // 
-// # File: cc.h
+// # File: cc_allocator_helper.h
 // 
 // # Created by: code1009
 // # Created on: 09-18, 2025.
 // 
 // # Description:
-//   @ c container
+//   @ 
 // 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
@@ -20,21 +20,10 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#include "cc_import.h"
-
-#include "cc_code_template.h"
-
-#include "cc_allocator.h"
-#include "cc_simple_segregated_storage.h"
-#include "cc_allocator_helper.h"
-
-#include "cc_element.h"
-#include "cc_container.h"
-
-#include "cc_compare.h"
-#include "cc_pair.h"
-
-#include "cc_vector.h"
+cc_api bool cc_simple_segregated_storage_allocator_initialize(
+	cc_allocator_t* allocator,
+	cc_simple_segregated_storage_t* simple_segregated_storage, void* memory_pointer, size_t memory_size, size_t data_size, cc_ssize_t max_count
+);
 
 
 
@@ -42,5 +31,5 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#endif // cc_h
+#endif // cc_allocator_helper_h
 

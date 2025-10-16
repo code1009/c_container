@@ -28,9 +28,9 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size)
+cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param)
 {
-	cc_container_initialize(&ctx->container, elements, max_count, data_size);
+	cc_container_initialize(&ctx->container, elements, max_count, param);
 }
 
 cc_api void cc_vector_clear(cc_vector_t* ctx)
@@ -63,7 +63,12 @@ cc_api size_t cc_vector_count(cc_vector_t* ctx)
 	return cc_container_count(&ctx->container);
 }
 
-cc_api bool cc_vector_is_empty(cc_vector_t* ctx)
+cc_api bool cc_vector_empty(cc_vector_t* ctx)
 {
-	return cc_container_is_empty(&ctx->container);
+	return cc_container_empty(&ctx->container);
+}
+
+cc_api uintptr_t cc_vector_param(cc_vector_t* ctx)
+{
+	return cc_container_param(&ctx->container);
 }

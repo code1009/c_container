@@ -32,7 +32,7 @@ cc_vector_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_t max_count, size_t data_size);
+cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param);
 cc_api void cc_vector_clear(cc_vector_t* ctx);
 
 cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index);
@@ -42,7 +42,9 @@ cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer);
 cc_api void* cc_vector_at(cc_vector_t* ctx, size_t index);
 
 cc_api size_t cc_vector_count(cc_vector_t* ctx);
-cc_api bool cc_vector_is_empty(cc_vector_t* ctx);
+cc_api bool cc_vector_empty(cc_vector_t* ctx);
+
+cc_api uintptr_t cc_vector_param(cc_vector_t* ctx);
 
 
 

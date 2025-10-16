@@ -18,6 +18,7 @@ void test_cc_vector_2();
 
 void test_cc_map_1();
 void test_cc_map_2();
+void test_cc_map_3();
 
 
 
@@ -58,6 +59,7 @@ void test()
 
 		{ "cc_map_1", test_cc_map_1 },
 		{ "cc_map_2", test_cc_map_2 },
+		{ "cc_map_3", test_cc_map_3 },
 
 		{ "end", test_end }
 	};

@@ -34,7 +34,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* pointer)
+cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* first)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -55,7 +55,7 @@ cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* pointer)
 		mid = (low & high) + ((low ^ high) / 2u);
 
 		first_element_pointer = cc_pair_collection_first(&ctx->collection, mid);
-		if (true == ctx->less(first_element_pointer, pointer))
+		if (true == ctx->less(first_element_pointer, first))
 		{
 			low = mid + 1u;
 		}

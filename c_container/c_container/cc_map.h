@@ -34,7 +34,7 @@ cc_map_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* pointer);
+cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* first);
 
 
 

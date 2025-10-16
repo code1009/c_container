@@ -32,7 +32,7 @@ cc_snode_t;
 //===========================================================================
 cc_api void cc_snode_initialize(cc_snode_t* ctx);
 cc_api void cc_snode_copy(cc_snode_t* dst, cc_snode_t* src);
-cc_api void cc_snode_set(cc_snode_t* dst, cc_snode_t* next, void* pointer);
+cc_api void cc_snode_set(cc_snode_t* dst, cc_snode_t* next, void* element);
 cc_api cc_snode_t* cc_snode_next(cc_snode_t* dst);
 cc_api void* cc_snode_element(cc_snode_t* dst);
 

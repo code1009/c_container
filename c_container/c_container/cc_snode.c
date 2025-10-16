@@ -47,13 +47,13 @@ cc_api void cc_snode_copy(cc_snode_t* dst, cc_snode_t* src)
 	cc_element_copy(&dst->element, &src->element);
 }
 
-cc_api void cc_snode_set(cc_snode_t* dst, cc_snode_t* next, void* pointer)
+cc_api void cc_snode_set(cc_snode_t* dst, cc_snode_t* next, void* element)
 {
 	cc_debug_assert(dst != NULL);
 
 
 	dst->next = next;
-	cc_element_set(&dst->element, pointer);
+	cc_element_set(&dst->element, element);
 }
 
 cc_api cc_snode_t* cc_snode_next(cc_snode_t* dst)

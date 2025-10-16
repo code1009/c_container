@@ -26,7 +26,6 @@
     <ClCompile Include="c_container\cc_collection.c" />
     <ClCompile Include="c_container\cc_code_template.c" />
     <ClCompile Include="c_container\cc_element.c" />
-    <ClCompile Include="c_container\cc_item.c" />
     <ClCompile Include="c_container\cc_map.c" />
     <ClCompile Include="c_container\cc_pair.c" />
     <ClCompile Include="c_container\cc_pair_collection.c" />
@@ -53,7 +52,6 @@
     <ClInclude Include="c_container\cc_element.h" />
     <ClInclude Include="c_container\cc_export.h" />
     <ClInclude Include="c_container\cc_import.h" />
-    <ClInclude Include="c_container\cc_item.h" />
     <ClInclude Include="c_container\cc_map.h" />
     <ClInclude Include="c_container\cc_pair.h" />
     <ClInclude Include="c_container\cc_pair_collection.h" />

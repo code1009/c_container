@@ -81,7 +81,7 @@ void test_cc_map_3()
 
 	size_t index = cc_map_lower_bound(&container, (void*)11);
 	std::cout << "lower bound of 11: " << index_string(index) << std::endl;
-	cc_debug_assert(index==5);
+	cc_debug_assert(index == cc_map_count(&container));
 
 
 	count = cc_map_count(&container);

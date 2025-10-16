@@ -49,7 +49,7 @@ cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* first)
 	{
 		// mid = (low + high) / 2u;
 		// (x+y)/2 => x&y + (x^y)/2
-		mid = (low & high) + ((low ^ high) / 2u);
+		mid = (low & high) + ((low ^ high) / 2);
 
 		first_element_pointer = cc_pair_collection_first(&ctx->collection, mid);
 		if (true == ctx->less(first_element_pointer, first))
@@ -142,6 +142,22 @@ cc_api cc_pair_t* cc_map_at(cc_map_t* ctx, size_t index)
 	return cc_pair_collection_at(&ctx->collection, index);
 }
 
+cc_api void* cc_map_element_first(cc_map_t* ctx, size_t index)
+{
+	cc_debug_assert(ctx != NULL);
+
+
+	return cc_pair_collection_first(&ctx->collection, index);
+}
+
+cc_api void* cc_map_element_second(cc_map_t* ctx, size_t index)
+{
+	cc_debug_assert(ctx != NULL);
+
+
+	return cc_pair_collection_second(&ctx->collection, index);
+}
+
 cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
 {
 	cc_debug_assert(ctx != NULL);
@@ -160,18 +176,13 @@ cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
 	return cc_invalid_index;
 }
 
-cc_api void* cc_map_get(cc_map_t* ctx, void* first)
+cc_api void* cc_map_element_second_by_first(cc_map_t* ctx, void* first)
 {
 	cc_debug_assert(ctx != NULL);
 
 
 	size_t index = cc_map_find(ctx, first);
-	if (index != cc_invalid_index)
-	{
-		return cc_pair_collection_second(&ctx->collection, index);
-	}
-
-	return NULL;
+	return cc_pair_collection_second(&ctx->collection, index);
 }
 
 //===========================================================================

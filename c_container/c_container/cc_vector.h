@@ -38,6 +38,7 @@ cc_api bool cc_vector_add(cc_vector_t* ctx, void* pointer);
 cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* pointer);
 
 cc_api cc_element_t* cc_vector_at(cc_vector_t* ctx, size_t index);
+cc_api void* cc_vector_element(cc_vector_t* ctx, size_t index);
 
 cc_api size_t cc_vector_count(cc_vector_t* ctx);
 cc_api bool cc_vector_empty(cc_vector_t* ctx);

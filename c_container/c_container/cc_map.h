@@ -47,8 +47,11 @@ cc_api bool cc_map_erase(cc_map_t* ctx, size_t index);
 cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second);
 
 cc_api cc_pair_t* cc_map_at(cc_map_t* ctx, size_t index);
+cc_api void* cc_map_element_first(cc_map_t* ctx, size_t index);
+cc_api void* cc_map_element_second(cc_map_t* ctx, size_t index);
+
 cc_api size_t cc_map_find(cc_map_t* ctx, void* first);
-cc_api void* cc_map_get(cc_map_t* ctx, void* first);
+cc_api void* cc_map_element_second_by_first(cc_map_t* ctx, void* first);
 
 cc_api size_t cc_map_count(cc_map_t* ctx);
 cc_api bool cc_map_empty(cc_map_t* ctx);

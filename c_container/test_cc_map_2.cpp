@@ -106,10 +106,10 @@ void test_cc_map_2()
 	}
 
 
-	data_pointer = (data_t*)cc_map_get(&container, (void*)4);
+	data_pointer = (data_t*)cc_map_element_second_by_first(&container, (void*)4);
 	if (data_pointer)
 	{
-		std::cout << "get:" << data_pointer->first << ", " << data_pointer->second << std::endl;
+		std::cout << "element:" << data_pointer->first << ", " << data_pointer->second << std::endl;
 	}
 	else
 	{
@@ -131,10 +131,7 @@ void test_cc_map_2()
 	}
 	for (i = 0; i < count; i++)
 	{
-		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
-		cc_debug_assert(element_pointer != NULL);
-
-		data_pointer = (data_t*)element_pointer->second.pointer;
+		data_pointer = (data_t*)cc_map_element_second(&container, i);
 		cc_debug_assert(data_pointer != NULL);
 
 		data_allocator.free(&data_storage, data_pointer);

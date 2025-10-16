@@ -119,13 +119,10 @@ void test_cc_map_1()
 	}
 	for (i = 0; i < count; i++)
 	{
-		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
-		cc_debug_assert(element_pointer != NULL);
-
-		key_pointer = (int*)element_pointer->first.pointer;
+		key_pointer = (int*)cc_map_element_first(&container, i);
 		cc_debug_assert(key_pointer != NULL);
 
-		data_pointer = (data_t*)element_pointer->second.pointer;
+		data_pointer = (data_t*)cc_map_element_second(&container, i);
 		cc_debug_assert(data_pointer != NULL);
 
 		key_allocator.free(&key_storage, key_pointer);

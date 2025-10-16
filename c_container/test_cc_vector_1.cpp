@@ -87,10 +87,7 @@ void test_cc_vector_1()
 	}
 	for (i = 0; i < count; i++)
 	{
-		element_pointer = cc_vector_at(&container, i);
-		cc_debug_assert(element_pointer != NULL);
-
-		data_pointer = (data_t*)element_pointer->pointer;
+		data_pointer = (data_t*)cc_vector_element(&container, i);
 		cc_debug_assert(data_pointer != NULL);
 
 		delete data_pointer;

@@ -97,10 +97,7 @@ void test_cc_map_3()
 	}
 	for (i = 0; i < count; i++)
 	{
-		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
-		cc_debug_assert(element_pointer != NULL);
-
-		data_pointer = (data_t*)element_pointer->second.pointer;
+		data_pointer = (data_t*)cc_map_element_second(&container, i);
 		cc_debug_assert(data_pointer != NULL);
 
 		data_allocator.free(&data_storage, data_pointer);

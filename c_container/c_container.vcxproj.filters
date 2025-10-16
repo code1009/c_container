@@ -90,6 +90,9 @@
     <ClCompile Include="c_container\cc_snode_collection.c">
       <Filter>src\c_container\core</Filter>
     </ClCompile>
+    <ClCompile Include="c_container\cc_hash_table.c">
+      <Filter>src\c_container\container</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c_container\cc_code_template.h">
@@ -154,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="c_container\cc_snode_collection.h">
       <Filter>src\c_container\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_hash_table.h">
+      <Filter>src\c_container\container</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

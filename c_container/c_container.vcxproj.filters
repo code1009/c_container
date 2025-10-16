@@ -13,28 +13,22 @@
     <Filter Include="src\c_container\environment">
       <UniqueIdentifier>{508abbbb-4ead-4f01-bca2-aad67bb0db49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\c_container\container">
+      <UniqueIdentifier>{93d6c3bd-b503-4569-8802-faf916d5e597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\c_container\core">
+      <UniqueIdentifier>{9fd113a6-1fb0-428c-9097-0397611b4e3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\test">
+      <UniqueIdentifier>{503ddcbb-8941-4451-a81d-a3161111b7a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="c_container\cc_collection.c">
-      <Filter>src\c_container</Filter>
-    </ClCompile>
-    <ClCompile Include="c_container\cc_item.c">
-      <Filter>src\c_container</Filter>
-    </ClCompile>
     <ClCompile Include="c_container\cc_code_template.c">
       <Filter>src\c_container\environment</Filter>
-    </ClCompile>
-    <ClCompile Include="c_container\cc_compare.c">
-      <Filter>src\c_container</Filter>
-    </ClCompile>
-    <ClCompile Include="c_container\cc_element.c">
-      <Filter>src\c_container</Filter>
-    </ClCompile>
-    <ClCompile Include="c_container\cc_pair.c">
-      <Filter>src\c_container</Filter>
     </ClCompile>
     <ClCompile Include="c_container\cc_assert.c">
       <Filter>src\c_container\environment</Filter>
@@ -45,26 +39,53 @@
     <ClCompile Include="c_container\cc_allocator.c">
       <Filter>src\c_container\memory</Filter>
     </ClCompile>
-    <ClCompile Include="c_container\cc_vector.c">
-      <Filter>src\c_container</Filter>
-    </ClCompile>
     <ClCompile Include="c_container\cc_allocator_helper.c">
       <Filter>src\c_container\memory</Filter>
     </ClCompile>
-    <ClCompile Include="c_container\cc_map.c">
-      <Filter>src\c_container</Filter>
+    <ClCompile Include="c_container\cc_compare.c">
+      <Filter>src\c_container\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_collection.c">
+      <Filter>src\c_container\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_element.c">
+      <Filter>src\c_container\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_item.c">
+      <Filter>src\c_container\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_pair.c">
+      <Filter>src\c_container\core</Filter>
     </ClCompile>
     <ClCompile Include="c_container\cc_pair_collection.c">
-      <Filter>src\c_container</Filter>
+      <Filter>src\c_container\core</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_map.c">
+      <Filter>src\c_container\container</Filter>
+    </ClCompile>
+    <ClCompile Include="c_container\cc_vector.c">
+      <Filter>src\c_container\container</Filter>
+    </ClCompile>
+    <ClCompile Include="test_cc_vector_1.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
+    <ClCompile Include="test_cc_vector_2.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
+    <ClCompile Include="test_cc_map_1.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
+    <ClCompile Include="test_cc_map_2.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
+    <ClCompile Include="test_cc.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>src\test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="c_container\cc_collection.h">
-      <Filter>src\c_container</Filter>
-    </ClInclude>
-    <ClInclude Include="c_container\cc_item.h">
-      <Filter>src\c_container</Filter>
-    </ClInclude>
     <ClInclude Include="c_container\cc_code_template.h">
       <Filter>src\c_container\environment</Filter>
     </ClInclude>
@@ -73,15 +94,6 @@
     </ClInclude>
     <ClInclude Include="c_container\cc_import.h">
       <Filter>src\c_container\environment</Filter>
-    </ClInclude>
-    <ClInclude Include="c_container\cc_compare.h">
-      <Filter>src\c_container</Filter>
-    </ClInclude>
-    <ClInclude Include="c_container\cc_pair.h">
-      <Filter>src\c_container</Filter>
-    </ClInclude>
-    <ClInclude Include="c_container\cc_element.h">
-      <Filter>src\c_container</Filter>
     </ClInclude>
     <ClInclude Include="c_container\cc_assert.h">
       <Filter>src\c_container\environment</Filter>
@@ -104,17 +116,35 @@
     <ClInclude Include="c_container\cc_allocator.h">
       <Filter>src\c_container\memory</Filter>
     </ClInclude>
-    <ClInclude Include="c_container\cc_vector.h">
-      <Filter>src\c_container</Filter>
-    </ClInclude>
     <ClInclude Include="c_container\cc_allocator_helper.h">
       <Filter>src\c_container\memory</Filter>
     </ClInclude>
-    <ClInclude Include="c_container\cc_map.h">
-      <Filter>src\c_container</Filter>
+    <ClInclude Include="c_container\cc_compare.h">
+      <Filter>src\c_container\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_collection.h">
+      <Filter>src\c_container\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_element.h">
+      <Filter>src\c_container\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_item.h">
+      <Filter>src\c_container\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_pair.h">
+      <Filter>src\c_container\core</Filter>
     </ClInclude>
     <ClInclude Include="c_container\cc_pair_collection.h">
-      <Filter>src\c_container</Filter>
+      <Filter>src\c_container\core</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_map.h">
+      <Filter>src\c_container\container</Filter>
+    </ClInclude>
+    <ClInclude Include="c_container\cc_vector.h">
+      <Filter>src\c_container\container</Filter>
+    </ClInclude>
+    <ClInclude Include="test.hpp">
+      <Filter>src\test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

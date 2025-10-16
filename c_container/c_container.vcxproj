@@ -33,6 +33,12 @@
     <ClCompile Include="c_container\cc_simple_segregated_storage.c" />
     <ClCompile Include="c_container\cc_vector.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="test_cc.cpp" />
+    <ClCompile Include="test_cc_map_1.cpp" />
+    <ClCompile Include="test_cc_map_2.cpp" />
+    <ClCompile Include="test_cc_vector_1.cpp" />
+    <ClCompile Include="test_cc_vector_2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c_container\cc.h" />
@@ -54,6 +60,7 @@
     <ClInclude Include="c_container\cc_simple_segregated_storage.h" />
     <ClInclude Include="c_container\cc_type.h" />
     <ClInclude Include="c_container\cc_vector.h" />
+    <ClInclude Include="test.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

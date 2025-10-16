@@ -37,6 +37,7 @@
 
 #include "cc_vector.h"
 #include "cc_map.h"
+#include "cc_hash_table.h"
 
 
 

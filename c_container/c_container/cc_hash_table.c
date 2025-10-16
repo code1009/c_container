@@ -88,13 +88,13 @@ cc_api void cc_hash_entry_clear(cc_hash_entry_t* ctx)
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api hash_key_t cc_hash_key_djb2(void* data, size_t length)
+cc_api cc_hash_key_t cc_hash_key_djb2(void* data, size_t length)
 {
 	cc_debug_assert(data != NULL);
 	cc_debug_assert(length != 0);
 
 
-	hash_key_t hash = 5381;
+	cc_hash_key_t hash = 5381;
 	uint8_t* ptr = (uint8_t*)data;
 	for (size_t i = 0; i < length; i++)
 	{
@@ -104,6 +104,47 @@ cc_api hash_key_t cc_hash_key_djb2(void* data, size_t length)
 	return hash;
 }
 
+cc_api cc_hash_key_t cc_hash_key_fnv1a_x64(void* data, size_t length)
+{
+	cc_debug_assert(data != NULL);
+	cc_debug_assert(length != 0);
+
+	uint8_t* ptr = (uint8_t*)data;
+	cc_hash_key_t hash;
+
+	const cc_hash_key_t FNV_OFFSET = 14695981039346656037ULL;
+	const cc_hash_key_t FNV_PRIME = 1099511628211ULL;
+
+	hash = FNV_OFFSET;
+	for (size_t i = 0; i < length; i++)
+	{
+		hash ^= (cc_hash_key_t)ptr[i];
+		hash *= FNV_PRIME;
+	}
+
+	return hash;
+}
+
+cc_api cc_hash_key_t cc_hash_key_fnv1a_x32(void* data, size_t length)
+{
+	cc_debug_assert(data != NULL);
+	cc_debug_assert(length != 0);
+
+	uint8_t* ptr = (uint8_t*)data;
+	cc_hash_key_t hash;
+
+	const cc_hash_key_t FNV_OFFSET = 2166136261U;
+	const cc_hash_key_t FNV_PRIME = 16777619U;
+
+	hash = FNV_OFFSET;
+	for (size_t i = 0; i < length; i++)
+	{
+		hash ^= (cc_hash_key_t)ptr[i];
+		hash *= FNV_PRIME;
+	}
+
+	return hash;
+}
 
 
 
@@ -115,23 +156,28 @@ static inline size_t cc_hash_linear_probe(size_t index, size_t attempt, size_t s
 	return (index + attempt) % size;
 }
 
+cc_api size_t cc_hash_probe(size_t index, size_t attempt, size_t size)
+{
+	return cc_hash_linear_probe(index, attempt, size);
+}
+
 
 
 
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_hash_table_initialize(cc_hash_table_t* ctx, cc_equal_t equal, cc_hash_key_generate_t key_generate, cc_hash_entry_t* table, size_t max_count, uintptr_t param)
+cc_api void cc_hash_table_initialize(cc_hash_table_t* ctx, cc_hash_key_generate_t key_generate, cc_equal_t equal, cc_hash_entry_t* table, size_t max_count, uintptr_t param)
 {
 	cc_debug_assert(ctx != NULL);
-	cc_debug_assert(equal != NULL);
 	cc_debug_assert(key_generate != NULL);
+	cc_debug_assert(equal != NULL);
 	cc_debug_assert(table != NULL);
 	cc_debug_assert(max_count != 0);
 
 
-	ctx->equal = equal;
 	ctx->key_generate = key_generate;
+	ctx->equal = equal;
 	ctx->table = table;
 	ctx->max_count = max_count;
 	ctx->param = param;
@@ -204,14 +250,14 @@ cc_api bool cc_hash_table_add(cc_hash_table_t* ctx, void* element)
 	}
 
 
-	hash_key_t key = ctx->key_generate(element);
+	cc_hash_key_t key = ctx->key_generate(element);
 	size_t index = key % ctx->max_count;
 
 
 	size_t attempt;
 	for(attempt = 0; attempt < ctx->max_count; attempt++)
 	{
-		size_t probe_index = cc_hash_linear_probe(index, attempt, ctx->max_count);
+		size_t probe_index = cc_hash_probe(index, attempt, ctx->max_count);
 		cc_hash_entry_t* entry = &ctx->table[probe_index];
 		cc_hash_entry_status_t status = cc_hash_entry_status(entry);
 
@@ -276,14 +322,14 @@ cc_api size_t cc_hash_table_find(cc_hash_table_t* ctx, void* element)
 	cc_debug_assert(ctx != NULL);
 
 
-	hash_key_t key = ctx->key_generate(element);
+	cc_hash_key_t key = ctx->key_generate(element);
 	size_t index = key % ctx->max_count;
 
 
 	size_t attempt;
 	for (attempt = 0; attempt < ctx->max_count; attempt++)
 	{
-		size_t probe_index = cc_hash_linear_probe(index, attempt, ctx->max_count);
+		size_t probe_index = cc_hash_probe(index, attempt, ctx->max_count);
 		cc_hash_entry_t* entry = &ctx->table[probe_index];
 		cc_hash_entry_status_t status = cc_hash_entry_status(entry);
 
@@ -346,4 +392,12 @@ cc_api bool cc_hash_table_empty(cc_hash_table_t* ctx)
 
 
 	return (ctx->count == 0) ? true : false;
+}
+
+cc_api size_t cc_hash_table_size(cc_hash_table_t* ctx)
+{
+	cc_debug_assert(ctx != NULL);
+
+
+	return ctx->max_count;
 }

@@ -11,6 +11,6 @@
 std::string index_string(size_t index)
 {
 	char buffer[32];
-	sprintf_s(buffer, " [%zu] ", index);
+	sprintf_s(buffer, " [%2zu] ", index);
 	return std::string(buffer);
 }

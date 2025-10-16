@@ -87,6 +87,9 @@
     <ClCompile Include="c_container\cc_hash_table.c">
       <Filter>src\c_container\container</Filter>
     </ClCompile>
+    <ClCompile Include="test_cc_hash_table_1.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c_container\cc_code_template.h">

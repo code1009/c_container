@@ -20,9 +20,9 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-typedef size_t hash_key_t;
+typedef size_t cc_hash_key_t;
 
-typedef hash_key_t (*cc_hash_key_generate_t)(void* data);
+typedef cc_hash_key_t (*cc_hash_key_generate_t)(void* data);
 
 typedef enum _cc_hash_entry_status_t
 {
@@ -48,8 +48,8 @@ cc_hash_entry_t;
 //===========================================================================
 typedef struct _cc_hash_table_t
 {
-	cc_equal_t equal;
 	cc_hash_key_generate_t key_generate;
+	cc_equal_t equal;
 	cc_hash_entry_t* table;
 	size_t max_count;
 	uintptr_t param;
@@ -77,7 +77,11 @@ cc_api void cc_hash_entry_clear(cc_hash_entry_t* ctx);
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api hash_key_t cc_hash_key_djb2(void* data, size_t length);
+cc_api cc_hash_key_t cc_hash_key_djb2(void* data, size_t length);
+cc_api cc_hash_key_t cc_hash_key_fnv1a_x64(void* data, size_t length);
+cc_api cc_hash_key_t cc_hash_key_fnv1a_x32(void* data, size_t length);
+
+cc_api size_t cc_hash_probe(size_t index, size_t attempt, size_t size);
 
 
 
@@ -85,7 +89,7 @@ cc_api hash_key_t cc_hash_key_djb2(void* data, size_t length);
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_hash_table_initialize(cc_hash_table_t* ctx, cc_equal_t equal, cc_hash_key_generate_t key_generate, cc_hash_entry_t* table, size_t max_count, uintptr_t param);
+cc_api void cc_hash_table_initialize(cc_hash_table_t* ctx, cc_hash_key_generate_t key_generate, cc_equal_t equal, cc_hash_entry_t* table, size_t max_count, uintptr_t param);
 cc_api uintptr_t cc_hash_table_param(cc_hash_table_t* ctx);
 
 cc_api void cc_hash_table_clear(cc_hash_table_t* ctx);
@@ -100,6 +104,8 @@ cc_api void* cc_hash_table_element_by_key(cc_hash_table_t* ctx, void* element);
 
 cc_api size_t cc_hash_table_count(cc_hash_table_t* ctx);
 cc_api bool cc_hash_table_empty(cc_hash_table_t* ctx);
+
+cc_api size_t cc_hash_table_size(cc_hash_table_t* ctx);
 
 
 

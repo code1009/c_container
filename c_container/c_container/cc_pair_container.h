@@ -44,6 +44,7 @@ cc_api bool cc_pair_container_erase(cc_pair_container_t* ctx, size_t index);
 cc_api bool cc_pair_container_add(cc_pair_container_t* ctx, void* first, void* second);
 cc_api bool cc_pair_container_insert(cc_pair_container_t* ctx, size_t index, void* first, void* second);
 
+cc_api cc_pair_t* cc_pair_container_at(cc_pair_container_t* ctx, size_t index);
 cc_api void* cc_pair_container_first(cc_pair_container_t* ctx, size_t index);
 cc_api void* cc_pair_container_second(cc_pair_container_t* ctx, size_t index);
 

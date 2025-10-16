@@ -30,7 +30,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-size_t cc_map_lower_bound(cc_map_t* ctx, void* pointer)
+cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* pointer)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -39,7 +39,7 @@ size_t cc_map_lower_bound(cc_map_t* ctx, void* pointer)
 	size_t high;
 	size_t mid;
 
-	void* e;
+	void* first_element_pointer;
 
 
 	low = 0u;
@@ -50,46 +50,14 @@ size_t cc_map_lower_bound(cc_map_t* ctx, void* pointer)
 		// (x+y)/2 => x&y + (x^y)/2
 		mid = (low & high) + ((low ^ high) / 2u);
 
-		e = cc_pair_container_first(&ctx->container, mid);
-		if (true == ctx->less(e, pointer))
+		first_element_pointer = cc_pair_container_first(&ctx->container, mid);
+		if (true == ctx->less(first_element_pointer, pointer))
 		{
 			low = mid + 1u;
 		}
 		else
 		{
 			high = mid;
-		}
-	}
-
-	return low;
-}
-
-size_t cc_map_upper_bound(cc_map_t* ctx, void* pointer)
-{
-	cc_debug_assert(ctx != NULL);
-
-
-	size_t low;
-	size_t high;
-	size_t mid;
-
-	void* e;
-
-
-	low = 0u;
-	high = cc_map_count(ctx);
-	while (low < high)
-	{
-		mid = (low & high) + ((low ^ high) / 2u);
-
-		e = cc_pair_container_first(&ctx->container, mid);
-		if (true == ctx->less(pointer, e))
-		{
-			high = mid;
-		}
-		else
-		{
-			low = mid + 1u;
 		}
 	}
 
@@ -146,8 +114,22 @@ cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second)
 	cc_debug_assert(ctx != NULL);
 
 
-	//return cc_pair_container_add(&ctx->container, pointer);
-	return false;
+	// find insert position
+	size_t index = cc_map_lower_bound(ctx, first);
+
+
+	// if key already exists, do not insert
+	if (index < cc_map_count(ctx))
+	{
+		void* first_element_pointer = cc_pair_container_first(&ctx->container, index);
+		if (true == ctx->equal(first_element_pointer, first))
+		{
+			return false;
+		}
+	}
+
+	// insert at found position (shifts elements)
+	return cc_pair_container_insert(&ctx->container, index, first, second);
 }
 
 //===========================================================================
@@ -156,14 +138,23 @@ cc_api cc_pair_t* cc_map_at(cc_map_t* ctx, size_t index)
 	cc_debug_assert(ctx != NULL);
 
 
-	//return cc_pair_container_at(&ctx->container, index);
-	return NULL;
+	return cc_pair_container_at(&ctx->container, index);
 }
 
 cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
 {
 	cc_debug_assert(ctx != NULL);
 
+
+	size_t index = cc_map_lower_bound(ctx, first);
+	if (index < cc_map_count(ctx))
+	{
+		void* first_element_pointer = cc_pair_container_first(&ctx->container, index);
+		if (true == ctx->equal(first_element_pointer, first))
+		{
+			return index;
+		}
+	}
 
 	return cc_invalid_index;
 }
@@ -172,6 +163,12 @@ cc_api void* cc_map_get(cc_map_t* ctx, void* first)
 {
 	cc_debug_assert(ctx != NULL);
 
+
+	size_t index = cc_map_find(ctx, first);
+	if (index != cc_invalid_index)
+	{
+		return cc_pair_container_second(&ctx->container, index);
+	}
 
 	return NULL;
 }

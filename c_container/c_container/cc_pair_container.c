@@ -120,6 +120,18 @@ cc_api bool cc_pair_container_insert(cc_pair_container_t* ctx, size_t index, voi
 }
 
 //===========================================================================
+cc_api cc_pair_t* cc_pair_container_at(cc_pair_container_t* ctx, size_t index)
+{
+	cc_debug_assert(ctx != NULL);
+
+
+	if (index < ctx->count)
+	{
+		return &ctx->elements[index];
+	}
+	return NULL;
+}
+
 cc_api void* cc_pair_container_first(cc_pair_container_t* ctx, size_t index)
 {
 	cc_debug_assert(ctx != NULL);

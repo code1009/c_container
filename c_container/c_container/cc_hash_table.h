@@ -65,6 +65,12 @@ cc_hash_table_t;
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 cc_api void cc_hash_entry_initialize(cc_hash_entry_t* ctx);
+cc_api void* cc_hash_entry_element(cc_hash_entry_t* ctx);
+cc_api cc_hash_entry_status_t cc_hash_entry_status(cc_hash_entry_t* ctx);
+cc_api void cc_hash_entry_fill(cc_hash_entry_t* ctx, void* element);
+cc_api void cc_hash_entry_remove(cc_hash_entry_t* ctx);
+cc_api void cc_hash_entry_clear(cc_hash_entry_t* ctx);
+
 
 
 

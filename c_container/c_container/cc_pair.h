@@ -31,10 +31,11 @@ cc_pair_t;
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 cc_api void cc_pair_initialize(cc_pair_t* ctx);
-cc_api void cc_pair_copy(cc_pair_t* dst, cc_pair_t* src);
 cc_api void cc_pair_set(cc_pair_t* dst, void* first, void* second);
 cc_api void* cc_pair_first(cc_pair_t* dst);
 cc_api void* cc_pair_second(cc_pair_t* dst);
+
+cc_api void cc_pair_copy(cc_pair_t* dst, cc_pair_t* src);
 
 
 

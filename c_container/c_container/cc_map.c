@@ -31,7 +31,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* first)
+cc_api size_t cc_map_lower_bound(cc_map_t* ctx, const void* first)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -71,7 +71,7 @@ cc_api size_t cc_map_lower_bound(cc_map_t* ctx, void* first)
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_map_initialize(cc_map_t* ctx, cc_equal_t equal, cc_less_t less, cc_pair_t* elements, size_t max_count, uintptr_t param)
+cc_api void cc_map_initialize(cc_map_t* ctx, const cc_equal_t equal, const cc_less_t less, const cc_pair_t* elements, const size_t max_count, const uintptr_t param)
 {
 	cc_debug_assert(ctx != NULL);
 	cc_debug_assert(equal != NULL);
@@ -102,7 +102,7 @@ cc_api void cc_map_clear(cc_map_t* ctx)
 	cc_pair_collection_clear(&ctx->collection);
 }
 
-cc_api bool cc_map_erase(cc_map_t* ctx, size_t index)
+cc_api bool cc_map_erase(cc_map_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -110,7 +110,7 @@ cc_api bool cc_map_erase(cc_map_t* ctx, size_t index)
 	return cc_pair_collection_erase(&ctx->collection, index);
 }
 
-cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second)
+cc_api bool cc_map_add(cc_map_t* ctx, const void* first, const void* second)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -134,7 +134,7 @@ cc_api bool cc_map_add(cc_map_t* ctx, void* first, void* second)
 }
 
 //===========================================================================
-cc_api cc_pair_t* cc_map_at(cc_map_t* ctx, size_t index)
+cc_api cc_pair_t* cc_map_at(cc_map_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -142,7 +142,7 @@ cc_api cc_pair_t* cc_map_at(cc_map_t* ctx, size_t index)
 	return cc_pair_collection_at(&ctx->collection, index);
 }
 
-cc_api void* cc_map_element_first(cc_map_t* ctx, size_t index)
+cc_api void* cc_map_element_first(cc_map_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -150,7 +150,7 @@ cc_api void* cc_map_element_first(cc_map_t* ctx, size_t index)
 	return cc_pair_collection_element_first(&ctx->collection, index);
 }
 
-cc_api void* cc_map_element_second(cc_map_t* ctx, size_t index)
+cc_api void* cc_map_element_second(cc_map_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -158,7 +158,7 @@ cc_api void* cc_map_element_second(cc_map_t* ctx, size_t index)
 	return cc_pair_collection_element_second(&ctx->collection, index);
 }
 
-cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
+cc_api size_t cc_map_find(cc_map_t* ctx, const void* first)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -176,7 +176,7 @@ cc_api size_t cc_map_find(cc_map_t* ctx, void* first)
 	return cc_invalid_index;
 }
 
-cc_api void* cc_map_element_second_by_first(cc_map_t* ctx, void* first)
+cc_api void* cc_map_element_second_by_first(cc_map_t* ctx, const void* first)
 {
 	cc_debug_assert(ctx != NULL);
 

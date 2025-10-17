@@ -33,14 +33,14 @@
     <ClCompile Include="c_container\cc_simple_segregated_storage.c" />
     <ClCompile Include="c_container\cc_vector.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="test_case_cc.cpp" />
-    <ClCompile Include="test_case_cc_hash_table_1.cpp" />
-    <ClCompile Include="test_case_cc_map_1.cpp" />
-    <ClCompile Include="test_case_cc_map_2.cpp" />
-    <ClCompile Include="test_case_cc_vector_1.cpp" />
-    <ClCompile Include="test_case_cc_vector_2.cpp" />
-    <ClCompile Include="test_output.cpp" />
-    <ClCompile Include="test_runner.cpp" />
+    <ClCompile Include="test\test_output.cpp" />
+    <ClCompile Include="test\test_runner.cpp" />
+    <ClCompile Include="test_c_container\test_case_cc.cpp" />
+    <ClCompile Include="test_c_container\test_case_cc_hash_table_1.cpp" />
+    <ClCompile Include="test_c_container\test_case_cc_map_1.cpp" />
+    <ClCompile Include="test_c_container\test_case_cc_map_2.cpp" />
+    <ClCompile Include="test_c_container\test_case_cc_vector_1.cpp" />
+    <ClCompile Include="test_c_container\test_case_cc_vector_2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c_container\cc.h" />
@@ -62,9 +62,9 @@
     <ClInclude Include="c_container\cc_simple_segregated_storage.h" />
     <ClInclude Include="c_container\cc_type.h" />
     <ClInclude Include="c_container\cc_vector.h" />
-    <ClInclude Include="test.hpp" />
-    <ClInclude Include="test_output.hpp" />
-    <ClInclude Include="test_runner.hpp" />
+    <ClInclude Include="test\test_output.hpp" />
+    <ClInclude Include="test\test_runner.hpp" />
+    <ClInclude Include="test_c_container\test.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -111,7 +111,7 @@ cc_api cc_hash_key_t cc_hash_key_djb2(const void* data, const size_t length)
 //===========================================================================
 #if 1
 // Linear probing
-cc_api size_t cc_hash_linear_probe(const size_t index, const size_t attempt, const size_t size)
+static size_t cc_hash_linear_probe(const size_t index, const size_t attempt, const size_t size)
 {
 	cc_debug_assert(size != 0);
 
@@ -120,9 +120,9 @@ cc_api size_t cc_hash_linear_probe(const size_t index, const size_t attempt, con
 }
 #endif
 
-#if 1
+#if 0
 // Quadratic probing
-cc_api size_t cc_hash_quadratic_probe(const size_t index, const size_t attempt, const size_t size)
+static size_t cc_hash_quadratic_probe(const size_t index, const size_t attempt, const size_t size)
 {
 	cc_debug_assert(size != 0);
 

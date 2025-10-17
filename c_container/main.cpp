@@ -100,7 +100,7 @@ static void test_suite_cc_hash_table()
 
 
 	test_suite_t test_suite;
-	test_suite.name = "test_run_cc_hash_table";
+	test_suite.name = "test_suite_cc_hash_table";
 	test_suite.items = test_cases;
 	test_suite.count = sizeof(test_cases) / sizeof(test_case_t) - 1;
 	test_runner(&test_suite);

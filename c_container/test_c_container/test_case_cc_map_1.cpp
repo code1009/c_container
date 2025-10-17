@@ -260,7 +260,7 @@ static void print(void)
 	count = cc_map_count(&_data_container.container);
 	for (i = 0; i < count; i++)
 	{
-		element_pointer = (cc_pair_t*)cc_map_at(&_data_container.container, i);
+		element_pointer = cc_map_at(&_data_container.container, i);
 		test_assert(element_pointer != NULL);
 
 		data_pointer = (data_t*)element_pointer->second.pointer;

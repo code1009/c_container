@@ -219,7 +219,7 @@ static void print(void)
 	count = cc_map_count(&_data_container.container);
 	for (i = 0; i < count; i++)
 	{
-		element_pointer = (cc_pair_t*)cc_map_at(&_data_container.container, i);
+		element_pointer = cc_map_at(&_data_container.container, i);
 		test_assert(element_pointer != NULL);
 
 		data_pointer = (data_t*)element_pointer->second.pointer;
@@ -274,7 +274,7 @@ static void find_and_erase(void)
 	size_t index = cc_map_find(&_data_container.container, (void*)5);
 	if (index != cc_invalid_index)
 	{
-		element_pointer = (cc_pair_t*)cc_map_at(&_data_container.container, index);
+		element_pointer = cc_map_at(&_data_container.container, index);
 		data_pointer = (data_t*)element_pointer->second.pointer;
 		test_out << "find:" << test_tindex(index) << data_pointer->first << ", " << data_pointer->second << test_tendl;
 

@@ -36,7 +36,7 @@ void test_cc_map_3()
 	if (rv == false)
 	{
 		std::cout << "data storage allocator initialize failed" << std::endl;
-		cc_debug_assert(0);
+		test_assert(0);
 		return;
 	}
 
@@ -59,7 +59,7 @@ void test_cc_map_3()
 		else
 		{
 			std::cout << "data storage allocate failed:" << index_string(i) << std::endl;
-			cc_debug_assert(0);
+			test_assert(0);
 			break;
 		}
 
@@ -73,7 +73,7 @@ void test_cc_map_3()
 		{
 			std::cout << "full:" << index_string(i) << std::endl;
 			data_allocator.free(&data_storage, data_pointer);
-			cc_debug_assert(0);
+			test_assert(0);
 			break;
 		}
 	}
@@ -81,24 +81,24 @@ void test_cc_map_3()
 
 	size_t index = cc_map_lower_bound(&container, (void*)11);
 	std::cout << "lower bound of 11: " << index_string(index) << std::endl;
-	cc_debug_assert(index == cc_map_count(&container));
+	test_assert(index == cc_map_count(&container));
 
 
 	count = cc_map_count(&container);
 	for (i = 0; i < count; i++)
 	{
 		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
-		cc_debug_assert(element_pointer != NULL);
+		test_assert(element_pointer != NULL);
 
 		data_pointer = (data_t*)element_pointer->second.pointer;
-		cc_debug_assert(data_pointer != NULL);
+		test_assert(data_pointer != NULL);
 
 		std::cout << index_string(i) << data_pointer->first << ", " << data_pointer->second << std::endl;
 	}
 	for (i = 0; i < count; i++)
 	{
 		data_pointer = (data_t*)cc_map_element_second(&container, i);
-		cc_debug_assert(data_pointer != NULL);
+		test_assert(data_pointer != NULL);
 
 		data_allocator.free(&data_storage, data_pointer);
 	}

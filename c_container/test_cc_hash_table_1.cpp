@@ -8,36 +8,31 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api cc_hash_key_t test1_cc_hash_key_generate(void* data)
+typedef struct _data_t
 {
-	typedef struct _data_t
-	{
-		uint16_t key1;
-		uint16_t key2;
-		uint32_t value;
-	} data_t;
+	uint16_t key1;
+	uint16_t key2;
+	uint32_t value;
+} data_t;
 
 
-	cc_debug_assert(data != NULL);
 
 
-	data_t* data_pointer = (data_t*)data;
 
-	return cc_hash_key_djb2(&data_pointer->key1, 4);
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+cc_api static cc_hash_key_t cc_hash_key_generate(void* data)
+{
+	test_assert(data != NULL);
+
+
+	return cc_hash_key_djb2(data, 4);
 }
 
-cc_api bool test1_cc_hash_equal(void* left, void* right)
+cc_api static bool cc_hash_equal(void* left, void* right)
 {
-	typedef struct _data_t
-	{
-		uint16_t key1;
-		uint16_t key2;
-		uint32_t value;
-	} data_t;
-
-
-	cc_debug_assert(left != NULL);
-	cc_debug_assert(right != NULL);
+	test_assert(left != NULL);
+	test_assert(right != NULL);
 
 
 	data_t* ldata_pointer = (data_t*)left;
@@ -54,120 +49,265 @@ cc_api bool test1_cc_hash_equal(void* left, void* right)
 	return false;
 }
 
-void test_cc_hash_table_1()
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+#define data_max_count 32
+
+//===========================================================================
+typedef struct _data_memory_pool_t
 {
-	typedef struct _data_t
+	cc_simple_segregated_storage_t storage;
+	data_t memory[data_max_count];
+	cc_allocator_t allocator;
+}
+data_memory_pool_t;
+
+//===========================================================================
+static data_memory_pool_t _data_memory_pool;
+
+//===========================================================================
+static bool data_memory_pool_initialize()
+{
+	bool rv;
+	rv = cc_simple_segregated_storage_allocator_initialize(
+		&_data_memory_pool.allocator,
+		&_data_memory_pool.storage, &_data_memory_pool.memory[0], sizeof(_data_memory_pool.memory), sizeof(data_t), data_max_count
+	);
+	if (rv == false)
 	{
-		uint16_t key1;
-		uint16_t key2;
-		uint32_t value;
-	} data_t;
+		std::cout << "cc_simple_segregated_storage_allocator_initialize() failed" << std::endl;
+		test_assert(0);
+		return false;
+	}
+	return true;
+}
+
+static void data_memory_pool_uninitialize()
+{
+	std::cout << "data storage count: " << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << std::endl;
+}
+
+static data_t* data_memory_pool_alloc()
+{
+	data_t* data_pointer = (data_t*)_data_memory_pool.allocator.alloc(&_data_memory_pool.storage);
+	if (data_pointer == NULL)
+	{
+		std::cout << "_data_memory_pool.allocator.alloc() failed" << std::endl;
+		//test_assert(0);
+	}
+	return data_pointer;
+}
+
+static void data_memory_pool_free(data_t* data)
+{
+	bool rv;
+	
+	rv = _data_memory_pool.allocator.free(&_data_memory_pool.storage, data);
+	if (rv == false)
+	{
+		std::cout << "_data_memory_pool.allocator.free() failed" << std::endl;
+		test_assert(0);
+	}
+}
 
 
-	const size_t max_count = 256;
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+typedef struct _data_container_t
+{
+	cc_hash_entry_t elements[data_max_count];
+	cc_hash_table_t container;
+}
+data_container_t;
+
+//===========================================================================
+static data_container_t _data_container;
+
+//===========================================================================
+static bool data_container_initialize()
+{
+	bool rv;
+
+	rv = data_memory_pool_initialize();
+	if (rv == false)
+	{
+		return false;
+	}
+
+	cc_hash_table_initialize(
+		&_data_container.container,
+		cc_hash_key_generate, cc_hash_equal, _data_container.elements, data_max_count, sizeof(data_t));
+
+	return true;
+}
+
+static void data_container_uninitialize()
+{
+	std::cout << "elements count: " << cc_hash_table_count(&_data_container.container) << std::endl;
+
+	data_memory_pool_uninitialize();
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+static size_t cc_hash_calc_key_index(data_t* data_pointer)
+{
+	cc_hash_key_t key = cc_hash_key_generate(data_pointer);
+
+	size_t table_size = cc_hash_table_size(&_data_container.container);
+	test_assert(table_size != 0);
+
+
+	size_t index = key % table_size;
+
+
+	return index;
+}
+
+static size_t cc_hash_calc_attempt(data_t* data_pointer, size_t target)
+{
+	cc_hash_key_t key = cc_hash_key_generate(data_pointer);
+
+	size_t table_size = cc_hash_table_size(&_data_container.container);
+	test_assert(table_size != 0);
+
+
+	size_t index = key % table_size;
+
+
+	size_t attemp = 0;
+
+	for (attemp = 0; attemp < table_size; attemp++)
+	{
+		if (cc_hash_probe(index, attemp, table_size) == target)
+		{
+			return attemp;
+		}
+	}
+
+	if (attemp >= table_size)
+	{
+		return cc_invalid_index;
+	}
+
+	return attemp;
+}
+
+//===========================================================================
+static void add(void)
+{
 	size_t i;
 	size_t count;
 	bool rv;
 	data_t* data_pointer;
 
 
-	cc_simple_segregated_storage_t data_storage;
-	data_t data_memory[max_count];
-
-	cc_allocator_t data_allocator;
-
-	rv = cc_simple_segregated_storage_allocator_initialize(
-		&data_allocator,
-		&data_storage, &data_memory[0], sizeof(data_memory), sizeof(data_t), max_count
-	);
-	if (rv == false)
-	{
-		std::cout << "data storage allocator initialize failed" << std::endl;
-		cc_debug_assert(0);
-		return;
-	}
-
-
-	cc_hash_entry_t elements[max_count];
-	cc_hash_table_t container;
-	cc_hash_table_initialize(&container, test1_cc_hash_key_generate, test1_cc_hash_equal, elements, max_count, sizeof(data_t));
-	//cc_hash_entry_t* element_pointer;
-
-
-	count = 20;
+	count = 512;
 	for (i = 0; i < count; i++)
 	{
-		data_pointer = (data_t*)data_allocator.alloc(&data_storage);
+		data_pointer = data_memory_pool_alloc();
 		if (data_pointer)
 		{
-			data_pointer->key1  = (uint16_t)i;
-			data_pointer->key2  = (uint16_t)i + 10;
+			data_pointer->key1 = (uint16_t)i;
+			data_pointer->key2 = (uint16_t)i + 10;
 			data_pointer->value = (uint32_t)i + 1000;
 		}
 		else
 		{
-			std::cout << "data storage allocate failed:" << index_string(i) << std::endl;
-			cc_debug_assert(i==16);
+			std::cout << "data_memory_pool_alloc() failed:" << index_string(i) << std::endl;
 			break;
 		}
 
-		rv = cc_hash_table_add(&container, data_pointer);
+		rv = cc_hash_table_add(&_data_container.container, data_pointer);
 		if (false == rv)
 		{
 			std::cout << "add failed:" << index_string(i) << std::endl;
-			data_allocator.free(&data_storage, data_pointer);
-			//cc_debug_assert(0);
+			data_memory_pool_free(data_pointer);
 			break;
 		}
-		
-
-		cc_hash_key_t hash_key = test1_cc_hash_key_generate(data_pointer);
-		std::cout << "add:" 
-			<< index_string(i) 
-			<< index_string(data_pointer->key1) << "-" 
-			<< index_string(data_pointer->key2) << ": " 
-			<< data_pointer->value << ", "
-
-			<< "hash="
-			<< index_string(cc_hash_probe(hash_key % max_count, 0, max_count))
-			<< hash_key
-			<< std::endl;
 	}
+}
+
+static void print(void)
+{
+	size_t i;
+	size_t count;
+	data_t* data_pointer;
 
 
-	count = cc_hash_table_size(&container);
+	count = cc_hash_table_size(&_data_container.container);
 	for (i = 0; i < count; i++)
 	{
-		data_pointer = (data_t*)cc_hash_table_element(&container, i);
+		data_pointer = (data_t*)cc_hash_table_element(&_data_container.container, i);
 
 		if (data_pointer != NULL)
 		{
-			cc_hash_key_t hash_key = test1_cc_hash_key_generate(data_pointer);
-
 			std::cout
-				<< index_string(cc_hash_probe(hash_key % max_count, 0, max_count))
-				<< "->"
+				<< index_string(cc_hash_calc_key_index(data_pointer))
+				<< "+"
+				<< cc_hash_calc_attempt(data_pointer, i)
+				<< " ->"
 				<< index_string(i)
 				<< " = "
 				<< index_string(data_pointer->key1) << "-"
 				<< index_string(data_pointer->key2) << ": "
 				<< data_pointer->value
+				<< ", hash="
+				<< cc_hash_key_generate(data_pointer)
 				<< std::endl
 				;
 		}
 	}
+}
+
+static void release(void)
+{
+	size_t i;
+	size_t count;
+	data_t* data_pointer;
+
+
+	count = cc_hash_table_size(&_data_container.container);
 	for (i = 0; i < count; i++)
 	{
-		data_pointer = (data_t*)cc_hash_table_element(&container, i);
+		data_pointer = (data_t*)cc_hash_table_element(&_data_container.container, i);
 		if (data_pointer != NULL)
 		{
-			data_allocator.free(&data_storage, data_pointer);
+			data_memory_pool_free(data_pointer);
 		}
 	}
+}
+
+static void run(void)
+{
+	add();
 
 
-	cc_hash_table_clear(&container);
 
+	print();
+	release();
+}
 
-	std::cout << "data storage count: " << cc_simple_segregated_storage_count(&data_storage) << std::endl;
+//===========================================================================
+void test_cc_hash_table_1()
+{
+	if (!data_container_initialize())
+	{
+		return;
+	}
+
+	run();
+
+	data_container_uninitialize();
 }

@@ -15,13 +15,13 @@ void test_cc_assert_2();
 
 void test_cc_vector_1();
 void test_cc_vector_2();
+void test_cc_vector_3();
 
 void test_cc_map_1();
 void test_cc_map_2();
 void test_cc_map_3();
 
 void test_cc_hash_table_1();
-void test_cc_hash_table_2();
 
 
 
@@ -52,7 +52,7 @@ void test()
 	{
 		{ "begin", test_begin },
 		
-		{ "cc_code_template", test_cc_code_template },
+//		{ "cc_code_template", test_cc_code_template },
 		
 //		{ "cc_assert_1", test_cc_assert_1 },
 //		{ "cc_assert_2", test_cc_assert_2 },
@@ -60,12 +60,11 @@ void test()
 		{ "cc_vector_1", test_cc_vector_1 },
 		{ "cc_vector_2", test_cc_vector_2 },
 
-		{ "cc_map_1", test_cc_map_1 },
-		{ "cc_map_2", test_cc_map_2 },
-		{ "cc_map_3", test_cc_map_3 },
+//		{ "cc_map_1", test_cc_map_1 },
+//		{ "cc_map_2", test_cc_map_2 },
+//		{ "cc_map_3", test_cc_map_3 },
 
 		{ "cc_hash_table_1", test_cc_hash_table_1 },
-		{ "cc_hash_table_2", test_cc_hash_table_2 },
 
 		{ "end", test_end }
 	};

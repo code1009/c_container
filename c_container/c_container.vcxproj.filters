@@ -66,9 +66,6 @@
     <ClCompile Include="test_cc_vector_1.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
-    <ClCompile Include="test_cc_vector_2.cpp">
-      <Filter>src\test</Filter>
-    </ClCompile>
     <ClCompile Include="test_cc_map_1.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
@@ -90,7 +87,7 @@
     <ClCompile Include="test_cc_hash_table_1.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
-    <ClCompile Include="test_cc_hash_table_2.cpp">
+    <ClCompile Include="test_cc_vector_2.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,138 +8,283 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-void test_cc_vector_2()
+typedef struct _data_t
 {
-	typedef struct _data_t
+	int first;
+	int second;
+} data_t;
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+#define data_max_count 32
+
+//===========================================================================
+typedef struct _data_memory_pool_t
+{
+	cc_simple_segregated_storage_t storage;
+	data_t memory[data_max_count];
+	cc_allocator_t allocator;
+}
+data_memory_pool_t;
+
+//===========================================================================
+static data_memory_pool_t _data_memory_pool;
+
+static bool data_memory_pool_initialize()
+{
+	bool rv;
+	rv = cc_simple_segregated_storage_allocator_initialize(
+		&_data_memory_pool.allocator,
+		&_data_memory_pool.storage, &_data_memory_pool.memory[0], sizeof(_data_memory_pool.memory), sizeof(data_t), data_max_count
+	);
+	if (rv == false)
 	{
-		int first;
-		int second;
-	} data_t;
+		std::cout << "cc_simple_segregated_storage_allocator_initialize() failed" << std::endl;
+		test_assert(0);
+		return false;
+	}
+	return true;
+}
+
+static void data_memory_pool_uninitialize()
+{
+	std::cout << "data storage count: " << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << std::endl;
+}
+
+static data_t* data_memory_pool_alloc()
+{
+	data_t* data_pointer = (data_t*)_data_memory_pool.allocator.alloc(&_data_memory_pool.storage);
+	if (data_pointer == NULL)
+	{
+		std::cout << "_data_memory_pool.allocator.alloc() failed" << std::endl;
+		//test_assert(0);
+	}
+	return data_pointer;
+}
+
+static void data_memory_pool_free(data_t* data)
+{
+	bool rv;
+
+	rv = _data_memory_pool.allocator.free(&_data_memory_pool.storage, data);
+	if (rv == false)
+	{
+		std::cout << "_data_memory_pool.allocator.free() failed" << std::endl;
+		test_assert(0);
+	}
+}
 
 
-	const size_t max_count = 10;
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+typedef struct _data_container_t
+{
+	cc_element_t elements[data_max_count];
+	cc_vector_t container;
+}
+data_container_t;
+
+//===========================================================================
+static data_container_t _data_container;
+
+static bool data_container_initialize()
+{
+	bool rv;
+
+	rv = data_memory_pool_initialize();
+	if (rv == false)
+	{
+		return false;
+	}
+
+	cc_vector_initialize(&_data_container.container, _data_container.elements, data_max_count, sizeof(data_t));
+
+	return true;
+}
+
+static void data_container_uninitialize()
+{
+	std::cout << "elements count: " << cc_vector_count(&_data_container.container) << std::endl;
+
+	data_memory_pool_uninitialize();
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+static void add(void)
+{
 	size_t i;
 	size_t count;
 	bool rv;
 	data_t* data_pointer;
 
 
-#if 0
-	cc_simple_segregated_storage_t data_storage;
-	data_t data_memory[max_count];
-
-	rv = cc_simple_segregated_storage_initialize(&data_storage, &data_memory[0], sizeof(data_memory), sizeof(data_t), max_count);
-	if (rv == false)
-	{
-		std::cout << "data storage initialize failed" << std::endl;
-		cc_debug_assert(0);
-		return;
-	}
-
-
-	cc_allocator_t data_allocator;
-	cc_allocator_initialize(&data_allocator, &data_storage, (cc_alloc_t)cc_simple_segregated_storage_allocate, (cc_free_t)cc_simple_segregated_storage_free);
-#else
-	cc_simple_segregated_storage_t data_storage;
-	data_t data_memory[max_count];
-
-	cc_allocator_t data_allocator;
-
-	rv = cc_simple_segregated_storage_allocator_initialize(
-		&data_allocator,
-		&data_storage, &data_memory[0], sizeof(data_memory), sizeof(data_t), max_count
-	);
-	if (rv == false)
-	{
-		std::cout << "data storage allocator initialize failed" << std::endl;
-		cc_debug_assert(0);
-		return;
-	}
-#endif
-
-
-	cc_element_t elements[max_count];
-	cc_vector_t container;
-	cc_vector_initialize(&container, elements, max_count, sizeof(data_t));
-	cc_element_t* element_pointer;
-
-
-	count = 20;
+	count = 512;
 	for (i = 0; i < count; i++)
 	{
-		data_pointer = (data_t*)data_allocator.alloc(&data_storage);
+		data_pointer = data_memory_pool_alloc();
 		if (data_pointer)
 		{
 			data_pointer->first = (int)i;
-			data_pointer->second = (int)i;
+			data_pointer->second = 10+(int)i;
 		}
 		else
 		{
-			std::cout << "data storage allocate failed:" << index_string(i) << std::endl;
-			cc_debug_assert(i == 10);
+			std::cout << "data_memory_pool_alloc() failed:" << index_string(i) << std::endl;
 			break;
 		}
 
-		rv = cc_vector_add(&container, data_pointer);
+		rv = cc_vector_add(&_data_container.container, data_pointer);
 		if (false == rv)
 		{
-			std::cout << "full:" << index_string(i) << std::endl;
-			data_allocator.free(&data_storage, data_pointer);
-			cc_debug_assert(i==10);
+			std::cout << "add failed:" << index_string(i) << std::endl;
+			data_memory_pool_free(data_pointer);
 			break;
 		}
 	}
+}
+
+static void print(void)
+{
+	size_t i;
+	size_t count;
+	data_t* data_pointer;
+
+
+	count = cc_vector_count(&_data_container.container);
+	for (i = 0; i < count; i++)
+	{
+		data_pointer = (data_t*)cc_vector_element(&_data_container.container, i);
+
+		if (data_pointer != NULL)
+		{
+			std::cout
+				<< index_string(i)
+				<< " = "
+				<< data_pointer->first
+				<< ", "
+				<< data_pointer->second
+				<< std::endl
+				;
+		}
+	}
+}
+
+static void release(void)
+{
+	size_t i;
+	size_t count;
+	data_t* data_pointer;
+
+
+	count = cc_vector_count(&_data_container.container);
+	for (i = 0; i < count; i++)
+	{
+		data_pointer = (data_t*)cc_vector_element(&_data_container.container, i);
+		if (data_pointer != NULL)
+		{
+			data_memory_pool_free(data_pointer);
+		}
+	}
+
+	cc_vector_clear(&_data_container.container);
+}
+
+static void erase(void)
+{
+	size_t i;
+	data_t* data_pointer;
+	bool rv;
+
+	cc_element_t* element_pointer;
 
 
 	i = 9;
-	element_pointer = cc_vector_at(&container, i);
-	cc_debug_assert(element_pointer != NULL);
+
+
+	element_pointer = cc_vector_at(&_data_container.container, i);
+	test_assert(element_pointer != NULL);
+
 	data_pointer = (data_t*)element_pointer->pointer;
-	cc_debug_assert(data_pointer != NULL);
-	rv = cc_vector_erase(&container, i);
+	test_assert(data_pointer != NULL);
+
+
+	rv = cc_vector_erase(&_data_container.container, i);
 	if (false == rv)
 	{
 		std::cout << "erase failed:" << index_string(i) << std::endl;
-		cc_debug_assert(0);
+		test_assert(0);
 	}
 	else
 	{
 		std::cout << "erase success:" << index_string(i) << data_pointer->first << std::endl;
-		data_allocator.free(&data_storage, data_pointer);
+		data_memory_pool_free(data_pointer);
 	}
+}
+
+static void insert(void)
+{
+	size_t i;
+
+	bool rv;
+	data_t* data_pointer;
 
 
 	i = 5;
-	data_pointer = (data_t*)data_allocator.alloc(&data_storage);
+	data_pointer = data_memory_pool_alloc();
 	if (data_pointer)
 	{
-		data_pointer->first = 10;
-		cc_vector_insert(&container, i, data_pointer);
+		data_pointer->first = 99;
+		data_pointer->second = 99;
+		rv = cc_vector_insert(&_data_container.container, i, data_pointer);
+		if(rv)
+		{
+			std::cout << "insert success:" << index_string(i) << std::endl;
+		}
+		else
+		{
+			std::cout << "insert failed:" << index_string(i) << std::endl;
+			data_memory_pool_free(data_pointer);
+		}
 	}
-
-
-	count = cc_vector_count(&container);
-	for (i = 0; i < count; i++)
+	else
 	{
-		element_pointer = cc_vector_at(&container, i);
-		cc_debug_assert(element_pointer != NULL);
-
-		data_pointer = (data_t*)element_pointer->pointer;
-		cc_debug_assert(data_pointer != NULL);
-
-		std::cout << index_string(i) << data_pointer->first << std::endl;
+		std::cout << "data_memory_pool_alloc() failed:" << index_string(i) << std::endl;
 	}
-	for (i = 0; i < count; i++)
+}
+
+static void run(void)
+{
+	add();
+
+	erase();
+	insert();
+
+	print();
+	release();
+}
+
+
+
+
+//===========================================================================
+void test_cc_vector_2()
+{
+	if (!data_container_initialize())
 	{
-		data_pointer = (data_t*)cc_vector_element(&container, i);
-		cc_debug_assert(data_pointer != NULL);
-
-		data_allocator.free(&data_storage, data_pointer);
+		return;
 	}
 
+	run();
 
-	cc_vector_clear(&container);
-
-
-	std::cout << "data storage count: " << cc_simple_segregated_storage_count(&data_storage) << std::endl;
+	data_container_uninitialize();
 }

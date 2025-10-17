@@ -36,7 +36,7 @@ void test_cc_map_2()
 	if (rv == false)
 	{
 		std::cout << "data storage allocator initialize failed" << std::endl;
-		cc_debug_assert(0);
+		test_assert(0);
 		return;
 	}
 
@@ -59,7 +59,7 @@ void test_cc_map_2()
 		else
 		{
 			std::cout << "data storage allocate failed:" << index_string(i) << std::endl;
-			cc_debug_assert(i==10);
+			test_assert(i==10);
 			break;
 		}
 
@@ -73,7 +73,7 @@ void test_cc_map_2()
 		{
 			std::cout << "full:" << index_string(i) << std::endl;
 			data_allocator.free(&data_storage, data_pointer);
-			cc_debug_assert(0);
+			test_assert(0);
 			break;
 		}
 	}
@@ -91,7 +91,7 @@ void test_cc_map_2()
 		if (false == rv)
 		{
 			std::cout << "erase failed:" << index_string(index) << std::endl;
-			cc_debug_assert(0);
+			test_assert(0);
 		}
 		else
 		{
@@ -102,7 +102,7 @@ void test_cc_map_2()
 	else
 	{
 		std::cout << "not found" << std::endl;
-		cc_debug_assert(0);
+		test_assert(0);
 	}
 
 
@@ -114,7 +114,7 @@ void test_cc_map_2()
 	else
 	{
 		std::cout << "not found" << std::endl;
-		cc_debug_assert(0);
+		test_assert(0);
 	}
 
 
@@ -122,17 +122,17 @@ void test_cc_map_2()
 	for (i = 0; i < count; i++)
 	{
 		element_pointer = (cc_pair_t*)cc_map_at(&container, i);
-		cc_debug_assert(element_pointer != NULL);
+		test_assert(element_pointer != NULL);
 
 		data_pointer = (data_t*)element_pointer->second.pointer;
-		cc_debug_assert(data_pointer != NULL);
+		test_assert(data_pointer != NULL);
 
 		std::cout << index_string(i) << data_pointer->first << ", " << data_pointer->second << std::endl;
 	}
 	for (i = 0; i < count; i++)
 	{
 		data_pointer = (data_t*)cc_map_element_second(&container, i);
-		cc_debug_assert(data_pointer != NULL);
+		test_assert(data_pointer != NULL);
 
 		data_allocator.free(&data_storage, data_pointer);
 	}

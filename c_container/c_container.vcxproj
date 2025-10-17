@@ -36,7 +36,6 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="test_cc.cpp" />
     <ClCompile Include="test_cc_hash_table_1.cpp" />
-    <ClCompile Include="test_cc_hash_table_2.cpp" />
     <ClCompile Include="test_cc_map_1.cpp" />
     <ClCompile Include="test_cc_map_2.cpp" />
     <ClCompile Include="test_cc_map_3.cpp" />

@@ -120,7 +120,7 @@ static bool key_memory_pool_initialize()
 
 static void key_memory_pool_uninitialize()
 {
-	test_out << "key storage count: " << cc_simple_segregated_storage_count(&_key_memory_pool.storage) << test_tendl;
+	test_out << "key storage count:" << cc_simple_segregated_storage_count(&_key_memory_pool.storage) << test_tendl;
 }
 
 static int* key_memory_pool_alloc()

@@ -260,7 +260,7 @@ static void lbound(void)
 {
 	size_t index;
 	index = cc_map_lower_bound(&_data_container.container, (void*)11);
-	test_out << "lower bound of 11: " << test_tindex(index) << test_tendl;
+	test_out << "lower bound of 11:" << test_tindex(index) << test_tendl;
 	test_assert(index == cc_map_count(&_data_container.container));
 }
 

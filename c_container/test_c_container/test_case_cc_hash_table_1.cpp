@@ -261,7 +261,7 @@ static void print(void)
 				<< test_tindex(i)
 				<< " = "
 				<< test_tindex(data_pointer->key1) << "-"
-				<< test_tindex(data_pointer->key2) << ": "
+				<< test_tindex(data_pointer->key2) << ":"
 				<< data_pointer->value
 				<< ", hash="
 				<< cc_hash_key_generate(data_pointer)

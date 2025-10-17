@@ -48,7 +48,7 @@ static bool data_memory_pool_initialize()
 	);
 	if (rv == false)
 	{
-		std::cout << "cc_simple_segregated_storage_allocator_initialize() failed" << std::endl;
+		test::out << "cc_simple_segregated_storage_allocator_initialize() failed" << test::tendl;
 		test_assert(0);
 		return false;
 	}
@@ -57,7 +57,7 @@ static bool data_memory_pool_initialize()
 
 static void data_memory_pool_uninitialize()
 {
-	std::cout << "data storage count: " << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << std::endl;
+	test::out << "data storage count: " << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << test::tendl;
 }
 
 static data_t* data_memory_pool_alloc()
@@ -65,7 +65,7 @@ static data_t* data_memory_pool_alloc()
 	data_t* data_pointer = (data_t*)_data_memory_pool.allocator.alloc(&_data_memory_pool.storage);
 	if (data_pointer == NULL)
 	{
-		std::cout << "_data_memory_pool.allocator.alloc() failed" << std::endl;
+		test::out << "_data_memory_pool.allocator.alloc() failed" << test::tendl;
 		//test_assert(0);
 	}
 	return data_pointer;
@@ -78,7 +78,7 @@ static void data_memory_pool_free(data_t* data)
 	rv = _data_memory_pool.allocator.free(&_data_memory_pool.storage, data);
 	if (rv == false)
 	{
-		std::cout << "_data_memory_pool.allocator.free() failed" << std::endl;
+		test::out << "_data_memory_pool.allocator.free() failed" << test::tendl;
 		test_assert(0);
 	}
 }
@@ -117,7 +117,7 @@ static bool data_container_initialize()
 
 static void data_container_uninitialize()
 {
-	std::cout << "elements count: " << cc_map_count(&_data_container.container) << std::endl;
+	test::out << "elements count: " << cc_map_count(&_data_container.container) << test::tendl;
 
 	data_memory_pool_uninitialize();
 }
@@ -147,7 +147,7 @@ static void add(void)
 		}
 		else
 		{
-			std::cout << "data_memory_pool_alloc() failed:" << index_string(i) << std::endl;
+			test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
 			break;
 		}
 
@@ -161,7 +161,7 @@ static void add(void)
 
 		if (false == rv)
 		{
-			std::cout << "add failed:" << index_string(i) << std::endl;
+			test::out << "add failed:" << test::tindex(i) << test::tendl;
 			data_memory_pool_free(data_pointer);
 			break;
 		}
@@ -187,7 +187,7 @@ static void add2(void)
 		}
 		else
 		{
-			std::cout << "data_memory_pool_alloc() failed:" << index_string(i) << std::endl;
+			test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
 			break;
 		}
 
@@ -201,7 +201,7 @@ static void add2(void)
 
 		if (false == rv)
 		{
-			std::cout << "add failed:" << index_string(i) << std::endl;
+			test::out << "add failed:" << test::tindex(i) << test::tendl;
 			data_memory_pool_free(data_pointer);
 			break;
 		}
@@ -225,13 +225,13 @@ static void print(void)
 		data_pointer = (data_t*)element_pointer->second.pointer;
 		test_assert(data_pointer != NULL);
 
-		std::cout
-			<< index_string(i)
+		test::out
+			<< test::tindex(i)
 			<< " = "
 			<< data_pointer->first
 			<< ", "
 			<< data_pointer->second
-			<< std::endl
+			<< test::tendl
 			;
 	}
 }
@@ -260,7 +260,7 @@ static void lbound(void)
 {
 	size_t index;
 	index = cc_map_lower_bound(&_data_container.container, (void*)11);
-	std::cout << "lower bound of 11: " << index_string(index) << std::endl;
+	test::out << "lower bound of 11: " << test::tindex(index) << test::tendl;
 	test_assert(index == cc_map_count(&_data_container.container));
 }
 
@@ -276,24 +276,24 @@ static void find_and_erase(void)
 	{
 		element_pointer = (cc_pair_t*)cc_map_at(&_data_container.container, index);
 		data_pointer = (data_t*)element_pointer->second.pointer;
-		std::cout << "find:" << index_string(index) << data_pointer->first << ", " << data_pointer->second << std::endl;
+		test::out << "find:" << test::tindex(index) << data_pointer->first << ", " << data_pointer->second << test::tendl;
 
 
 		rv = cc_map_erase(&_data_container.container, index);
 		if (false == rv)
 		{
-			std::cout << "erase failed:" << index_string(index) << std::endl;
+			test::out << "erase failed:" << test::tindex(index) << test::tendl;
 			test_assert(0);
 		}
 		else
 		{
-			std::cout << "erase success:" << index_string(index) << data_pointer->first << ", " << data_pointer->second << std::endl;
+			test::out << "erase success:" << test::tindex(index) << data_pointer->first << ", " << data_pointer->second << test::tendl;
 		}
 		data_memory_pool_free(data_pointer);
 	}
 	else
 	{
-		std::cout << "not found" << std::endl;
+		test::out << "not found" << test::tendl;
 		test_assert(0);
 	}
 
@@ -301,11 +301,11 @@ static void find_and_erase(void)
 	data_pointer = (data_t*)cc_map_element_second_by_first(&_data_container.container, (void*)4);
 	if (data_pointer)
 	{
-		std::cout << "element:" << data_pointer->first << ", " << data_pointer->second << std::endl;
+		test::out << "element:" << data_pointer->first << ", " << data_pointer->second << test::tendl;
 	}
 	else
 	{
-		std::cout << "not found" << std::endl;
+		test::out << "not found" << test::tendl;
 		test_assert(0);
 	}
 }

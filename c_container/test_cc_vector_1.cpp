@@ -28,7 +28,7 @@ typedef struct _data_t
 //===========================================================================
 static data_t* data_memory_pool_alloc()
 {
-	return new(std::nothrow)data_t();
+	return new data_t();
 }
 
 static void data_memory_pool_free(data_t* data)
@@ -62,7 +62,7 @@ static bool data_container_initialize()
 
 static void data_container_uninitialize()
 {
-	std::cout << "elements count: " << cc_vector_count(&_data_container.container) << std::endl;
+	test::out << "elements count: " << cc_vector_count(&_data_container.container) << test::tendl;
 }
 
 
@@ -89,14 +89,14 @@ static void add(void)
 		}
 		else
 		{
-			std::cout << "data_memory_pool_alloc() failed:" << index_string(i) << std::endl;
+			test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
 			break;
 		}
 
 		rv = cc_vector_add(&_data_container.container, data_pointer);
 		if (false == rv)
 		{
-			std::cout << "add failed:" << index_string(i) << std::endl;
+			test::out << "add failed:" << test::tindex(i) << test::tendl;
 			data_memory_pool_free(data_pointer);
 			break;
 		}
@@ -125,12 +125,12 @@ static void erase(void)
 	rv = cc_vector_erase(&_data_container.container, i);
 	if (false == rv)
 	{
-		std::cout << "erase failed:" << index_string(i) << std::endl;
+		test::out << "erase failed:" << test::tindex(i) << test::tendl;
 		test_assert(0);
 	}
 	else
 	{
-		std::cout << "erase success:" << index_string(i) << data_pointer->value << std::endl;
+		test::out << "erase success:" << test::tindex(i) << data_pointer->value << test::tendl;
 		data_memory_pool_free(data_pointer);
 	}
 }
@@ -151,17 +151,17 @@ static void insert(void)
 		rv = cc_vector_insert(&_data_container.container, i, data_pointer);
 		if (rv)
 		{
-			std::cout << "insert success:" << index_string(i) << std::endl;
+			test::out << "insert success:" << test::tindex(i) << test::tendl;
 		}
 		else
 		{
-			std::cout << "insert failed:" << index_string(i) << std::endl;
+			test::out << "insert failed:" << test::tindex(i) << test::tendl;
 			data_memory_pool_free(data_pointer);
 		}
 	}
 	else
 	{
-		std::cout << "data_memory_pool_alloc() failed:" << index_string(i) << std::endl;
+		test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
 	}
 }
 
@@ -179,11 +179,11 @@ static void print(void)
 
 		if (data_pointer != NULL)
 		{
-			std::cout
-				<< index_string(i)
+			test::out
+				<< test::tindex(i)
 				<< " = "
 				<< data_pointer->value
-				<< std::endl
+				<< test::tendl
 				;
 		}
 	}

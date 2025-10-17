@@ -16,6 +16,7 @@ namespace test
     //=======================================================================
     output out;
     text_endl tendl;
+    text_index tindex(0);
 
 
 
@@ -23,8 +24,8 @@ namespace test
 
     /////////////////////////////////////////////////////////////////////////
     //=======================================================================
-    text_endl::text_endl()
-        : _value("\n")
+    text_endl::text_endl(const char* v)
+        : _value(v)
     {
 	}
 
@@ -34,14 +35,15 @@ namespace test
     {
 	}
 
+    text_index& text_index::operator()(size_t v)
+    { 
+        _value = v; 
+        return *this; 
+    }
+
 
 
     /////////////////////////////////////////////////////////////////////////
-    //=======================================================================
-    output::output()
-    {
-    }
-
     //=======================================================================
     output& output::operator<<(char v)
     {
@@ -153,7 +155,7 @@ namespace test
     output& output::operator<<(const text_index& v)
     {
 		// 64bit or 32bit 겸용시 %zu 사용
-        printf("%zu", v._value);
+        printf(" [%3zu] ", v._value);
 
         return *this;
     }

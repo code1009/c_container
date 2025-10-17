@@ -36,32 +36,32 @@ typedef struct _test_t
 //===========================================================================
 void test_begin()
 {
-	std::cout << "begin of test" << std::endl;
+	test::out << "begin of test" << test::tendl;
 }
 
 void test_end()
 {
-	std::cout << "end of test" << std::endl;
+	test::out << "end of test" << test::tendl;
 }
 
-void test()
+void test_run()
 {
 	test_t tests[] =
 	{
 		{ "begin", test_begin },
 		
-//		{ "cc_code_template", test_cc_code_template },
+		{ "cc_code_template", test_cc_code_template },
 		
 //		{ "cc_assert_1", test_cc_assert_1 },
 //		{ "cc_assert_2", test_cc_assert_2 },
 
-//		{ "cc_vector_1", test_cc_vector_1 },
-//		{ "cc_vector_2", test_cc_vector_2 },
+		{ "cc_vector_1", test_cc_vector_1 },
+		{ "cc_vector_2", test_cc_vector_2 },
 
 		{ "cc_map_1", test_cc_map_1 },
 		{ "cc_map_2", test_cc_map_2 },
 
-//		{ "cc_hash_table_1", test_cc_hash_table_1 },
+		{ "cc_hash_table_1", test_cc_hash_table_1 },
 
 		{ "end", test_end }
 	};
@@ -73,13 +73,13 @@ void test()
 
 	for (i = 0; i < count; i++)
 	{
-		std::cout << "==========================================================================" << std::endl;
-		std::cout << "test: " << tests[i].name << std::endl;
-		std::cout << "==========================================================================" << std::endl;
+		test::out << "==========================================================================" << test::tendl;
+		test::out << "test: " << tests[i].name << test::tendl;
+		test::out << "==========================================================================" << test::tendl;
 		
 		tests[i].function();
 		
-		std::cout << std::endl;
+		test::out << test::tendl;
 	}
 }
 
@@ -91,7 +91,7 @@ void test()
 //===========================================================================
 int main()
 {
-	test();
+	test_run();
 
 	return 0;
 }

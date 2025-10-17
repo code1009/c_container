@@ -14,7 +14,7 @@ namespace test
     public:
         const char* _value;
     public:
-        explicit text_endl();
+        explicit text_endl(const char* v = "\n");
     };
 
     //=======================================================================
@@ -24,16 +24,12 @@ namespace test
         size_t _value;
     public:
         explicit text_index(size_t v);
+        text_index& operator()(size_t v);
     };
 
     //=======================================================================
     class output
     {
-    public:
-
-    public:
-        explicit output();
-
     public:
         output& operator<<(char v);
         output& operator<<(short int v);
@@ -62,6 +58,7 @@ namespace test
     //=======================================================================
     extern output out;
 	extern text_endl tendl;
+    extern text_index tindex;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================

@@ -21,6 +21,7 @@ void test_cc_map_2();
 void test_cc_map_3();
 
 void test_cc_hash_table_1();
+void test_cc_hash_table_2();
 
 
 
@@ -64,6 +65,7 @@ void test()
 		{ "cc_map_3", test_cc_map_3 },
 
 		{ "cc_hash_table_1", test_cc_hash_table_1 },
+		{ "cc_hash_table_2", test_cc_hash_table_2 },
 
 		{ "end", test_end }
 	};

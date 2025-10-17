@@ -104,61 +104,43 @@ cc_api cc_hash_key_t cc_hash_key_djb2(void* data, size_t length)
 	return hash;
 }
 
-cc_api cc_hash_key_t cc_hash_key_fnv1a_x64(void* data, size_t length)
-{
-	cc_debug_assert(data != NULL);
-	cc_debug_assert(length != 0);
-
-	uint8_t* ptr = (uint8_t*)data;
-	cc_hash_key_t hash;
-
-	const cc_hash_key_t FNV_OFFSET = 14695981039346656037ULL;
-	const cc_hash_key_t FNV_PRIME = 1099511628211ULL;
-
-	hash = FNV_OFFSET;
-	for (size_t i = 0; i < length; i++)
-	{
-		hash ^= (cc_hash_key_t)ptr[i];
-		hash *= FNV_PRIME;
-	}
-
-	return hash;
-}
-
-cc_api cc_hash_key_t cc_hash_key_fnv1a_x32(void* data, size_t length)
-{
-	cc_debug_assert(data != NULL);
-	cc_debug_assert(length != 0);
-
-	uint8_t* ptr = (uint8_t*)data;
-	cc_hash_key_t hash;
-
-	const cc_hash_key_t FNV_OFFSET = 2166136261U;
-	const cc_hash_key_t FNV_PRIME = 16777619U;
-
-	hash = FNV_OFFSET;
-	for (size_t i = 0; i < length; i++)
-	{
-		hash ^= (cc_hash_key_t)ptr[i];
-		hash *= FNV_PRIME;
-	}
-
-	return hash;
-}
-
 
 
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-static inline size_t cc_hash_linear_probe(size_t index, size_t attempt, size_t size)
+#if 1
+// Linear probing: h(i) = (index + i) % size
+static size_t cc_hash_linear_probe(size_t index, size_t attempt, size_t size)
 {
+	cc_debug_assert(size != 0);
+
+
 	return (index + attempt) % size;
 }
+#endif
+
+#if 0
+// Quadratic probing: h(i) = (index + i + i^2) % size
+// 50% 이상 데이터를 채우면 삽입할 공간을 찾지 못하는 경우가 발생할 수 있음
+static size_t cc_hash_quadratic_probe(size_t index, size_t attempt, size_t size)
+{
+	cc_debug_assert(size != 0);
+
+
+	//return (index + attempt + (attempt * attempt)) % size;
+	size_t offset = (attempt + (attempt * attempt)) % size;
+	return (index + offset) % size;
+}
+#endif
 
 cc_api size_t cc_hash_probe(size_t index, size_t attempt, size_t size)
 {
+#if 1
 	return cc_hash_linear_probe(index, attempt, size);
+#else
+	return cc_hash_quadratic_probe(index, attempt, size);
+#endif
 }
 
 

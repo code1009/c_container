@@ -18,7 +18,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 typedef void* (*cc_alloc_t)(void* handle);
-typedef void  (*cc_free_t) (void* handle, void* pointer);
+typedef bool  (*cc_free_t) (void* handle, void* pointer);
 
 
 

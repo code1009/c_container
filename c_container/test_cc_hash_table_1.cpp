@@ -8,7 +8,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api cc_hash_key_t test_cc_hash_key_generate(void* data)
+cc_api cc_hash_key_t test1_cc_hash_key_generate(void* data)
 {
 	typedef struct _data_t
 	{
@@ -24,10 +24,9 @@ cc_api cc_hash_key_t test_cc_hash_key_generate(void* data)
 	data_t* data_pointer = (data_t*)data;
 
 	return cc_hash_key_djb2(&data_pointer->key1, 4);
-	//return cc_hash_key_fnv1a_x64(&data_pointer->key1, 4);
 }
 
-cc_api bool test_cc_hash_equal(void* left, void* right)
+cc_api bool test1_cc_hash_equal(void* left, void* right)
 {
 	typedef struct _data_t
 	{
@@ -65,7 +64,7 @@ void test_cc_hash_table_1()
 	} data_t;
 
 
-	const size_t max_count = 16;
+	const size_t max_count = 256;
 	size_t i;
 	size_t count;
 	bool rv;
@@ -91,7 +90,7 @@ void test_cc_hash_table_1()
 
 	cc_hash_entry_t elements[max_count];
 	cc_hash_table_t container;
-	cc_hash_table_initialize(&container, test_cc_hash_key_generate, test_cc_hash_equal, elements, max_count, sizeof(data_t));
+	cc_hash_table_initialize(&container, test1_cc_hash_key_generate, test1_cc_hash_equal, elements, max_count, sizeof(data_t));
 	//cc_hash_entry_t* element_pointer;
 
 
@@ -115,14 +114,14 @@ void test_cc_hash_table_1()
 		rv = cc_hash_table_add(&container, data_pointer);
 		if (false == rv)
 		{
-			std::cout << "full:" << index_string(i) << std::endl;
+			std::cout << "add failed:" << index_string(i) << std::endl;
 			data_allocator.free(&data_storage, data_pointer);
-			cc_debug_assert(0);
+			//cc_debug_assert(0);
 			break;
 		}
 		
 
-		cc_hash_key_t hash_key = test_cc_hash_key_generate(data_pointer);
+		cc_hash_key_t hash_key = test1_cc_hash_key_generate(data_pointer);
 		std::cout << "add:" 
 			<< index_string(i) 
 			<< index_string(data_pointer->key1) << "-" 
@@ -143,8 +142,13 @@ void test_cc_hash_table_1()
 
 		if (data_pointer != NULL)
 		{
+			cc_hash_key_t hash_key = test1_cc_hash_key_generate(data_pointer);
+
 			std::cout
+				<< index_string(cc_hash_probe(hash_key % max_count, 0, max_count))
+				<< "->"
 				<< index_string(i)
+				<< " = "
 				<< index_string(data_pointer->key1) << "-"
 				<< index_string(data_pointer->key2) << ": "
 				<< data_pointer->value

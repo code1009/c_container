@@ -9,7 +9,7 @@
 // # Created on: 09-18, 2025.
 // 
 // # Description:
-//   @ open addressing(linear probing) hash table
+//   @ open addressing hash table
 // 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
@@ -78,8 +78,6 @@ cc_api void cc_hash_entry_clear(cc_hash_entry_t* ctx);
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 cc_api cc_hash_key_t cc_hash_key_djb2(void* data, size_t length);
-cc_api cc_hash_key_t cc_hash_key_fnv1a_x64(void* data, size_t length);
-cc_api cc_hash_key_t cc_hash_key_fnv1a_x32(void* data, size_t length);
 
 cc_api size_t cc_hash_probe(size_t index, size_t attempt, size_t size);
 

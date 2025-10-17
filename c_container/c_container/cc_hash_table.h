@@ -22,7 +22,7 @@
 //===========================================================================
 typedef size_t cc_hash_key_t;
 
-typedef cc_hash_key_t (*cc_hash_key_generate_t)(void* data);
+typedef cc_hash_key_t (*cc_hash_key_generate_t)(const void* data);
 
 typedef enum _cc_hash_entry_status_t
 {
@@ -77,9 +77,9 @@ cc_api void cc_hash_entry_clear(cc_hash_entry_t* ctx);
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api cc_hash_key_t cc_hash_key_djb2(void* data, size_t length);
+cc_api cc_hash_key_t cc_hash_key_djb2(const void* data, const size_t length);
 
-cc_api size_t cc_hash_probe(size_t index, size_t attempt, size_t size);
+cc_api size_t cc_hash_probe(const size_t index, const size_t attempt, const size_t size);
 
 
 

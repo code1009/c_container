@@ -33,17 +33,17 @@ cc_pair_collection_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_pair_collection_initialize(cc_pair_collection_t* ctx, cc_pair_t* elements, size_t max_count, uintptr_t param);
+cc_api void cc_pair_collection_initialize(cc_pair_collection_t* ctx, const cc_pair_t* elements, const size_t max_count, const uintptr_t param);
 cc_api uintptr_t cc_pair_collection_param(cc_pair_collection_t* ctx);
 
 cc_api void cc_pair_collection_clear(cc_pair_collection_t* ctx);
-cc_api bool cc_pair_collection_erase(cc_pair_collection_t* ctx, size_t index);
-cc_api bool cc_pair_collection_add(cc_pair_collection_t* ctx, void* first, void* second);
-cc_api bool cc_pair_collection_insert(cc_pair_collection_t* ctx, size_t index, void* first, void* second);
+cc_api bool cc_pair_collection_erase(cc_pair_collection_t* ctx, const size_t index);
+cc_api bool cc_pair_collection_add(cc_pair_collection_t* ctx, const void* first, const void* second);
+cc_api bool cc_pair_collection_insert(cc_pair_collection_t* ctx, const size_t index, const void* first, const void* second);
 
-cc_api cc_pair_t* cc_pair_collection_at(cc_pair_collection_t* ctx, size_t index);
-cc_api void* cc_pair_collection_element_first(cc_pair_collection_t* ctx, size_t index);
-cc_api void* cc_pair_collection_element_second(cc_pair_collection_t* ctx, size_t index);
+cc_api cc_pair_t* cc_pair_collection_at(cc_pair_collection_t* ctx, const size_t index);
+cc_api void* cc_pair_collection_element_first(cc_pair_collection_t* ctx, const size_t index);
+cc_api void* cc_pair_collection_element_second(cc_pair_collection_t* ctx, const size_t index);
 
 cc_api size_t cc_pair_collection_count(cc_pair_collection_t* ctx);
 cc_api bool cc_pair_collection_empty(cc_pair_collection_t* ctx);

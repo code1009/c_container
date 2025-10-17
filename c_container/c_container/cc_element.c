@@ -33,12 +33,12 @@ cc_api void cc_element_initialize(cc_element_t* ctx)
 	ctx->pointer = NULL;
 }
 
-cc_api void cc_element_set(cc_element_t* ctx, void* pointer)
+cc_api void cc_element_set(cc_element_t* ctx, const void* pointer)
 {
 	cc_debug_assert(ctx != NULL);
 
 
-	ctx->pointer = pointer;
+	ctx->pointer = (void*)pointer;
 }
 
 cc_api void* cc_element_get(cc_element_t* ctx)
@@ -50,7 +50,7 @@ cc_api void* cc_element_get(cc_element_t* ctx)
 }
 
 //===========================================================================
-cc_api void cc_element_copy(cc_element_t* dst, cc_element_t* src)
+cc_api void cc_element_copy(cc_element_t* dst, const cc_element_t* src)
 {
 	cc_debug_assert(dst != NULL);
 	cc_debug_assert(src != NULL);

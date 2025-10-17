@@ -21,7 +21,7 @@ typedef struct _data_t
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api static cc_hash_key_t cc_hash_key_generate(void* data)
+cc_api static cc_hash_key_t cc_hash_key_generate(const void* data)
 {
 	test_assert(data != NULL);
 
@@ -29,7 +29,7 @@ cc_api static cc_hash_key_t cc_hash_key_generate(void* data)
 	return cc_hash_key_djb2(data, 4);
 }
 
-cc_api static bool cc_hash_equal(void* left, void* right)
+cc_api static bool cc_hash_equal(const void* left, const void* right)
 {
 	test_assert(left != NULL);
 	test_assert(right != NULL);

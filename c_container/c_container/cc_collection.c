@@ -28,14 +28,14 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_collection_initialize(cc_collection_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param)
+cc_api void cc_collection_initialize(cc_collection_t* ctx, const cc_element_t* elements, const size_t max_count, const uintptr_t param)
 {
 	cc_debug_assert(ctx != NULL);
 	cc_debug_assert(elements != NULL);
 	cc_debug_assert(max_count != 0);
 
 
-	ctx->elements = elements;
+	ctx->elements = (cc_element_t*)elements;
 	ctx->max_count = max_count;
 	ctx->param = param;
 
@@ -64,7 +64,7 @@ cc_api void cc_collection_clear(cc_collection_t* ctx)
 	ctx->count = 0;
 }
 
-cc_api bool cc_collection_erase(cc_collection_t* ctx, size_t index)
+cc_api bool cc_collection_erase(cc_collection_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -83,7 +83,7 @@ cc_api bool cc_collection_erase(cc_collection_t* ctx, size_t index)
 	return false;
 }
 
-cc_api bool cc_collection_add(cc_collection_t* ctx, void* element)
+cc_api bool cc_collection_add(cc_collection_t* ctx, const void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -100,7 +100,7 @@ cc_api bool cc_collection_add(cc_collection_t* ctx, void* element)
 	return false;
 }
 
-cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* element)
+cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, const void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -121,7 +121,7 @@ cc_api bool cc_collection_insert(cc_collection_t* ctx, size_t index, void* eleme
 }
 
 //===========================================================================
-cc_api cc_element_t* cc_collection_at(cc_collection_t* ctx, size_t index)
+cc_api cc_element_t* cc_collection_at(cc_collection_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -133,7 +133,7 @@ cc_api cc_element_t* cc_collection_at(cc_collection_t* ctx, size_t index)
 	return NULL;
 }
 
-cc_api void* cc_collection_element(cc_collection_t* ctx, size_t index)
+cc_api void* cc_collection_element(cc_collection_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 

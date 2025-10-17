@@ -37,7 +37,7 @@ cc_api void cc_pair_initialize(cc_pair_t* ctx)
 	cc_element_initialize(&ctx->second);
 }
 
-cc_api void cc_pair_set(cc_pair_t* ctx, void* first, void* second)
+cc_api void cc_pair_set(cc_pair_t* ctx, const void* first, const void* second)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -63,7 +63,7 @@ cc_api void* cc_pair_second(cc_pair_t* ctx)
 }
 
 //===========================================================================
-cc_api void cc_pair_copy(cc_pair_t* dst, cc_pair_t* src)
+cc_api void cc_pair_copy(cc_pair_t* dst, const cc_pair_t* src)
 {
 	cc_debug_assert(dst != NULL);
 	cc_debug_assert(src != NULL);

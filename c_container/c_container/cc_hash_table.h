@@ -67,7 +67,7 @@ cc_hash_table_t;
 cc_api void cc_hash_entry_initialize(cc_hash_entry_t* ctx);
 cc_api void* cc_hash_entry_element(cc_hash_entry_t* ctx);
 cc_api cc_hash_entry_status_t cc_hash_entry_status(cc_hash_entry_t* ctx);
-cc_api void cc_hash_entry_fill(cc_hash_entry_t* ctx, void* element);
+cc_api void cc_hash_entry_fill(cc_hash_entry_t* ctx, const void* element);
 cc_api void cc_hash_entry_remove(cc_hash_entry_t* ctx);
 cc_api void cc_hash_entry_clear(cc_hash_entry_t* ctx);
 
@@ -87,18 +87,18 @@ cc_api size_t cc_hash_probe(const size_t index, const size_t attempt, const size
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_hash_table_initialize(cc_hash_table_t* ctx, cc_hash_key_generate_t key_generate, cc_equal_t equal, cc_hash_entry_t* table, size_t max_count, uintptr_t param);
+cc_api void cc_hash_table_initialize(cc_hash_table_t* ctx, const cc_hash_key_generate_t key_generate, const cc_equal_t equal, const cc_hash_entry_t* table, const size_t max_count, const uintptr_t param);
 cc_api uintptr_t cc_hash_table_param(cc_hash_table_t* ctx);
 
 cc_api void cc_hash_table_clear(cc_hash_table_t* ctx);
-cc_api bool cc_hash_table_erase(cc_hash_table_t* ctx, size_t index);
-cc_api bool cc_hash_table_add(cc_hash_table_t* ctx, void* element);
+cc_api bool cc_hash_table_erase(cc_hash_table_t* ctx, const size_t index);
+cc_api bool cc_hash_table_add(cc_hash_table_t* ctx, const void* element);
 
-cc_api cc_hash_entry_t* cc_hash_table_at(cc_hash_table_t* ctx, size_t index);
-cc_api void* cc_hash_table_element(cc_hash_table_t* ctx, size_t index);
+cc_api cc_hash_entry_t* cc_hash_table_at(cc_hash_table_t* ctx, const size_t index);
+cc_api void* cc_hash_table_element(cc_hash_table_t* ctx, const size_t index);
 
-cc_api size_t cc_hash_table_find(cc_hash_table_t* ctx, void* element);
-cc_api void* cc_hash_table_element_by_key(cc_hash_table_t* ctx, void* element);
+cc_api size_t cc_hash_table_find(cc_hash_table_t* ctx, const void* element);
+cc_api void* cc_hash_table_element_by_key(cc_hash_table_t* ctx, const void* element);
 
 cc_api size_t cc_hash_table_count(cc_hash_table_t* ctx);
 cc_api bool cc_hash_table_empty(cc_hash_table_t* ctx);

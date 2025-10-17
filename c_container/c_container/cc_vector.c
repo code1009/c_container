@@ -29,7 +29,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_vector_initialize(cc_vector_t* ctx, cc_element_t* elements, size_t max_count, uintptr_t param)
+cc_api void cc_vector_initialize(cc_vector_t* ctx, const cc_element_t* elements, const size_t max_count, const uintptr_t param)
 {
 	cc_debug_assert(ctx != NULL);
 	cc_debug_assert(elements != NULL);
@@ -56,7 +56,7 @@ cc_api void cc_vector_clear(cc_vector_t* ctx)
 	cc_collection_clear(&ctx->collection);
 }
 
-cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index)
+cc_api bool cc_vector_erase(cc_vector_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -64,7 +64,7 @@ cc_api bool cc_vector_erase(cc_vector_t* ctx, size_t index)
 	return cc_collection_erase(&ctx->collection, index);
 }
 
-cc_api bool cc_vector_add(cc_vector_t* ctx, void* element)
+cc_api bool cc_vector_add(cc_vector_t* ctx, const void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -72,7 +72,7 @@ cc_api bool cc_vector_add(cc_vector_t* ctx, void* element)
 	return cc_collection_add(&ctx->collection, element);
 }
 
-cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* element)
+cc_api bool cc_vector_insert(cc_vector_t* ctx, const size_t index, const void* element)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -81,7 +81,7 @@ cc_api bool cc_vector_insert(cc_vector_t* ctx, size_t index, void* element)
 }
 
 //===========================================================================
-cc_api cc_element_t* cc_vector_at(cc_vector_t* ctx, size_t index)
+cc_api cc_element_t* cc_vector_at(cc_vector_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 
@@ -89,7 +89,7 @@ cc_api cc_element_t* cc_vector_at(cc_vector_t* ctx, size_t index)
 	return cc_collection_at(&ctx->collection, index);
 }
 
-cc_api void* cc_vector_element(cc_vector_t* ctx, size_t index)
+cc_api void* cc_vector_element(cc_vector_t* ctx, const size_t index)
 {
 	cc_debug_assert(ctx != NULL);
 

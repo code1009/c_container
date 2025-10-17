@@ -66,6 +66,9 @@
     <ClInclude Include="test\test_runner.hpp" />
     <ClInclude Include="test_c_container\test.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

@@ -26,8 +26,7 @@ class test_text_index
 public:
     size_t _value;
 public:
-    explicit test_text_index();
-    test_text_index& operator()(size_t v);
+    explicit test_text_index(size_t v);
 };
 
 
@@ -71,7 +70,7 @@ public:
 //===========================================================================
 extern test_output test_out;
 extern test_text_endl test_tendl;
-extern test_text_index test_tindex;
+using test_tindex = test_text_index;
 
 
 

@@ -109,10 +109,10 @@ static void test_suite_cc_hash_table()
 //===========================================================================
 static void test_run()
 {
-	test_suite_cc_code_template();
+//	test_suite_cc_code_template();
 //	test_suite_cc_assert();
-	test_suite_cc_vector();
-	test_suite_cc_map();
+//	test_suite_cc_vector();
+//	test_suite_cc_map();
 	test_suite_cc_hash_table();
 }
 

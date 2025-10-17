@@ -12,7 +12,6 @@
 //===========================================================================
 test_output test_out;
 test_text_endl test_tendl;
-test_text_index test_tindex;
 
 
 
@@ -28,12 +27,7 @@ test_text_endl::test_text_endl() : _value("\n") {}
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-test_text_index::test_text_index() : _value(0) {}
-test_text_index& test_text_index::operator()(size_t v)
-{ 
-    _value = v; 
-    return *this; 
-}
+test_text_index::test_text_index(size_t v) : _value(v) {}
 
 
 

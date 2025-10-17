@@ -40,7 +40,7 @@ cc_api size_t cc_map_lower_bound(cc_map_t* ctx, const void* first)
 	size_t high;
 	size_t mid;
 
-	void* first_element_pointer;
+	void* existing_element_first;
 
 
 	low = 0u;
@@ -51,8 +51,8 @@ cc_api size_t cc_map_lower_bound(cc_map_t* ctx, const void* first)
 		// (x+y)/2 => x&y + (x^y)/2
 		mid = (low & high) + ((low ^ high) / 2);
 
-		first_element_pointer = cc_pair_collection_element_first(&ctx->collection, mid);
-		if (true == ctx->less(first_element_pointer, first))
+		existing_element_first = cc_pair_collection_element_first(&ctx->collection, mid);
+		if (true == ctx->less(existing_element_first, first))
 		{
 			low = mid + 1u;
 		}

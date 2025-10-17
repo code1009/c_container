@@ -87,6 +87,9 @@
     <ClCompile Include="test_cc_map_2.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
+    <ClCompile Include="test_output.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c_container\cc_code_template.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="c_container\cc_hash_table.h">
       <Filter>src\c_container\container</Filter>
+    </ClInclude>
+    <ClInclude Include="test_output.hpp">
+      <Filter>src\test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

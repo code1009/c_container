@@ -58,7 +58,7 @@ void test()
 //		{ "cc_vector_1", test_cc_vector_1 },
 //		{ "cc_vector_2", test_cc_vector_2 },
 
-//		{ "cc_map_1", test_cc_map_1 },
+		{ "cc_map_1", test_cc_map_1 },
 		{ "cc_map_2", test_cc_map_2 },
 
 //		{ "cc_hash_table_1", test_cc_hash_table_1 },

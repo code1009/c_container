@@ -136,8 +136,48 @@ static void add(void)
 	data_t* data_pointer;
 
 
-	count = 10;
+	count = 5;
 	for (i = 0; i < count; i++)
+	{
+		data_pointer = data_memory_pool_alloc();
+		if (data_pointer)
+		{
+			data_pointer->first = (int)i;
+			data_pointer->second = 10 + (int)i;
+		}
+		else
+		{
+			std::cout << "data_memory_pool_alloc() failed:" << index_string(i) << std::endl;
+			break;
+		}
+
+#if (1==cc_config_compiler_msvc)
+#pragma warning(disable:4312)
+		rv = cc_map_add(&_data_container.container, (void*)data_pointer->first, data_pointer);
+#pragma warning(default:4312)
+#else
+		rv = cc_map_add(&_data_container.container, (void*)data_pointer->first, data_pointer);
+#endif
+
+		if (false == rv)
+		{
+			std::cout << "add failed:" << index_string(i) << std::endl;
+			data_memory_pool_free(data_pointer);
+			break;
+		}
+	}
+}
+
+static void add2(void)
+{
+	size_t i;
+	size_t count;
+	bool rv;
+	data_t* data_pointer;
+
+
+	count = 10;
+	for (i = 5; i < count; i++)
 	{
 		data_pointer = data_memory_pool_alloc();
 		if (data_pointer)
@@ -278,6 +318,10 @@ static void find_and_erase(void)
 static void run(void)
 {
 	add();
+
+	lbound();
+
+	add2();
 
 	lbound();
 	find_and_erase();

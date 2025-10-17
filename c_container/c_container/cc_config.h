@@ -45,13 +45,13 @@
 //===========================================================================
 #if defined(_WIN64) || defined(_WIN32)
 
-#define cc_config_os_unknown 0
-#define cc_config_os_windows 1
+#define cc_config_platform_os_unknown 0
+#define cc_config_platform_os_windows 1
 
 #else
 
-#define cc_config_os_unknown 1
-#define cc_config_os_windows 0
+#define cc_config_platform_os_unknown 1
+#define cc_config_platform_os_windows 0
 
 #endif
 
@@ -61,23 +61,23 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#if 1==cc_config_os_windows
+#if 1==cc_config_platform_os_windows
 
 #if defined(_WIN64)
-#define cc_config_platform_x32 0
-#define cc_config_platform_x64 1
+#define cc_config_platform_32bit 0
+#define cc_config_platform_64bit 1
 #else
-#define cc_config_platform_x32 1
-#define cc_config_platform_x64 0
+#define cc_config_platform_32bit 1
+#define cc_config_platform_64bit 0
 #endif
 
 #endif
 
 //===========================================================================
-#if 1==cc_config_os_unknown
+#if 1==cc_config_platform_os_unknown
 
-#define cc_config_platform_x32 1
-#define cc_config_platform_x64 0
+#define cc_config_platform_32bit 1
+#define cc_config_platform_64bit 0
 
 #endif
 

@@ -69,16 +69,10 @@
     <ClCompile Include="test_cc_map_1.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
-    <ClCompile Include="test_cc_map_2.cpp">
-      <Filter>src\test</Filter>
-    </ClCompile>
     <ClCompile Include="test_cc.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
     <ClCompile Include="test.cpp">
-      <Filter>src\test</Filter>
-    </ClCompile>
-    <ClCompile Include="test_cc_map_3.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
     <ClCompile Include="c_container\cc_hash_table.c">
@@ -88,6 +82,9 @@
       <Filter>src\test</Filter>
     </ClCompile>
     <ClCompile Include="test_cc_vector_2.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
+    <ClCompile Include="test_cc_map_2.cpp">
       <Filter>src\test</Filter>
     </ClCompile>
   </ItemGroup>

@@ -17,11 +17,11 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#if (1==cc_config_platform_x64)
+#if (1==cc_config_platform_64bit)
 	typedef __int64 cc_ssize_t;
 #endif
 
-#if (1==cc_config_platform_x32)
+#if (1==cc_config_platform_32bit)
 	typedef int cc_ssize_t;
 #endif
 

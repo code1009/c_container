@@ -31,7 +31,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#if (1==cc_config_os_windows)
+#if (1==cc_config_platform_os_windows)
 
 cc_api void cc_code_template_function(cc_code_template_t* ctx)
 {
@@ -41,7 +41,7 @@ cc_api void cc_code_template_function(cc_code_template_t* ctx)
 #endif
 
 //===========================================================================
-#if (1==cc_config_os_unknown)
+#if (1==cc_config_platform_os_unknown)
 
 cc_api void cc_code_template_function(cc_code_template_t* ctx)
 {

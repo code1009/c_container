@@ -39,6 +39,7 @@ static void data_memory_pool_free(data_t* data)
 
 
 
+
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 typedef struct _data_container_t
@@ -51,6 +52,7 @@ data_container_t;
 //===========================================================================
 static data_container_t _data_container;
 
+//===========================================================================
 static bool data_container_initialize()
 {
 	cc_vector_initialize(&_data_container.container, _data_container.elements, data_max_count, sizeof(data_t));
@@ -62,6 +64,7 @@ static void data_container_uninitialize()
 {
 	std::cout << "elements count: " << cc_vector_count(&_data_container.container) << std::endl;
 }
+
 
 
 
@@ -206,6 +209,12 @@ static void release(void)
 	cc_vector_clear(&_data_container.container);
 }
 
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
 static void run(void)
 {
 	add();
@@ -220,6 +229,8 @@ static void run(void)
 
 
 
+
+/////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 void test_cc_vector_1()
 {

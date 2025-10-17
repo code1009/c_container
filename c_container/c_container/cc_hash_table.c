@@ -136,7 +136,7 @@ cc_api size_t cc_hash_quadratic_probe(const size_t index, const size_t attempt, 
 
 cc_api size_t cc_hash_probe(const size_t index, const size_t attempt, const size_t size)
 {
-#if 0
+#if 1
 	return cc_hash_linear_probe(index, attempt, size);
 #else
 	return cc_hash_quadratic_probe(index, attempt, size);

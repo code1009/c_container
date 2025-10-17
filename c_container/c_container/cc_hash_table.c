@@ -110,33 +110,33 @@ cc_api cc_hash_key_t cc_hash_key_djb2(const void* data, const size_t length)
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 #if 1
-// Linear probing: h(i) = (index + i) % size
-static size_t cc_hash_linear_probe(const size_t index, const size_t attempt, const size_t size)
+// Linear probing
+cc_api size_t cc_hash_linear_probe(const size_t index, const size_t attempt, const size_t size)
 {
 	cc_debug_assert(size != 0);
 
-
+	// : h(i) = (index + i) % size
 	return (index + attempt) % size;
 }
 #endif
 
-#if 0
-// Quadratic probing: h(i) = (index + i + i^2) % size
-// 50% 이상 데이터를 채우면 삽입할 공간을 찾지 못하는 경우가 발생할 수 있음
-static size_t cc_hash_quadratic_probe(const size_t index, const size_t attempt, const size_t size)
+#if 1
+// Quadratic probing
+cc_api size_t cc_hash_quadratic_probe(const size_t index, const size_t attempt, const size_t size)
 {
 	cc_debug_assert(size != 0);
 
-
+	//h(i) = (index + i + i^2) % size : 50% 이상 데이터를 채우면 삽입할 공간을 찾지 못하는 경우가 발생할 수 있음
 	//return (index + attempt + (attempt * attempt)) % size;
-	size_t offset = (attempt + (attempt * attempt)) % size;
-	return (index + offset) % size;
+
+	//h(i) = (index + i^2) % size
+	return (index + (attempt * attempt)) % size;
 }
 #endif
 
 cc_api size_t cc_hash_probe(const size_t index, const size_t attempt, const size_t size)
 {
-#if 1
+#if 0
 	return cc_hash_linear_probe(index, attempt, size);
 #else
 	return cc_hash_quadratic_probe(index, attempt, size);

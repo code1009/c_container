@@ -8,7 +8,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-void test_cc_code_template()
+void test_case_cc_code_template()
 {
 	cc_code_template_t code_template;
 	code_template.field = cc_code_template_macro;
@@ -21,12 +21,12 @@ void test_cc_code_template()
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-void test_cc_assert_1()
+void test_case_cc_assert_1()
 {
 	cc_assert(0 != 0);
 }
 
-void test_cc_assert_2()
+void test_case_cc_assert_2()
 {
 	cc_debug_assert(0 != 0);
 }

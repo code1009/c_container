@@ -300,7 +300,7 @@ static void run(void)
 }
 
 //===========================================================================
-void test_cc_hash_table_1()
+void test_case_cc_hash_table_1()
 {
 	if (!data_container_initialize())
 	{

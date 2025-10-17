@@ -8,18 +8,14 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-void test_cc_code_template();
-
-void test_cc_assert_1();
-void test_cc_assert_2();
-
-void test_cc_vector_1();
-void test_cc_vector_2();
-
-void test_cc_map_1();
-void test_cc_map_2();
-
-void test_cc_hash_table_1();
+void test_case_cc_code_template();
+void test_case_cc_assert_1();
+void test_case_cc_assert_2();
+void test_case_cc_vector_1();
+void test_case_cc_vector_2();
+void test_case_cc_map_1();
+void test_case_cc_map_2();
+void test_case_cc_hash_table_1();
 
 
 
@@ -27,60 +23,97 @@ void test_cc_hash_table_1();
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-typedef struct _test_t
+static void test_suite_cc_code_template()
 {
-	const char* name;
-	void (*function)(void);
-} test_t;
-
-//===========================================================================
-void test_begin()
-{
-	test_out << "begin of test" << test_tendl;
-}
-
-void test_end()
-{
-	test_out << "end of test" << test_tendl;
-}
-
-void test_run()
-{
-	test_t tests[] =
+	test_case_t test_cases[] =
 	{
-		{ "begin", test_begin },
-		
-		{ "cc_code_template", test_cc_code_template },
-		
-//		{ "cc_assert_1", test_cc_assert_1 },
-//		{ "cc_assert_2", test_cc_assert_2 },
-
-		{ "cc_vector_1", test_cc_vector_1 },
-		{ "cc_vector_2", test_cc_vector_2 },
-
-		{ "cc_map_1", test_cc_map_1 },
-		{ "cc_map_2", test_cc_map_2 },
-
-		{ "cc_hash_table_1", test_cc_hash_table_1 },
-
-		{ "end", test_end }
+		{ "test_case_cc_code_template", test_case_cc_code_template },
+		{ NULL, NULL }
 	};
 
 
+	test_suite_t test_suite;
+	test_suite.name = "test_suite_cc_code_template";
+	test_suite.items = test_cases;
+	test_suite.count = sizeof(test_cases) / sizeof(test_case_t) - 1;
+	test_runner(&test_suite);
+}
 
-	size_t i = 0;
-	size_t count = sizeof(tests) / sizeof(test_t);
-
-	for (i = 0; i < count; i++)
+static void test_suite_cc_assert()
+{
+	test_case_t test_cases[] =
 	{
-		test_out << "==========================================================================" << test_tendl;
-		test_out << "test: " << tests[i].name << test_tendl;
-		test_out << "==========================================================================" << test_tendl;
-		
-		tests[i].function();
-		
-		test_out << test_tendl;
-	}
+		{ "test_case_cc_assert_1", test_case_cc_assert_1 },
+		{ "test_case_cc_assert_2", test_case_cc_assert_2 },
+		{ NULL, NULL }
+	};
+
+
+	test_suite_t test_suite;
+	test_suite.name = "test_suite_cc_assert";
+	test_suite.items = test_cases;
+	test_suite.count = sizeof(test_cases) / sizeof(test_case_t) - 1;
+	test_runner(&test_suite);
+}
+
+static void test_suite_cc_vector()
+{
+	test_case_t test_cases[] =
+	{
+		{ "test_case_cc_vector_1", test_case_cc_vector_1 },
+		{ "test_case_cc_vector_2", test_case_cc_vector_2 },
+		{ NULL, NULL }
+	};
+
+
+	test_suite_t test_suite;
+	test_suite.name = "test_suite_cc_vector";
+	test_suite.items = test_cases;
+	test_suite.count = sizeof(test_cases) / sizeof(test_case_t) - 1;
+	test_runner(&test_suite);
+}
+
+static void test_suite_cc_map()
+{
+	test_case_t test_cases[] =
+	{
+		{ "test_case_cc_map_1", test_case_cc_map_1 },
+		{ "test_case_cc_map_2", test_case_cc_map_2 },
+		{ NULL, NULL }
+	};
+
+
+	test_suite_t test_suite;
+	test_suite.name = "test_suite_cc_map";
+	test_suite.items = test_cases;
+	test_suite.count = sizeof(test_cases) / sizeof(test_case_t) - 1;
+	test_runner(&test_suite);
+}
+
+static void test_suite_cc_hash_table()
+{
+	test_case_t test_cases[] =
+	{
+		{ "test_case_cc_hash_table_1", test_case_cc_hash_table_1 },
+		{ NULL, NULL }
+	};
+
+
+	test_suite_t test_suite;
+	test_suite.name = "test_run_cc_hash_table";
+	test_suite.items = test_cases;
+	test_suite.count = sizeof(test_cases) / sizeof(test_case_t) - 1;
+	test_runner(&test_suite);
+}
+
+//===========================================================================
+static void test_run()
+{
+//	test_suite_cc_code_template();
+//	test_suite_cc_assert();
+	test_suite_cc_vector();
+	test_suite_cc_map();
+	test_suite_cc_hash_table();
 }
 
 

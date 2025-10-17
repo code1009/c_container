@@ -55,7 +55,7 @@ cc_api static bool cc_hash_equal(void* left, void* right)
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-#define data_max_count 64
+#define data_max_count 32
 
 //===========================================================================
 typedef struct _data_memory_pool_t
@@ -161,7 +161,7 @@ static void data_container_uninitialize()
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-static size_t cc_hash_calc_start_index(data_t* data_pointer)
+static size_t cc_hash_calc_key_index(data_t* data_pointer)
 {
 	cc_hash_key_t key = cc_hash_key_generate(data_pointer);
 
@@ -254,10 +254,10 @@ static void print(void)
 		if (data_pointer != NULL)
 		{
 			std::cout
-				<< index_string(cc_hash_calc_start_index(data_pointer))
-				<< ":"
+				<< index_string(cc_hash_calc_key_index(data_pointer))
+				<< "+"
 				<< cc_hash_calc_attempt(data_pointer, i)
-				<< "->"
+				<< " ->"
 				<< index_string(i)
 				<< " = "
 				<< index_string(data_pointer->key1) << "-"

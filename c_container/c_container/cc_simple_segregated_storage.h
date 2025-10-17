@@ -49,9 +49,9 @@ cc_simple_segregated_storage_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api size_t cc_simple_segregated_storage_calc_chunk_size(size_t data_size);
-cc_api size_t cc_simple_segregated_storage_calc_memory_size(size_t data_size, cc_ssize_t max_count);
-cc_api bool   cc_simple_segregated_storage_validate_pointer(cc_simple_segregated_storage_t* ctx, void* pointer);
+cc_api size_t cc_simple_segregated_storage_calc_chunk_size(const size_t data_size);
+cc_api size_t cc_simple_segregated_storage_calc_memory_size(const size_t data_size, const cc_ssize_t max_count);
+cc_api bool   cc_simple_segregated_storage_validate_pointer(const cc_simple_segregated_storage_t* ctx, const void* pointer);
 
 
 
@@ -59,10 +59,10 @@ cc_api bool   cc_simple_segregated_storage_validate_pointer(cc_simple_segregated
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api bool cc_simple_segregated_storage_initialize(cc_simple_segregated_storage_t* ctx, void* memory_pointer, size_t memory_size, size_t data_size, cc_ssize_t max_count);
+cc_api bool cc_simple_segregated_storage_initialize(cc_simple_segregated_storage_t* ctx, const void* memory_pointer, const size_t memory_size, const size_t data_size, const cc_ssize_t max_count);
 
 cc_api void* cc_simple_segregated_storage_allocate(cc_simple_segregated_storage_t* ctx);
-cc_api bool  cc_simple_segregated_storage_free(cc_simple_segregated_storage_t* ctx, void* pointer);
+cc_api bool  cc_simple_segregated_storage_free(cc_simple_segregated_storage_t* ctx, const void* pointer);
 
 cc_api cc_ssize_t cc_simple_segregated_storage_count(cc_simple_segregated_storage_t* ctx);
 

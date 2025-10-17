@@ -27,7 +27,7 @@ typedef bool  (*cc_free_t) (void* handle, void* pointer);
 //===========================================================================
 typedef struct _cc_allocator_t
 {
-	void* handle;
+	const void* handle;
 	cc_alloc_t alloc;
 	cc_free_t free;
 }
@@ -39,7 +39,7 @@ cc_allocator_t;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-cc_api void cc_allocator_initialize(cc_allocator_t* ctx, void* handle, cc_alloc_t alloc, cc_free_t free);
+cc_api void cc_allocator_initialize(cc_allocator_t* ctx, const void* handle, const cc_alloc_t alloc, const cc_free_t free);
 
 
 

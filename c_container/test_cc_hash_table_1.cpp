@@ -79,7 +79,7 @@ static bool data_memory_pool_initialize()
 	);
 	if (rv == false)
 	{
-		test::out << "cc_simple_segregated_storage_allocator_initialize() failed" << test::tendl;
+		test_out << "cc_simple_segregated_storage_allocator_initialize() failed" << test_tendl;
 		test_assert(0);
 		return false;
 	}
@@ -88,7 +88,7 @@ static bool data_memory_pool_initialize()
 
 static void data_memory_pool_uninitialize()
 {
-	test::out << "data storage count: " << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << test::tendl;
+	test_out << "data storage count:" << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << test_tendl;
 }
 
 static data_t* data_memory_pool_alloc()
@@ -96,7 +96,7 @@ static data_t* data_memory_pool_alloc()
 	data_t* data_pointer = (data_t*)_data_memory_pool.allocator.alloc(&_data_memory_pool.storage);
 	if (data_pointer == NULL)
 	{
-		test::out << "_data_memory_pool.allocator.alloc() failed" << test::tendl;
+		test_out << "_data_memory_pool.allocator.alloc() failed" << test_tendl;
 		//test_assert(0);
 	}
 	return data_pointer;
@@ -109,7 +109,7 @@ static void data_memory_pool_free(data_t* data)
 	rv = _data_memory_pool.allocator.free(&_data_memory_pool.storage, data);
 	if (rv == false)
 	{
-		test::out << "_data_memory_pool.allocator.free() failed" << test::tendl;
+		test_out << "_data_memory_pool.allocator.free() failed" << test_tendl;
 		test_assert(0);
 	}
 }
@@ -150,7 +150,7 @@ static bool data_container_initialize()
 
 static void data_container_uninitialize()
 {
-	test::out << "elements count: " << cc_hash_table_count(&_data_container.container) << test::tendl;
+	test_out << "elements count:" << cc_hash_table_count(&_data_container.container) << test_tendl;
 
 	data_memory_pool_uninitialize();
 }
@@ -225,14 +225,14 @@ static void add(void)
 		}
 		else
 		{
-			test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
+			test_out << "data_memory_pool_alloc() failed:" << test_tindex(i) << test_tendl;
 			break;
 		}
 
 		rv = cc_hash_table_add(&_data_container.container, data_pointer);
 		if (false == rv)
 		{
-			test::out << "add failed:" << test::tindex(i) << test::tendl;
+			test_out << "add failed:" << test_tindex(i) << test_tendl;
 			data_memory_pool_free(data_pointer);
 			break;
 		}
@@ -253,19 +253,19 @@ static void print(void)
 
 		if (data_pointer != NULL)
 		{
-			test::out
-				<< test::tindex(cc_hash_calc_key_index(data_pointer))
+			test_out
+				<< test_tindex(cc_hash_calc_key_index(data_pointer))
 				<< "+"
 				<< cc_hash_calc_attempt(data_pointer, i)
 				<< " ->"
-				<< test::tindex(i)
+				<< test_tindex(i)
 				<< " = "
-				<< test::tindex(data_pointer->key1) << "-"
-				<< test::tindex(data_pointer->key2) << ": "
+				<< test_tindex(data_pointer->key1) << "-"
+				<< test_tindex(data_pointer->key2) << ": "
 				<< data_pointer->value
 				<< ", hash="
 				<< cc_hash_key_generate(data_pointer)
-				<< test::tendl
+				<< test_tendl
 				;
 		}
 	}

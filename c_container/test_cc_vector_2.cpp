@@ -49,7 +49,7 @@ static bool data_memory_pool_initialize()
 	);
 	if (rv == false)
 	{
-		test::out << "cc_simple_segregated_storage_allocator_initialize() failed" << test::tendl;
+		test_out << "cc_simple_segregated_storage_allocator_initialize() failed" << test_tendl;
 		test_assert(0);
 		return false;
 	}
@@ -58,7 +58,7 @@ static bool data_memory_pool_initialize()
 
 static void data_memory_pool_uninitialize()
 {
-	test::out << "data storage count: " << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << test::tendl;
+	test_out << "data storage count:" << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << test_tendl;
 }
 
 static data_t* data_memory_pool_alloc()
@@ -66,7 +66,7 @@ static data_t* data_memory_pool_alloc()
 	data_t* data_pointer = (data_t*)_data_memory_pool.allocator.alloc(&_data_memory_pool.storage);
 	if (data_pointer == NULL)
 	{
-		test::out << "_data_memory_pool.allocator.alloc() failed" << test::tendl;
+		test_out << "_data_memory_pool.allocator.alloc() failed" << test_tendl;
 		//test_assert(0);
 	}
 	return data_pointer;
@@ -79,7 +79,7 @@ static void data_memory_pool_free(data_t* data)
 	rv = _data_memory_pool.allocator.free(&_data_memory_pool.storage, data);
 	if (rv == false)
 	{
-		test::out << "_data_memory_pool.allocator.free() failed" << test::tendl;
+		test_out << "_data_memory_pool.allocator.free() failed" << test_tendl;
 		test_assert(0);
 	}
 }
@@ -118,7 +118,7 @@ static bool data_container_initialize()
 
 static void data_container_uninitialize()
 {
-	test::out << "elements count: " << cc_vector_count(&_data_container.container) << test::tendl;
+	test_out << "elements count:" << cc_vector_count(&_data_container.container) << test_tendl;
 
 	data_memory_pool_uninitialize();
 }
@@ -148,14 +148,14 @@ static void add(void)
 		}
 		else
 		{
-			test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
+			test_out << "data_memory_pool_alloc() failed:" << test_tindex(i) << test_tendl;
 			break;
 		}
 
 		rv = cc_vector_add(&_data_container.container, data_pointer);
 		if (false == rv)
 		{
-			test::out << "add failed:" << test::tindex(i) << test::tendl;
+			test_out << "add failed:" << test_tindex(i) << test_tendl;
 			data_memory_pool_free(data_pointer);
 			break;
 		}
@@ -176,13 +176,13 @@ static void print(void)
 
 		if (data_pointer != NULL)
 		{
-			test::out
-				<< test::tindex(i)
+			test_out
+				<< test_tindex(i)
 				<< " = "
 				<< data_pointer->first
 				<< ", "
 				<< data_pointer->second
-				<< test::tendl
+				<< test_tendl
 				;
 		}
 	}
@@ -230,12 +230,12 @@ static void erase(void)
 	rv = cc_vector_erase(&_data_container.container, i);
 	if (false == rv)
 	{
-		test::out << "erase failed:" << test::tindex(i) << test::tendl;
+		test_out << "erase failed:" << test_tindex(i) << test_tendl;
 		test_assert(0);
 	}
 	else
 	{
-		test::out << "erase success:" << test::tindex(i) << data_pointer->first << test::tendl;
+		test_out << "erase success:" << test_tindex(i) << data_pointer->first << test_tendl;
 		data_memory_pool_free(data_pointer);
 	}
 }
@@ -257,17 +257,17 @@ static void insert(void)
 		rv = cc_vector_insert(&_data_container.container, i, data_pointer);
 		if(rv)
 		{
-			test::out << "insert success:" << test::tindex(i) << test::tendl;
+			test_out << "insert success:" << test_tindex(i) << test_tendl;
 		}
 		else
 		{
-			test::out << "insert failed:" << test::tindex(i) << test::tendl;
+			test_out << "insert failed:" << test_tindex(i) << test_tendl;
 			data_memory_pool_free(data_pointer);
 		}
 	}
 	else
 	{
-		test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
+		test_out << "data_memory_pool_alloc() failed:" << test_tindex(i) << test_tendl;
 	}
 }
 

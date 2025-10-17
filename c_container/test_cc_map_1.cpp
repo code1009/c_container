@@ -49,7 +49,7 @@ static bool data_memory_pool_initialize()
 	);
 	if (rv == false)
 	{
-		test::out << "cc_simple_segregated_storage_allocator_initialize() failed" << test::tendl;
+		test_out << "cc_simple_segregated_storage_allocator_initialize() failed" << test_tendl;
 		test_assert(0);
 		return false;
 	}
@@ -58,7 +58,7 @@ static bool data_memory_pool_initialize()
 
 static void data_memory_pool_uninitialize()
 {
-	test::out << "data storage count: " << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << test::tendl;
+	test_out << "data storage count:" << cc_simple_segregated_storage_count(&_data_memory_pool.storage) << test_tendl;
 }
 
 static data_t* data_memory_pool_alloc()
@@ -66,7 +66,7 @@ static data_t* data_memory_pool_alloc()
 	data_t* data_pointer = (data_t*)_data_memory_pool.allocator.alloc(&_data_memory_pool.storage);
 	if (data_pointer == NULL)
 	{
-		test::out << "_data_memory_pool.allocator.alloc() failed" << test::tendl;
+		test_out << "_data_memory_pool.allocator.alloc() failed" << test_tendl;
 		//test_assert(0);
 	}
 	return data_pointer;
@@ -79,7 +79,7 @@ static void data_memory_pool_free(data_t* data)
 	rv = _data_memory_pool.allocator.free(&_data_memory_pool.storage, data);
 	if (rv == false)
 	{
-		test::out << "_data_memory_pool.allocator.free() failed" << test::tendl;
+		test_out << "_data_memory_pool.allocator.free() failed" << test_tendl;
 		test_assert(0);
 	}
 }
@@ -111,7 +111,7 @@ static bool key_memory_pool_initialize()
 	);
 	if (rv == false)
 	{
-		test::out << "cc_simple_segregated_storage_allocator_initialize() failed (key)" << test::tendl;
+		test_out << "cc_simple_segregated_storage_allocator_initialize() failed (key)" << test_tendl;
 		test_assert(0);
 		return false;
 	}
@@ -120,7 +120,7 @@ static bool key_memory_pool_initialize()
 
 static void key_memory_pool_uninitialize()
 {
-	test::out << "key storage count: " << cc_simple_segregated_storage_count(&_key_memory_pool.storage) << test::tendl;
+	test_out << "key storage count: " << cc_simple_segregated_storage_count(&_key_memory_pool.storage) << test_tendl;
 }
 
 static int* key_memory_pool_alloc()
@@ -128,7 +128,7 @@ static int* key_memory_pool_alloc()
 	int* key_pointer = (int*)_key_memory_pool.allocator.alloc(&_key_memory_pool.storage);
 	if (key_pointer == NULL)
 	{
-		test::out << "_key_memory_pool.allocator.alloc() failed" << test::tendl;
+		test_out << "_key_memory_pool.allocator.alloc() failed" << test_tendl;
 		//test_assert(0);
 	}
 	return key_pointer;
@@ -141,7 +141,7 @@ static void key_memory_pool_free(int* key)
 	rv = _key_memory_pool.allocator.free(&_key_memory_pool.storage, key);
 	if (rv == false)
 	{
-		test::out << "_key_memory_pool.allocator.free() failed" << test::tendl;
+		test_out << "_key_memory_pool.allocator.free() failed" << test_tendl;
 		test_assert(0);
 	}
 }
@@ -187,7 +187,7 @@ static bool data_container_initialize()
 
 static void data_container_uninitialize()
 {
-	test::out << "elements count: " << cc_map_count(&_data_container.container) << test::tendl;
+	test_out << "elements count:" << cc_map_count(&_data_container.container) << test_tendl;
 
 	key_memory_pool_uninitialize();
 	data_memory_pool_uninitialize();
@@ -217,7 +217,7 @@ static void add(void)
 		}
 		else
 		{
-			test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
+			test_out << "data_memory_pool_alloc() failed:" << test_tindex(i) << test_tendl;
 			test_assert(i == 10);
 			break;
 		}
@@ -229,18 +229,18 @@ static void add(void)
 		}
 		else
 		{
-			test::out << "key_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
+			test_out << "key_memory_pool_alloc() failed:" << test_tindex(i) << test_tendl;
 			test_assert(0);
 			data_memory_pool_free(data_pointer);
 			break;
 		}
 
 
-		test::out << "add:" << test::tindex(i) << data_pointer->first << ", " << data_pointer->second << test::tendl;
+		test_out << "add:" << test_tindex(i) << data_pointer->first << ", " << data_pointer->second << test_tendl;
 		rv = cc_map_add(&_data_container.container, key_pointer, data_pointer);
 		if (false == rv)
 		{
-			test::out << "add failed:" << test::tindex(i) << test::tendl;
+			test_out << "add failed:" << test_tindex(i) << test_tendl;
 			data_memory_pool_free(data_pointer);
 			key_memory_pool_free(key_pointer);
 			test_assert(0);
@@ -266,13 +266,13 @@ static void print(void)
 		data_pointer = (data_t*)element_pointer->second.pointer;
 		test_assert(data_pointer != NULL);
 
-		test::out
-			<< test::tindex(i)
+		test_out
+			<< test_tindex(i)
 			<< " = "
 			<< data_pointer->first
 			<< ", "
 			<< data_pointer->second
-			<< test::tendl
+			<< test_tendl
 			;
 	}
 }

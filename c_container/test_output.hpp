@@ -4,65 +4,74 @@
 
 
 
+
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-namespace test
+class test_text_endl
 {
-    //=======================================================================
-    class text_endl
-    {
-    public:
-        const char* _value;
-    public:
-        explicit text_endl(const char* v = "\n");
-    };
+public:
+    const char* _value;
+public:
+    explicit test_text_endl();
+};
 
-    //=======================================================================
-    class text_index
-    {
-    public:
-        size_t _value;
-    public:
-        explicit text_index(size_t v);
-        text_index& operator()(size_t v);
-    };
 
-    //=======================================================================
-    class output
-    {
-    public:
-        output& operator<<(char v);
-        output& operator<<(short int v);
-        output& operator<<(int v);
-        output& operator<<(long int v);
-        output& operator<<(long long int v);
 
-        output& operator<<(unsigned char v);
-        output& operator<<(unsigned short int v);
-        output& operator<<(unsigned int v);
-        output& operator<<(unsigned long int v);
-        output& operator<<(unsigned long long int v);
 
-        output& operator<<(float v);
-        output& operator<<(double v);
-
-        output& operator<<(bool v);
-        output& operator<<(const char* v);
-        output& operator<<(const void* v);
-
-    public:
-        output& operator<<(const text_index& v);
-        output& operator<<(const text_endl& v);
-    };
-
-    //=======================================================================
-    extern output out;
-	extern text_endl tendl;
-    extern text_index tindex;
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-} // namespace test
+class test_text_index
+{
+public:
+    size_t _value;
+public:
+    explicit test_text_index();
+    test_text_index& operator()(size_t v);
+};
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+class test_output
+{
+public:
+    test_output& operator<<(char v);
+    test_output& operator<<(short int v);
+    test_output& operator<<(int v);
+    test_output& operator<<(long int v);
+    test_output& operator<<(long long int v);
+
+    test_output& operator<<(unsigned char v);
+    test_output& operator<<(unsigned short int v);
+    test_output& operator<<(unsigned int v);
+    test_output& operator<<(unsigned long int v);
+    test_output& operator<<(unsigned long long int v);
+
+    test_output& operator<<(float v);
+    test_output& operator<<(double v);
+
+    test_output& operator<<(bool v);
+    test_output& operator<<(const char* v);
+    test_output& operator<<(const void* v);
+
+public:
+    test_output& operator<<(const test_text_index& v);
+    test_output& operator<<(const test_text_endl& v);
+};
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+extern test_output test_out;
+extern test_text_endl test_tendl;
+extern test_text_index test_tindex;
 
 
 

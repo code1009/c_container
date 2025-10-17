@@ -62,7 +62,7 @@ static bool data_container_initialize()
 
 static void data_container_uninitialize()
 {
-	test::out << "elements count: " << cc_vector_count(&_data_container.container) << test::tendl;
+	test_out << "elements count:" << cc_vector_count(&_data_container.container) << test_tendl;
 }
 
 
@@ -89,14 +89,14 @@ static void add(void)
 		}
 		else
 		{
-			test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
+			test_out << "data_memory_pool_alloc() failed:" << test_tindex(i) << test_tendl;
 			break;
 		}
 
 		rv = cc_vector_add(&_data_container.container, data_pointer);
 		if (false == rv)
 		{
-			test::out << "add failed:" << test::tindex(i) << test::tendl;
+			test_out << "add failed:" << test_tindex(i) << test_tendl;
 			data_memory_pool_free(data_pointer);
 			break;
 		}
@@ -125,12 +125,12 @@ static void erase(void)
 	rv = cc_vector_erase(&_data_container.container, i);
 	if (false == rv)
 	{
-		test::out << "erase failed:" << test::tindex(i) << test::tendl;
+		test_out << "erase failed:" << test_tindex(i) << test_tendl;
 		test_assert(0);
 	}
 	else
 	{
-		test::out << "erase success:" << test::tindex(i) << data_pointer->value << test::tendl;
+		test_out << "erase success:" << test_tindex(i) << data_pointer->value << test_tendl;
 		data_memory_pool_free(data_pointer);
 	}
 }
@@ -151,17 +151,17 @@ static void insert(void)
 		rv = cc_vector_insert(&_data_container.container, i, data_pointer);
 		if (rv)
 		{
-			test::out << "insert success:" << test::tindex(i) << test::tendl;
+			test_out << "insert success:" << test_tindex(i) << test_tendl;
 		}
 		else
 		{
-			test::out << "insert failed:" << test::tindex(i) << test::tendl;
+			test_out << "insert failed:" << test_tindex(i) << test_tendl;
 			data_memory_pool_free(data_pointer);
 		}
 	}
 	else
 	{
-		test::out << "data_memory_pool_alloc() failed:" << test::tindex(i) << test::tendl;
+		test_out << "data_memory_pool_alloc() failed:" << test_tindex(i) << test_tendl;
 	}
 }
 
@@ -179,11 +179,11 @@ static void print(void)
 
 		if (data_pointer != NULL)
 		{
-			test::out
-				<< test::tindex(i)
+			test_out
+				<< test_tindex(i)
 				<< " = "
 				<< data_pointer->value
-				<< test::tendl
+				<< test_tendl
 				;
 		}
 	}

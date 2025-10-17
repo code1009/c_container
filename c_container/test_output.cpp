@@ -10,164 +10,158 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-namespace test
-{
-    /////////////////////////////////////////////////////////////////////////
-    //=======================================================================
-    output out;
-    text_endl tendl;
-    text_index tindex(0);
+test_output test_out;
+test_text_endl test_tendl;
+test_text_index test_tindex;
 
 
 
 
 
-    /////////////////////////////////////////////////////////////////////////
-    //=======================================================================
-    text_endl::text_endl(const char* v)
-        : _value(v)
-    {
-	}
-
-    //=======================================================================
-    text_index::text_index(size_t v)
-        : _value(v)
-    {
-	}
-
-    text_index& text_index::operator()(size_t v)
-    { 
-        _value = v; 
-        return *this; 
-    }
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+test_text_endl::test_text_endl() : _value("\n") {}
 
 
 
-    /////////////////////////////////////////////////////////////////////////
-    //=======================================================================
-    output& output::operator<<(char v)
-    {
-        printf("%3d", static_cast<int>(v));
-        return *this;
-    }
 
-    output& output::operator<<(short int v)
-    {
-        printf("%3hd", v);
-        return *this;
-    }
 
-    output& output::operator<<(int v)
-    {
-        printf("%3d", v);
-        return *this;
-    }
-
-    output& output::operator<<(long int v)
-    {
-        printf("%3ld", v);
-        return *this;
-    }
-
-    output& output::operator<<(long long int v)
-    {
-        printf("%lld", v);
-        return *this;
-    }
-
-    output& output::operator<<(unsigned char v)
-    {
-        printf("%u", static_cast<unsigned int>(v));
-        return *this;
-    }
-
-    output& output::operator<<(unsigned short int v)
-    {
-        printf("%hu", v);
-        return *this;
-    }
-
-    output& output::operator<<(unsigned int v)
-    {
-        printf("%u", v);
-        return *this;
-    }
-
-    output& output::operator<<(unsigned long int v)
-    {
-        printf("%lu", v);
-        return *this;
-    }
-
-    output& output::operator<<(unsigned long long int v)
-    {
-        printf("%llu", v);
-        return *this;
-    }
-
-    output& output::operator<<(float v)
-    {
-        printf("%g", static_cast<double>(v));
-        return *this;
-    }
-
-    output& output::operator<<(double v)
-    {
-        printf("%g", v);
-        return *this;
-    }
-
-    output& output::operator<<(bool v)
-    {
-        if (v)
-        {
-            printf("true");
-        }
-        else
-        {
-            printf("false");
-        }
-
-        return *this;
-    }
-
-    output& output::operator<<(const char* v)
-    {
-        if (!v)
-        {
-            printf("(null)");
-        }
-        else
-        {
-            printf(v);
-        }
-
-        return *this;
-    }
-
-    output& output::operator<<(const void* v)
-    {
-        printf("%p", v);
-
-        return *this;
-    }
-
-    output& output::operator<<(const text_index& v)
-    {
-		// 64bit or 32bit 겸용시 %zu 사용
-        printf(" [%3zu] ", v._value);
-
-        return *this;
-    }
-
-    output& output::operator<<(const text_endl& v)
-    {
-        printf(v._value);
-
-        return *this;
-    }
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+test_text_index::test_text_index() : _value(0) {}
+test_text_index& test_text_index::operator()(size_t v)
+{ 
+    _value = v; 
+    return *this; 
 }
 
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+test_output& test_output::operator<<(char v)
+{
+    printf("%3d", static_cast<int>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(short int v)
+{
+    printf("%3hd", static_cast<int>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(int v)
+{
+    printf("%3d", static_cast<int>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(long int v)
+{
+    printf("%3ld", static_cast<int>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(long long int v)
+{
+    printf("%3lld", v);
+    return *this;
+}
+
+test_output& test_output::operator<<(unsigned char v)
+{
+    printf("%3u", static_cast<unsigned int>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(unsigned short int v)
+{
+    printf("%3hu", static_cast<unsigned int>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(unsigned int v)
+{
+    printf("%3u", static_cast<unsigned int>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(unsigned long int v)
+{
+    printf("%3lu", static_cast<unsigned int>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(unsigned long long int v)
+{
+    printf("%3llu", v);
+    return *this;
+}
+
+test_output& test_output::operator<<(float v)
+{
+    printf("%g", static_cast<double>(v));
+    return *this;
+}
+
+test_output& test_output::operator<<(double v)
+{
+    printf("%g", v);
+    return *this;
+}
+
+test_output& test_output::operator<<(bool v)
+{
+    if (v)
+    {
+        printf("true");
+    }
+    else
+    {
+        printf("false");
+    }
+
+    return *this;
+}
+
+test_output& test_output::operator<<(const char* v)
+{
+    if (!v)
+    {
+        printf("(null)");
+    }
+    else
+    {
+        printf(v);
+    }
+
+    return *this;
+}
+
+test_output& test_output::operator<<(const void* v)
+{
+    printf("%p", v);
+
+    return *this;
+}
+
+test_output& test_output::operator<<(const test_text_index& v)
+{
+	// 64bit or 32bit 겸용시 %zu 사용
+    printf(" [%3zu] ", v._value);
+
+    return *this;
+}
+
+test_output& test_output::operator<<(const test_text_endl& v)
+{
+    printf(v._value);
+
+    return *this;
+}
 
 
 

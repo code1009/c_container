@@ -36,12 +36,12 @@ typedef struct _test_t
 //===========================================================================
 void test_begin()
 {
-	test::out << "begin of test" << test::tendl;
+	test_out << "begin of test" << test_tendl;
 }
 
 void test_end()
 {
-	test::out << "end of test" << test::tendl;
+	test_out << "end of test" << test_tendl;
 }
 
 void test_run()
@@ -73,13 +73,13 @@ void test_run()
 
 	for (i = 0; i < count; i++)
 	{
-		test::out << "==========================================================================" << test::tendl;
-		test::out << "test: " << tests[i].name << test::tendl;
-		test::out << "==========================================================================" << test::tendl;
+		test_out << "==========================================================================" << test_tendl;
+		test_out << "test: " << tests[i].name << test_tendl;
+		test_out << "==========================================================================" << test_tendl;
 		
 		tests[i].function();
 		
-		test::out << test::tendl;
+		test_out << test_tendl;
 	}
 }
 
